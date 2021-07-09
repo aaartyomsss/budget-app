@@ -1,0 +1,35 @@
+.piechart-legend li {
+    display: inline;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.piechart-legend {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cont {
+    display: flex;
+    justify-content: space-around;
+}
+
+.centering-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nothing-to-display {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nothing-to-display > p {
+    font-size: 3rem;
+}

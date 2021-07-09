@@ -1,0 +1,11 @@
+.radio-btns-navbar {
+    width: 100%;
+    height: 2rem;
+    text-align: center;
+}
+
+.radio-btn {
+    width: 50%;
+    height: 100%;
+    margin: 0;
+}
