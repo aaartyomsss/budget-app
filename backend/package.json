@@ -1,5 +1,5 @@
 {
-  "name": "budget-backend",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -25,7 +25,8 @@
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "redis": "^3.1.2",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "@elastic/elasticsearch": "^7.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

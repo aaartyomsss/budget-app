@@ -31,7 +31,13 @@ googleRouter.post('/', async (req, res) => {
     const token = jwt.sign(user.toJSON(), config.SECRET);
 
     try {
-      await user.save();
+      await user.save(function (err) {
+        if (err) throw err;
+        doc.on('es-indexed', function (err, res) {
+          if (err) throw err;
+          console.log(res);
+        });
+      });
       res.send({
         token,
         googleId: user.googleId,

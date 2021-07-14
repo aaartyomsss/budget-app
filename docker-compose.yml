@@ -2,16 +2,30 @@ version: '3'
 services:
   frontend:
     build: ./frontend
+    container_name: frontend
     ports:
       - '3000:3000'
     networks:
       - budget-app
   backend:
     build: ./backend
+    container_name: backend
+    volumes:
+      - ./backend:/usr/src/app/backend
     ports:
-      - '3001:3001'
+      - 3001:3001
     networks:
       - budget-app
+    depends_on:
+      - redis
+    command: ['npm', 'start']
+  redis:
+    image: redis:6-alpine
+    container_name: redis
+    networks:
+      - budget-app
+    ports:
+      - 6379:6379
 networks:
   budget-app:
     driver: bridge

@@ -1,15 +1,9 @@
-FROM node:14
+FROM node:14-alpine
 
-WORKDIR /app
+RUN mkdir -p /usr/src/app/backend
 
-COPY package*.json ./
+WORKDIR /usr/src/app/backend
+
+COPY . /usr/src/app/backend
 
 RUN npm install
-
-COPY . .
-
-ENV PORT=3001
-
-EXPOSE 3001
-
-CMD [ "npm", "start" ]

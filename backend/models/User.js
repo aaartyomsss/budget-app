@@ -50,7 +50,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(uniqueValidator);
 userSchema.plugin(mongoosastic, {
-  hosts: ['localhost:9200'],
   esClient: ESClient,
 });
 

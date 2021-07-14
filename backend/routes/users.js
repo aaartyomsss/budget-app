@@ -17,7 +17,7 @@ userRouter.get('/:id', async (req, res) => {
   res.json(user);
 });
 
-//Continue writing code for verification
+// verification
 userRouter.get('/confirmation/:token', async (req, res) => {
   const token = req.params.token;
   const decodedUser = jwt.verify(token, process.env.EMAIL_TOKEN);
@@ -33,7 +33,7 @@ userRouter.get('/confirmation/:token', async (req, res) => {
   } catch (error) {}
 });
 
-// Reseting passord from user options
+// Reseting password from user options
 userRouter.patch('/reset-password', async (req, res) => {
   const body = req.body;
   if (!body.currentPassword || !body.newPassword) {
