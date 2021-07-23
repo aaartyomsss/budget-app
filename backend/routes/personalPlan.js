@@ -3,15 +3,15 @@ const Expense = require('../models/Expense');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('../utils/config');
-const redisClient = require('../redis/index');
+const getOrSetCache = require('../redis/index');
 
 // for fetching
 personalPlan.get('/', async (req, res) => {
-  console.log('REDIS!!!');
-  console.log('DOES THIS TRIGGER RELOAD!??!?!??!');
-  cosnole.log(redisClient.get('expenses'), 'WORKS!!!!!!!!');
-  const all = await Expense.find({});
-  res.json(all);
+  const expenses = await getOrSetCache('users', async () => {
+    const all = await Expense.find({});
+    return all;
+  });
+  res.json(expenses);
 });
 
 // Get single expense

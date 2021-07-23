@@ -7,7 +7,7 @@ googleRouter.post('/', async (req, res) => {
   const body = req.body;
 
   let user = await User.findOne({ email: body.email }).populate('personalPlan');
-
+  console.log(user);
   if (user) {
     const token = jwt.sign(user.toJSON(), config.SECRET);
     res.send({
@@ -16,6 +16,7 @@ googleRouter.post('/', async (req, res) => {
       email: user.email,
       name: user.name,
       id: user._id,
+      personalPlan: user.personalPlan,
       familyPlans: user.familyPlans,
       username: user.username,
     });
@@ -31,13 +32,6 @@ googleRouter.post('/', async (req, res) => {
     const token = jwt.sign(user.toJSON(), config.SECRET);
 
     try {
-      await user.save(function (err) {
-        if (err) throw err;
-        doc.on('es-indexed', function (err, res) {
-          if (err) throw err;
-          console.log(res);
-        });
-      });
       res.send({
         token,
         googleId: user.googleId,

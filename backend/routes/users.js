@@ -13,7 +13,8 @@ userRouter.get('/', async (req, res) => {
 });
 
 userRouter.get('/:id', async (req, res) => {
-  const user = User.findById(req.params.id);
+  // TODO set redis caching and manage mutations on personal expenses
+  const user = await User.findById(req.params.id).populate('personalPlan');
   res.json(user);
 });
 
@@ -21,7 +22,6 @@ userRouter.get('/:id', async (req, res) => {
 userRouter.get('/confirmation/:token', async (req, res) => {
   const token = req.params.token;
   const decodedUser = jwt.verify(token, process.env.EMAIL_TOKEN);
-  console.log(token, decodedUser);
   if (!decodedUser) {
     return res.status(404).json({ error: 'Something went wrong' });
   }
