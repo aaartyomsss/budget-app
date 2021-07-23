@@ -139,13 +139,16 @@ userRouter.get('/search/:query', async (req, res) => {
   User.search(
     {
       query_string: {
-        query,
+        query: `*${query}*`,
       },
     },
     (err, result) => {
-      if (err) res.json({ err: err.message });
-      console.log('QUERY RESULT!!!!!!!', result);
-      res.json({ result });
+      if (err) return res.json({ err: err.message });
+      const foundUsers = result.hits.hits.map((user) => {
+        const username = user._source.username;
+        return { username };
+      });
+      return res.json({ foundUsers });
     }
   );
 });

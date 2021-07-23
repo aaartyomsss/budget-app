@@ -1,6 +1,6 @@
 const elasticsearch = require('elasticsearch');
 const ESclient = new elasticsearch.Client({
-  node: 'http://elasticsearch:9200',
+  host: process.env.ELASTICSEARCH_HOST,
 });
 
 module.exports = ESclient;
