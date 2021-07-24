@@ -15,11 +15,19 @@ const getOrSetCache = (key, cb) => {
   });
 };
 
-// TODO update cache util
-const addToCachedExpenses = (key, expenses) => {
-  return new Promise((resolve, reject) => {
-    redisClient.get();
-  });
-};
+// TODO finish functions
+const addToCachedExpenses = (key, newExpense) => {};
 
-module.exports = getOrSetCache;
+const updateCachedExpense = (key, newExpense) => {};
+
+const deleteCachedExpense = (key, expense) => {};
+
+const updateUsersCachedInfo = (key, updatedUser) => {};
+
+module.exports = {
+  getOrSetCache,
+  addToCachedExpenses,
+  updateCachedExpense,
+  deleteCachedExpense,
+  updateUsersCachedInfo,
+};

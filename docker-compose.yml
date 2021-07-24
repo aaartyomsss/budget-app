@@ -29,7 +29,7 @@ services:
     depends_on:
       - redis
       - elasticsearch
-    command: ['npm', 'start']
+    command: ['npm', 'test']
   redis:
     image: redis:6-alpine
     container_name: redis

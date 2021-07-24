@@ -3,11 +3,11 @@ const Expense = require('../models/Expense');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('../utils/config');
-const getOrSetCache = require('../redis/index');
+const redisUtils = require('../redis/index');
 
 // for fetching
 personalPlan.get('/', async (req, res) => {
-  const expenses = await getOrSetCache('users', async () => {
+  const expenses = await redisUtils.getOrSetCache('users', async () => {
     const all = await Expense.find({});
     return all;
   });
