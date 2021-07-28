@@ -10,6 +10,7 @@ import NavBar from './components/shared/NavBar';
 import Success from './components/pages/Success';
 import personalService from './services/personalService';
 import { initialPersonalPlan } from './reducers/personalReducer';
+import { initialFamilyPlans } from './reducers/familyPlanReducer';
 import ExpensesList from './components/pages/ExpensesList';
 import SpendingForm from './components/pages/SpendingForm';
 import MyProfile from './components/pages/MyProfile';
@@ -31,6 +32,7 @@ const App = () => {
         personalService.setToken(parsedUser.token);
         dispatch(login(parsedUser));
         dispatch(initialPersonalPlan(parsedUser));
+        dispatch(initialFamilyPlans(parsedUser));
       };
       fetch();
     }

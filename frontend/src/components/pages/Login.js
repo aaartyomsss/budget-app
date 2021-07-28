@@ -7,6 +7,7 @@ import '../../styles.css';
 import { useHistory } from 'react-router-dom';
 import personalService from '../../services/personalService';
 import { initialPersonalPlan } from '../../reducers/personalReducer';
+import { initialFamilyPlans } from '../../reducers/familyPlanReducer';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Login = () => {
       personalService.setToken(user.token);
       dispatch(login(user));
       dispatch(initialPersonalPlan(user));
+      dispatch(initialFamilyPlans(user));
       history.push('/personal-plan');
     } catch (error) {
       if (error.message === 'Request failed with status code 401') {

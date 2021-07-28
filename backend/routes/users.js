@@ -13,8 +13,11 @@ userRouter.get('/', async (req, res) => {
 });
 
 userRouter.get('/:id', async (req, res) => {
-  // TODO set redis caching and manage mutations on personal expenses
-  const user = await User.findById(req.params.id).populate('personalPlan');
+  // TODO set redis caching and manage mutations on expenses
+  // TODO fix family plans population
+  const user = await User.findById(req.params.id).populate(
+    'personalPlan familyPlans'
+  );
   res.json(user);
 });
 

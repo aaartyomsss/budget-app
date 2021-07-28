@@ -1,13 +1,13 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const loginRouter = require("express").Router();
-const User = require("../models/User");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const loginRouter = require('express').Router();
+const User = require('../models/User');
 
-loginRouter.post("/", async (req, res) => {
+loginRouter.post('/', async (req, res) => {
   const body = req.body;
 
   const user = await User.findOne({ username: body.username }).populate(
-    "personalPlan"
+    'personalPlan familyPlans'
   );
   const passwordValidation =
     user === null
@@ -16,12 +16,12 @@ loginRouter.post("/", async (req, res) => {
 
   if (!(user && passwordValidation)) {
     return res.status(401).json({
-      error: "Invalid password or username",
+      error: 'Invalid password or username',
     });
   }
 
   if (!user.confirmed) {
-    return res.status(403).json({ error: "Your account is not confirmed" });
+    return res.status(403).json({ error: 'Your account is not confirmed' });
   }
 
   const userForToken = {
@@ -32,16 +32,14 @@ loginRouter.post("/", async (req, res) => {
 
   const token = jwt.sign(userForToken, process.env.SECRET);
 
-  res
-    .status(200)
-    .send({
-      token,
-      username: user.username,
-      name: user.name,
-      personalPlan: user.personalPlan,
-      id: user._id,
-      familyPlans: user.familyPlans,
-    });
+  res.status(200).send({
+    token,
+    username: user.username,
+    name: user.name,
+    personalPlan: user.personalPlan,
+    id: user._id,
+    familyPlans: user.familyPlans,
+  });
 });
 
 module.exports = loginRouter;

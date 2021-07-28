@@ -9,13 +9,16 @@ familyPlanRouter.get('/plans', async (req, res) => {
 
 familyPlanRouter.post('/initialize-plan', async (req, res) => {
   const { planName, userId } = req.body;
+  const user = await User.findById(userId);
   const newFamilyPlan = new FamilyPlan({
     users: [userId],
     planName,
     created_by: userId,
   });
   try {
-    await newFamilyPlan.save();
+    const saved = await newFamilyPlan.save();
+    user.familyPlans = user.familyPlans.concat(saved._id);
+    await user.save();
     res.json(newFamilyPlan);
   } catch (error) {
     res.json({ error });
