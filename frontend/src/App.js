@@ -11,11 +11,12 @@ import Success from './components/pages/Success';
 import personalService from './services/personalService';
 import { initialPersonalPlan } from './reducers/personalReducer';
 import { initialFamilyPlans } from './reducers/familyPlanReducer';
-import ExpensesList from './components/pages/ExpensesList';
+import PersonalExpensesContainer from './components/pages/PersonalExpensesContainer';
+import FamilyExpensesContainer from './components/pages/FamilyExpensesContainer';
 import SpendingForm from './components/pages/SpendingForm';
 import MyProfile from './components/pages/MyProfile';
 import Overview from './components/pages/Overview';
-import FamilyPlanHome from './components/pages/FamilyPlanHome';
+import FamilyPlanHome from './components/pages/FamilyPlanHome/FamilyPlanHome';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const App = () => {
       <NavBar user={user} />
       <Switch>
         <Route path="/personal-plan">
-          <ExpensesList expenses={personalExpenses} />
+          <PersonalExpensesContainer expenses={personalExpenses} />
         </Route>
 
         <Route path="/my-profile">
@@ -68,6 +69,10 @@ const App = () => {
 
         <Route path="/successful-registration">
           <Success button={false} />
+        </Route>
+
+        <Route path="/family-plan/:familyPlanId">
+          <FamilyExpensesContainer />
         </Route>
 
         <Route path="/family-plans">
