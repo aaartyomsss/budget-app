@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import familyPlanReducer, {
-  createFamilyPlan,
-} from '../../../reducers/familyPlanReducer';
+import { createFamilyPlan } from '../../../reducers/familyPlanReducer';
 import { Popover, Button } from 'antd';
 import FamilyPlansList from './extra/FamilyPlansList';
+import InvitePeople from './extra/InvitePeople';
 import './assets/FamilyPlanHome.css';
 
 const CreatePlanForm = ({ setValue, sendValue }) => {
@@ -86,7 +85,9 @@ const FamilyPlanHome = () => {
         <div className="content">
           {showFamilyPlansList ? (
             <FamilyPlansList familyPlans={familyPlans} />
-          ) : null}
+          ) : (
+            <InvitePeople />
+          )}
         </div>
       </div>
     </div>

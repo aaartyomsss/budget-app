@@ -2,7 +2,6 @@ const familyPlanRequestRouter = require('express').Router();
 const { json } = require('express');
 const FamilyPlanRequest = require('../models/FamilyPlanRequest');
 const FamilyPlan = require('../models/FamilyPlan');
-const { returningUserById } = require('../utils/helperFunctions');
 const User = require('../models/User');
 
 const REQUEST_SENT = 'sent';
@@ -10,7 +9,7 @@ const REQUEST_ACCEPTED = 'accepted';
 
 familyPlanRequestRouter.post('/send-request', async (req, res) => {
   const { requester, planName, recepientId, planId } = req.body;
-  const recepient = await returningUserById(recepientId);
+  const recepient = await User.findById(recepientId);
 
   if (!recepient) {
     return res.status(403).json({ error: 'User was not found' });
@@ -28,7 +27,6 @@ familyPlanRequestRouter.post('/send-request', async (req, res) => {
   res.json(request);
 });
 
-// Uses recepient id as url param
 familyPlanRequestRouter.get('/requests/:id', async (req, res) => {
   const userId = req.params.id;
   const requests = await FamilyPlanRequest.find({ recepient: userId });
@@ -65,6 +63,7 @@ familyPlanRequestRouter.patch('/request-response/:id', async (req, res) => {
   } catch (e) {
     return res.status(403).json({ error: 'Request was not found ' });
   }
+  // TODO Add cancelation of a request
 });
 
 module.exports = familyPlanRequestRouter;

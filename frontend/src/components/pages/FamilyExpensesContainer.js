@@ -7,7 +7,8 @@ import ExpensesList from './ExpensesList';
 const FamilyExpensesContainer = () => {
   const { familyPlanId } = useParams();
   const familyPlanExpenses = useSelector(({ familyPlanReducer }) => {
-    return familyPlanReducer.filter((plan) => plan.id === familyPlanId);
+    const plan = familyPlanReducer.filter((plan) => plan.id === familyPlanId);
+    return plan[0].expenses;
   });
   familyPlanExpenses.forEach((obj) => {
     // RegEx that will ignore already formatted dates

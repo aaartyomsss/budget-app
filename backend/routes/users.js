@@ -14,7 +14,6 @@ userRouter.get('/', async (req, res) => {
 
 userRouter.get('/:id', async (req, res) => {
   // TODO set redis caching and manage mutations on expenses
-  // TODO fix family plans population
   const user = await User.findById(req.params.id).populate(
     'personalPlan familyPlans'
   );
@@ -149,7 +148,8 @@ userRouter.get('/search/:query', async (req, res) => {
       if (err) return res.json({ err: err.message });
       const foundUsers = result.hits.hits.map((user) => {
         const username = user._source.username;
-        return { username };
+        const id = user._id;
+        return { username, id };
       });
       return res.json({ foundUsers });
     }
