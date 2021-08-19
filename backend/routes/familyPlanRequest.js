@@ -4,8 +4,9 @@ const FamilyPlanRequest = require('../models/FamilyPlanRequest');
 const FamilyPlan = require('../models/FamilyPlan');
 const User = require('../models/User');
 
-const REQUEST_SENT = 'sent';
-const REQUEST_ACCEPTED = 'accepted';
+const REQUEST_SENT = 'SENT';
+const REQUEST_ACCEPTED = 'ACCEPTED';
+const REQUEST_DECLINED = 'DECLINED';
 
 familyPlanRequestRouter.post('/send-request', async (req, res) => {
   const { requester, planName, recepientId, planId } = req.body;
@@ -25,6 +26,21 @@ familyPlanRequestRouter.post('/send-request', async (req, res) => {
 
   await request.save();
   res.json(request);
+});
+
+familyPlanRequestRouter.get('/sent-requests/:id', async (req, res) => {
+  const requester = req.params.id;
+  const requests = await FamilyPlanRequest.find({ requester });
+  res.json(requests);
+});
+
+familyPlanRequestRouter.get('/avaiting-response/:id', async (req, res) => {
+  const recepient = req.params.id;
+  const requests = await FamilyPlanRequest.find({
+    recepient,
+    status: REQUEST_SENT,
+  });
+  res.json(requests);
 });
 
 familyPlanRequestRouter.get('/requests/:id', async (req, res) => {

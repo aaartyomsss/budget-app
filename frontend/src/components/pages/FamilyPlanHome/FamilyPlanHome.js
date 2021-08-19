@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createFamilyPlan } from '../../../reducers/familyPlanReducer';
-import { Popover, Button } from 'antd';
+import { Popover, Button, Tabs } from 'antd';
 import FamilyPlansList from './extra/FamilyPlansList';
 import InvitePeople from './extra/InvitePeople';
 import './assets/FamilyPlanHome.css';
@@ -25,9 +25,9 @@ const CreatePlanForm = ({ setValue, sendValue }) => {
 };
 
 const FamilyPlanHome = () => {
+  const { TabPane } = Tabs;
   const [visible, setVisible] = useState(false);
   const [formValue, setFormValue] = useState('');
-  const [showFamilyPlansList, setShowFamilyPlansList] = useState(true);
   const user = useSelector(({ user }) => user);
   const familyPlans = useSelector(({ familyPlanReducer }) => familyPlanReducer);
   const dispatch = useDispatch();
@@ -61,36 +61,20 @@ const FamilyPlanHome = () => {
   }
 
   return (
-    <div>
-      <div className="header">
-        <Button
-          className="btn"
-          type="primary"
-          onClick={() => setShowFamilyPlansList(true)}
-        >
-          Select Plan
-        </Button>
-        <Button
-          className="btn"
-          type="primary"
-          onClick={() => setShowFamilyPlansList(false)}
-        >
-          Invite People
-        </Button>
-      </div>
-      <div className="centering-container">
-        <div>
-          {showFamilyPlansList ? 'Your family Plans' : 'Find and invite users'}
+    <Tabs defaultActiveKey="1">
+      <TabPane tab="Family Plans" key="1">
+        <div className="centering-container">
+          <div>Your family Plans</div>
         </div>
-        <div className="content">
-          {showFamilyPlansList ? (
-            <FamilyPlansList familyPlans={familyPlans} />
-          ) : (
-            <InvitePeople />
-          )}
+        <FamilyPlansList familyPlans={familyPlans} />
+      </TabPane>
+      <TabPane tab="Invite People" key="2">
+        <div className="centering-container">
+          <div>Find and invite users</div>
         </div>
-      </div>
-    </div>
+        <InvitePeople user={user} />
+      </TabPane>
+    </Tabs>
   );
 
   //With plans block

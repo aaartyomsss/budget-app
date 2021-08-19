@@ -11,6 +11,7 @@ import Success from './components/pages/Success';
 import personalService from './services/personalService';
 import { initialPersonalPlan } from './reducers/personalReducer';
 import { initialFamilyPlans } from './reducers/familyPlanReducer';
+import { setSentRequests } from './reducers/invitationReducer';
 import PersonalExpensesContainer from './components/pages/PersonalExpensesContainer';
 import FamilyExpensesContainer from './components/pages/FamilyExpensesContainer';
 import SpendingForm from './components/pages/SpendingForm';
@@ -29,11 +30,12 @@ const App = () => {
     if (userJSON) {
       const fetch = async () => {
         const parsedUser = JSON.parse(userJSON);
-        console.log(parsedUser);
         personalService.setToken(parsedUser.token);
-        dispatch(login(parsedUser));
+        dispatch(setSentRequests(parsedUser.id));
+        console.log(parsedUser, 'PARSED USER');
         dispatch(initialPersonalPlan(parsedUser));
         dispatch(initialFamilyPlans(parsedUser));
+        dispatch(login(parsedUser));
       };
       fetch();
     }

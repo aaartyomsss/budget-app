@@ -2,8 +2,8 @@ POST http://localhost:3001/api/family-plan-request/send-request
 Content-Type: application/json
 
 {
-    "recepientId": "5fff0f3188f73e1f64c4171b",
-    "requester": "5ffdee25b68a851934c5fabe",
+    "recepientId": "60fb00b7597621002b5ba866",
+    "requester": "60fafe50597621002b5ba859",
     "planName": "And another one :))))",
-    "planId": "60c61bff5e87a728e8ebddff"
+    "planId": "60ff9d81bf7e4300e4ec5f94"
 }

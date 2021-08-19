@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import personalService from '../../services/personalService';
 import { initialPersonalPlan } from '../../reducers/personalReducer';
 import { initialFamilyPlans } from '../../reducers/familyPlanReducer';
+import { setSentRequests } from '../../reducers/invitationReducer';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Login = () => {
       window.localStorage.setItem('loggedInUser', JSON.stringify(user));
       personalService.setToken(user.token);
       dispatch(login(user));
+      dispatch(setSentRequests(user.id));
       dispatch(initialPersonalPlan(user));
       dispatch(initialFamilyPlans(user));
       history.push('/personal-plan');
