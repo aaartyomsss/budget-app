@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon -L index.js",
     "dev": "supervisor -w index.js",
-    "test": "NODE_ENV=test jest --verbose --runInBand"
+    "test": "cross-env NODE_ENV=test jest  --verbose --runInBand --watchAll=false"
   },
   "author": "",
   "license": "ISC",

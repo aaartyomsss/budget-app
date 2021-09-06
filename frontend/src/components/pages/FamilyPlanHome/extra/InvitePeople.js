@@ -5,6 +5,7 @@ import familyPlanService from '../../../../services/familyPlanService';
 import debounce from 'lodash.debounce';
 import InviteUserCard from './InviteUserCard';
 import { sendRequest } from '../../../../reducers/invitationReducer';
+import '../assets/InvitePeople.css';
 
 const InvitePeople = ({ user }) => {
   const { Option } = Select;
@@ -12,7 +13,9 @@ const InvitePeople = ({ user }) => {
   const [queryResults, setQueryResults] = useState([]);
   const [planForInvitation, setPlanForInvitation] = useState(null);
 
-  const invitations = useSelector(({ invitationReducer }) => invitationReducer);
+  const invitations = useSelector(
+    ({ invitationReducer }) => invitationReducer.sent
+  );
   const familyPlans = useSelector(({ familyPlanReducer }) => familyPlanReducer);
 
   const onSearch = async (e) => {
@@ -21,8 +24,12 @@ const InvitePeople = ({ user }) => {
     if (value !== '') {
       const { data } = await familyPlanService.searchUser(value),
         { foundUsers } = data;
-      console.log(foundUsers);
-      setQueryResults(foundUsers);
+      if (foundUsers) {
+        const result = foundUsers.filter(
+          (foundUser) => foundUser.id !== user.id
+        );
+        setQueryResults(result);
+      }
     }
   };
 
@@ -67,21 +74,20 @@ const InvitePeople = ({ user }) => {
           );
         })}
       </Select>
-      <div>
-        <span>Users found: {queryResults.length}</span>
+      <div className="text-container">
+        <span className="secondary-text">
+          Users found: {queryResults.length}
+        </span>
       </div>
-      <div>
+      <div className="user-list">
         {queryResults &&
           queryResults.map((foundUser) => {
-            if (foundUser.id !== user.id) {
-              return (
-                <InviteUserCard
-                  key={foundUser.id}
-                  {...{ foundUser, invitations, sendInvite }}
-                />
-              );
-            }
-            return <></>;
+            return (
+              <InviteUserCard
+                key={foundUser.id}
+                {...{ foundUser, invitations, sendInvite }}
+              />
+            );
           })}
       </div>
     </div>

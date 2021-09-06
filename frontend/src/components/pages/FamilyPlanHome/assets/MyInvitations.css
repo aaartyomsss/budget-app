@@ -1,0 +1,21 @@
+.container {
+  margin-top: 1rem;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #f7f7f7;
+  padding: 1rem 1rem;
+}
+
+.card-text {
+  font-size: 16px;
+}
+
+.btn-container {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}

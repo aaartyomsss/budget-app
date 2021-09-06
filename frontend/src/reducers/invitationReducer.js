@@ -1,11 +1,23 @@
 import familyPlanRequestService from '../services/familyPlanRequestService';
 
-const invitationReducer = (state = [], action) => {
+const invitationReducer = (state = { sent: [], received: [] }, action) => {
   switch (action.type) {
     case SET_SENT_REQUESTS:
-      return action.data;
+      return { ...state, sent: action.data };
     case SEND_REQUEST:
-      return state.concat(action.data);
+      return { ...state, sent: state.sent.concat(action.data) };
+    case SET_RECEIVED_REQUESTS:
+      return { ...state, received: action.data };
+    case ANSWER_REQUEST:
+      return {
+        ...state,
+        received: state.received.map((invitation) => {
+          if (invitation.id === action.data.requestId) {
+            invitation.status = action.data.answer;
+          }
+          return invitation;
+        }),
+      };
     default:
       return state;
   }
@@ -13,7 +25,7 @@ const invitationReducer = (state = [], action) => {
 
 export const setSentRequests = (userId) => {
   return async (dispatch) => {
-    const data = await familyPlanRequestService.getAllSentRequests(userId);
+    const data = await familyPlanRequestService.getSentRequests(userId);
     dispatch({ type: SET_SENT_REQUESTS, data });
   };
 };
@@ -25,7 +37,21 @@ export const sendRequest = (params) => {
   };
 };
 
+export const setReceivedRequests = (userId) => {
+  return async (dispatch) => {
+    const data = await familyPlanRequestService.getReceivedRequests(userId);
+    dispatch({ type: SET_RECEIVED_REQUESTS, data });
+  };
+};
+export const answerRequest = (answer, requestId) => {
+  console.log('YES WORKS');
+  const data = { answer, requestId };
+  return { type: ANSWER_REQUEST, data };
+};
+
 const SET_SENT_REQUESTS = 'SET_SENT_REQUESTS';
 const SEND_REQUEST = 'SEND_REQUEST';
+const SET_RECEIVED_REQUESTS = 'SET_RECEIVED_REQUESTS';
+const ANSWER_REQUEST = 'ANSWER_REQUEST';
 
 export default invitationReducer;

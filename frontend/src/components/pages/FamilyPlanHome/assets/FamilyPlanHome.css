@@ -14,6 +14,17 @@
   font-size: 24px;
 }
 
+.heading {
+  font-size: 24px;
+  margin: 0rem 0 1rem 0.1rem;
+}
+
+.family-plan-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .header {
   display: flex;
   justify-content: center;
@@ -25,4 +36,30 @@
 
 .btn {
   padding: 0 23.5%;
+}
+
+.tabs {
+  margin: 0 2rem;
+}
+
+.badge {
+  font-size: 20px;
+}
+
+/* FORM FOR CREATING PLAN */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-btn-container {
+  margin-top: 0.5rem;
 }

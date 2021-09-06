@@ -16,16 +16,20 @@ familyPlanRequestRouter.post('/send-request', async (req, res) => {
     return res.status(403).json({ error: 'User was not found' });
   }
 
-  const request = new FamilyPlanRequest({
-    status: REQUEST_SENT,
-    recepient: recepient._id,
-    requester,
-    planName,
-    planId,
-  });
+  try {
+    const request = new FamilyPlanRequest({
+      status: REQUEST_SENT,
+      recepient: recepient._id,
+      requester,
+      planName,
+      planId,
+    });
 
-  await request.save();
-  res.json(request);
+    await request.save();
+    res.json(request);
+  } catch (e) {
+    res.json({ error: e.message });
+  }
 });
 
 familyPlanRequestRouter.get('/sent-requests/:id', async (req, res) => {
@@ -39,7 +43,7 @@ familyPlanRequestRouter.get('/avaiting-response/:id', async (req, res) => {
   const requests = await FamilyPlanRequest.find({
     recepient,
     status: REQUEST_SENT,
-  });
+  }).populate('requester');
   res.json(requests);
 });
 
@@ -57,7 +61,6 @@ familyPlanRequestRouter.patch('/request-response/:id', async (req, res) => {
   }
 
   try {
-    //TODO Implement validation that request was not answered already
     const request = await FamilyPlanRequest.findOneAndUpdate(
       { _id: req.params.id },
       { status: answer },
@@ -75,6 +78,9 @@ familyPlanRequestRouter.patch('/request-response/:id', async (req, res) => {
       } catch (error) {
         res.json({ error: error.message });
       }
+    } else if (answer === REQUEST_DECLINED) {
+      // TODO finish decline implimitation
+      return;
     }
   } catch (e) {
     return res.status(403).json({ error: 'Request was not found ' });

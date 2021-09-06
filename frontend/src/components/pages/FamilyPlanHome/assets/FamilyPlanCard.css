@@ -1,6 +1,7 @@
 .plan-card-wrapper {
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
+  border: 1px solid #f7f7f7;
   justify-content: space-around;
+  padding: 1rem 0;
 }

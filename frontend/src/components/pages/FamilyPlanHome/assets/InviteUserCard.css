@@ -3,5 +3,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5%;
+  padding: 1rem 5%;
+}
+
+.card-text {
+  font-size: 20px;
 }

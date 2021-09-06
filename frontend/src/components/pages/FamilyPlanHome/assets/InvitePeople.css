@@ -4,3 +4,15 @@
   justify-content: center;
   align-items: center;
 }
+
+.text-container {
+  padding: 1rem 0;
+}
+
+.secondary-text {
+  font-size: 16px;
+}
+
+.user-list {
+  margin-top: 1rem;
+}

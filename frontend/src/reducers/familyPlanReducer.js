@@ -3,7 +3,7 @@ import { dateFormatter, capitalizeString } from '../functions/helperFunctions';
 
 const familyPlanReducer = (state = [], action) => {
   switch (action.type) {
-    case 'INIT':
+    case INIT:
       let familyPlans = action.user.familyPlans;
       familyPlans.forEach((plan) => {
         if (plan.lenght) {
@@ -14,13 +14,11 @@ const familyPlanReducer = (state = [], action) => {
         }
       });
       return familyPlans;
-    case 'CREATE_PLAN':
+    case ADD_PLAN:
       console.log(action.data);
       return state.concat(action.data);
     // case 'CLEAR':
     //   return action.data;
-    // case 'ADD':
-    //   return state.concat(action.data);
     // case 'REMOVE':
     //   const newState = state.filter((obj) => obj.id !== action.data);
     //   return newState;
@@ -36,7 +34,7 @@ const familyPlanReducer = (state = [], action) => {
 
 export const initialFamilyPlans = (user) => {
   return {
-    type: 'INIT',
+    type: INIT,
     user,
   };
 };
@@ -44,12 +42,23 @@ export const initialFamilyPlans = (user) => {
 export const createFamilyPlan = (planName, userId) => {
   return async (dispatch) => {
     const { data } = await familyPlanService.createPlan(planName, userId);
+    console.log(data);
     dispatch({
-      type: 'CREATE_PLAN',
+      type: ADD_PLAN,
       data,
     });
   };
 };
+
+export const addAcceptedPlan = (plan) => {
+  return {
+    type: ADD_PLAN,
+    data: plan,
+  };
+};
+
+const INIT = 'INIT';
+const ADD_PLAN = 'ADD_PLAN';
 
 // export const logoutClear = () => {
 //   return {

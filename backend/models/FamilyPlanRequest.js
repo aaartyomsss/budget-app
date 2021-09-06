@@ -1,8 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const familyPlanRequestSchema = new mongoose.Schema({
   requester: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   recepient: {
@@ -23,7 +24,7 @@ const familyPlanRequestSchema = new mongoose.Schema({
   },
 });
 
-familyPlanRequestSchema.set("toJSON", {
+familyPlanRequestSchema.set('toJSON', {
   transform: (document, returnedObj) => {
     returnedObj.id = returnedObj._id.toString();
     delete returnedObj._id;
@@ -32,7 +33,7 @@ familyPlanRequestSchema.set("toJSON", {
 });
 
 const FamilyPlanRequest = mongoose.model(
-  "FamilyPlanRequest",
+  'FamilyPlanRequest',
   familyPlanRequestSchema
 );
 

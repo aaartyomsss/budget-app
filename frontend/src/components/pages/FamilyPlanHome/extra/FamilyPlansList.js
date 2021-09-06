@@ -1,5 +1,6 @@
 import React from 'react';
 import FamilyPlanCard from './FamilyPlanCard';
+import '../assets/FamilyPlansList.css';
 
 const FamilyPlansList = ({ familyPlans }) => {
   let data = [];
@@ -13,7 +14,7 @@ const FamilyPlansList = ({ familyPlans }) => {
   });
 
   return (
-    <div>
+    <div className="container">
       {data.map((plan) => (
         <FamilyPlanCard
           key={plan.id}

@@ -11,7 +11,10 @@ import Success from './components/pages/Success';
 import personalService from './services/personalService';
 import { initialPersonalPlan } from './reducers/personalReducer';
 import { initialFamilyPlans } from './reducers/familyPlanReducer';
-import { setSentRequests } from './reducers/invitationReducer';
+import {
+  setSentRequests,
+  setReceivedRequests,
+} from './reducers/invitationReducer';
 import PersonalExpensesContainer from './components/pages/PersonalExpensesContainer';
 import FamilyExpensesContainer from './components/pages/FamilyExpensesContainer';
 import SpendingForm from './components/pages/SpendingForm';
@@ -25,14 +28,14 @@ const App = () => {
   const personalExpenses = useSelector((state) => state.personalExpenses);
 
   useEffect(() => {
-    // TODO Save only token and make request to server
+    // TODO ? Save only token and make request to server ?
     const userJSON = window.localStorage.getItem('loggedInUser');
     if (userJSON) {
       const fetch = async () => {
         const parsedUser = JSON.parse(userJSON);
         personalService.setToken(parsedUser.token);
         dispatch(setSentRequests(parsedUser.id));
-        console.log(parsedUser, 'PARSED USER');
+        dispatch(setReceivedRequests(parsedUser.id));
         dispatch(initialPersonalPlan(parsedUser));
         dispatch(initialFamilyPlans(parsedUser));
         dispatch(login(parsedUser));

@@ -11,7 +11,7 @@ familyPlanRouter.post('/initialize-plan', async (req, res) => {
   const { planName, userId } = req.body;
   const user = await User.findById(userId);
   const newFamilyPlan = new FamilyPlan({
-    users: [userId],
+    users: [user.id],
     planName,
     created_by: userId,
   });
