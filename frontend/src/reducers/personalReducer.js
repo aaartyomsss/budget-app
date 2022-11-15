@@ -5,7 +5,7 @@ const personalReducer = (state = [], action) => {
   switch (action.type) {
     case 'INIT':
       let usersExpenses = action.user.personalPlan;
-      if (usersExpenses.lenght) {
+      if (usersExpenses && usersExpenses.lenght) {
         usersExpenses.forEach((exp) => {
           exp.date = dateFormatter(exp.date);
           exp.type = capitalizeString(exp.type);
