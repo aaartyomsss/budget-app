@@ -29,4 +29,4 @@ Time spent bullets. Well, I was at times not to specific with the categories, so
 
 Now starts the part of 2022 development:
 
-1. TODO: do smth
+21. Basic unit tests for reducers - 0.5h
