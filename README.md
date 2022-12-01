@@ -30,3 +30,7 @@ Time spent bullets. Well, I was at times not to specific with the categories, so
 Now starts the part of 2022 development:
 
 21. Basic unit tests for reducers - 0.5h
+22. Fixing login/ sign up styling + setting up proper nodemailer environment - 0.75h
+
+CURRENT:
+GOAL: 122.5

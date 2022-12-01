@@ -56,7 +56,10 @@ const Login = () => {
   };
 
   return (
-    <div className="center-div border padding" style={{ width: '30%' }}>
+    <div
+      className="center-div"
+      style={{ width: '30%', height: '100%', marginTop: '10rem' }}
+    >
       <Form onFinish={handleSubmit} {...layout}>
         <Form.Item
           name="username"

@@ -45,7 +45,7 @@ const App = () => {
   }, [dispatch]); // eslint-disable-line
 
   return (
-    <div>
+    <div className="App">
       <NavBar user={user} />
       <Switch>
         <Route path="/personal-plan">
