@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop
   pull_request:
     branches: [main]
     types: [opened, synchronize]
@@ -20,6 +21,14 @@ jobs:
       - name: npm install
         working-directory: ./frontend
         run: npm install
+
+      - name: frontend linting
+        working-directory: ./frontend
+        run: npm runt lint
+
+      - name: npm frontend unit tests
+        working-directory: ./frontend
+        run: npm run test
 
       - name: Frontend build
         working-directory: ./frontend

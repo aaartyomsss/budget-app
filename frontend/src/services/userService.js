@@ -23,4 +23,4 @@ const changePassword = async (passwords) => {
   return res
 }
 
-export default { login, register, postGoogle, changePassword } // eslint-disable-line
+export default { login, register, postGoogle, changePassword }

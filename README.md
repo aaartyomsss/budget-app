@@ -32,6 +32,8 @@ Now starts the part of 2022 development:
 21. Basic unit tests for reducers - 0.5h
 22. Fixing login/ sign up styling + setting up proper nodemailer environment - 0.75h
 23. Setting up CI/CD pipeline - 0.25h
+24. ESlint configuration + fixes - 0.5h
+25. Add extra steps to pipeline - 0.1h
 
 CURRENT:
 GOAL: 122.5
