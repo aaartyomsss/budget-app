@@ -24,7 +24,7 @@ jobs:
 
       - name: frontend linting
         working-directory: ./frontend
-        run: npm runt lint
+        run: npm run lint
 
       - name: npm frontend unit tests
         working-directory: ./frontend
