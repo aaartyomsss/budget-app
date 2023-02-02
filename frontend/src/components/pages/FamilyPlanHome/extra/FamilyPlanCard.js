@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../assets/FamilyPlanCard.css';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import '../assets/FamilyPlanCard.css'
 
 const FamilyPlanCard = ({ id, planName, totalUsers, totalExpenses }) => {
   return (
@@ -11,7 +11,7 @@ const FamilyPlanCard = ({ id, planName, totalUsers, totalExpenses }) => {
       <span>{totalUsers}</span>
       <span>{totalExpenses}</span>
     </div>
-  );
-};
+  )
+}
 
-export default FamilyPlanCard;
+export default FamilyPlanCard

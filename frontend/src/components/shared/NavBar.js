@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { PageHeader } from 'antd';
-import DropdownMenu from './DropdownMenu';
-import { useLocation, useHistory } from 'react-router-dom';
-import { Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react'
+import { PageHeader } from 'antd'
+import DropdownMenu from './DropdownMenu'
+import { useLocation, useHistory } from 'react-router-dom'
+import { Button } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 
 const NavBar = ({ user }) => {
-  const location = useLocation();
-  const history = useHistory();
-  const subTitle = user === null ? '' : `Welcome ${user.name}`;
-  const [currentPage, setCurrentPage] = useState(null);
+  const location = useLocation()
+  const history = useHistory()
+  const subTitle = user === null ? '' : `Welcome ${user.name}`
+  const [currentPage, setCurrentPage] = useState(null)
 
   // Following hook checks what is the location and therefore
   // Based on it displays neccessary extras, i.e. buttons
   useEffect(() => {
-    setCurrentPage(location.pathname);
-  }, [location.pathname]);
+    setCurrentPage(location.pathname)
+  }, [location.pathname])
 
   return (
     <div style={{ border: '1px solid black' }}>
@@ -33,7 +33,7 @@ const NavBar = ({ user }) => {
         ]}
       />
     </div>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

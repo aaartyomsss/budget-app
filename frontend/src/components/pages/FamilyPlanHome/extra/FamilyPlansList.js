@@ -1,17 +1,17 @@
-import React from 'react';
-import FamilyPlanCard from './FamilyPlanCard';
-import '../assets/FamilyPlansList.css';
+import React from 'react'
+import FamilyPlanCard from './FamilyPlanCard'
+import '../assets/FamilyPlansList.css'
 
 const FamilyPlansList = ({ familyPlans }) => {
-  let data = [];
+  let data = []
   familyPlans.forEach((plan) => {
     data.push({
       id: plan.id,
       planName: plan.planName,
       totalUsers: plan.users.length,
       totalExpenses: plan.expenses.length,
-    });
-  });
+    })
+  })
 
   return (
     <div className="container">
@@ -25,7 +25,7 @@ const FamilyPlansList = ({ familyPlans }) => {
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default FamilyPlansList;
+export default FamilyPlansList

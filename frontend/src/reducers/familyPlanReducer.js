@@ -1,22 +1,22 @@
-import familyPlanService from '../services/familyPlanService';
-import { dateFormatter, capitalizeString } from '../functions/helperFunctions';
+import familyPlanService from '../services/familyPlanService'
+import { dateFormatter, capitalizeString } from '../functions/helperFunctions'
 
 const familyPlanReducer = (state = [], action) => {
   switch (action.type) {
-    case INIT:
-      let familyPlans = action.user.familyPlans;
+    case INIT: {
+      let familyPlans = action.user.familyPlans
       familyPlans.forEach((plan) => {
         if (plan.lenght) {
           plan.forEach((exp) => {
-            exp.date = dateFormatter(exp.date);
-            exp.type = capitalizeString(exp.type);
-          });
+            exp.date = dateFormatter(exp.date)
+            exp.type = capitalizeString(exp.type)
+          })
         }
-      });
-      return familyPlans;
+      })
+      return familyPlans
+    }
     case ADD_PLAN:
-      console.log(action.data);
-      return state.concat(action.data);
+      return state.concat(action.data)
     // case 'CLEAR':
     //   return action.data;
     // case 'REMOVE':
@@ -28,37 +28,36 @@ const familyPlanReducer = (state = [], action) => {
     //   );
     //   return modifiedArr;
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const initialFamilyPlans = (user) => {
   return {
     type: INIT,
     user,
-  };
-};
+  }
+}
 
 export const createFamilyPlan = (planName, userId) => {
   return async (dispatch) => {
-    const { data } = await familyPlanService.createPlan(planName, userId);
-    console.log(data);
+    const { data } = await familyPlanService.createPlan(planName, userId)
     dispatch({
       type: ADD_PLAN,
       data,
-    });
-  };
-};
+    })
+  }
+}
 
 export const addAcceptedPlan = (plan) => {
   return {
     type: ADD_PLAN,
     data: plan,
-  };
-};
+  }
+}
 
-const INIT = 'INIT';
-const ADD_PLAN = 'ADD_PLAN';
+const INIT = 'INIT'
+const ADD_PLAN = 'ADD_PLAN'
 
 // export const logoutClear = () => {
 //   return {
@@ -97,4 +96,4 @@ const ADD_PLAN = 'ADD_PLAN';
 //   };
 // };
 
-export default familyPlanReducer;
+export default familyPlanReducer

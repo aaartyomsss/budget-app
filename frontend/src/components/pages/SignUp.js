@@ -1,12 +1,12 @@
-import React from 'react';
-import { Form, Input, Button, message } from 'antd';
-import userService from '../../services/userService';
-import '../../styles.css';
-import { useHistory } from 'react-router-dom';
+import React from 'react'
+import { Form, Input, Button, message } from 'antd'
+import userService from '../../services/userService'
+import '../../styles.css'
+import { useHistory } from 'react-router-dom'
 
 const SignUp = () => {
-  const [form] = Form.useForm();
-  const history = useHistory();
+  const [form] = Form.useForm()
+  const history = useHistory()
 
   const layout = {
     labelCol: {
@@ -15,26 +15,26 @@ const SignUp = () => {
     wrapperCol: {
       span: 16,
     },
-  };
+  }
   const tailFormItemLayout = {
     wrapperCol: {
       offset: 4,
       span: 16,
     },
-  };
+  }
 
   const handleSubmit = async (values) => {
-    const newUser = await userService.register(values);
+    const newUser = await userService.register(values)
     if (newUser.error) {
-      message.error(newUser.error);
+      message.error(newUser.error)
     } else {
-      history.push('/successful-registration');
+      history.push('/successful-registration')
     }
-  };
+  }
 
-  window.addEventListener('popstate', (event) => {
-    history.push('/');
-  });
+  window.addEventListener('popstate', () => {
+    history.push('/')
+  })
 
   return (
     <div className="center-div" style={{ marginTop: '10rem' }}>
@@ -110,10 +110,10 @@ const SignUp = () => {
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
+                  return Promise.resolve()
                 }
 
-                return Promise.reject('Passwords do not match');
+                return Promise.reject('Passwords do not match')
               },
             }),
           ]}
@@ -128,7 +128,7 @@ const SignUp = () => {
         </Form.Item>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

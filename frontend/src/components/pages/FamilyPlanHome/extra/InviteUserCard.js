@@ -1,13 +1,13 @@
-import React from 'react';
-import { Button } from 'antd';
-import '../assets/InviteUserCard.css';
+import React from 'react'
+import { Button } from 'antd'
+import '../assets/InviteUserCard.css'
 
 const InviteUserCard = ({ foundUser, invitations, sendInvite }) => {
-  const { id, username } = foundUser;
+  const { id, username } = foundUser
   // TODO fix invitation is sent logic
   const isInviteSent = invitations.filter(
     (invitation) => invitation.recepient === id && invitation.status === 'SENT'
-  );
+  )
   return (
     <div className="card-div">
       <span className="card-text">{username}</span>
@@ -22,7 +22,7 @@ const InviteUserCard = ({ foundUser, invitations, sendInvite }) => {
         </Button>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default InviteUserCard;
+export default InviteUserCard

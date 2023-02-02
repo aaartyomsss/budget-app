@@ -1,15 +1,15 @@
-import React from "react";
-import { Menu, Dropdown, Button } from "antd";
-import { Link } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
-import Logout from "./Logout";
+import React from 'react'
+import { Menu, Dropdown, Button } from 'antd'
+import { Link } from 'react-router-dom'
+import { DownOutlined } from '@ant-design/icons'
+import Logout from './Logout'
 import {
   UserOutlined,
   TeamOutlined,
   IdcardOutlined,
   EuroCircleOutlined,
   PieChartOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons'
 
 const DropdownMenu = () => {
   const menu = (
@@ -53,7 +53,7 @@ const DropdownMenu = () => {
         <Logout />
       </Menu.Item>
     </Menu>
-  );
+  )
 
   return (
     <Dropdown key="more" overlay={menu}>
@@ -61,13 +61,13 @@ const DropdownMenu = () => {
         onClick={(e) => e.preventDefault()}
         type="default"
         style={{
-          display: "inline-block",
+          display: 'inline-block',
         }}
       >
         Menu <DownOutlined />
       </Button>
     </Dropdown>
-  );
-};
+  )
+}
 
-export default DropdownMenu;
+export default DropdownMenu

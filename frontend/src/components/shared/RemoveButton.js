@@ -4,11 +4,11 @@ import { DeleteOutlined } from '@ant-design/icons'
 
 // Remove expense button
 const RemoveButton = ({ onClick }) => {
-
-    return (
-        <Button onClick={onClick}><DeleteOutlined /></Button>
-    )
-
+  return (
+    <Button onClick={onClick}>
+      <DeleteOutlined />
+    </Button>
+  )
 }
 
 export default RemoveButton
