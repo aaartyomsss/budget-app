@@ -36,4 +36,4 @@ const modifyExpense = async (id, newExpense) => {
   return res.data
 }
 
-export default { getAll, addExpense, setToken, removeExpense, modifyExpense }; // eslint-disable-line
+export default { getAll, addExpense, setToken, removeExpense, modifyExpense }

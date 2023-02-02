@@ -15,4 +15,4 @@ const searchUser = async (query) => {
   return res
 }
 
-export default { createPlan, searchUser }; //eslint-disable-line
+export default { createPlan, searchUser }
