@@ -1,4 +1,4 @@
-import { getYear } from './dateFromatters';
+import { getYear } from './dateFromatters'
 
 describe('Get year function', () => {
   // test('Formats properly date JSON string', () => {
@@ -8,8 +8,8 @@ describe('Get year function', () => {
   // })
 
   test('Already formatted object', () => {
-    const dateFormatted = '19/12/2020';
+    const dateFormatted = '19/12/2020'
 
-    expect(getYear(dateFormatted)).toBe('2020');
-  });
-});
+    expect(getYear(dateFormatted)).toBe('2020')
+  })
+})

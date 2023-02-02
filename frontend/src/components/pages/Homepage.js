@@ -1,27 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Typography, Divider, Row, Col } from 'antd';
-import '../../styles.css';
-import { GoogleLogin } from 'react-google-login';
-import userService from '../../services/userService';
-import { useDispatch } from 'react-redux';
-import { login } from '../../reducers/userReducer';
-import personalService from '../../services/personalService';
-import { initialPersonalPlan } from '../../reducers/personalReducer';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Button, Typography, Divider, Row, Col } from 'antd'
+import '../../styles.css'
+import { GoogleLogin } from 'react-google-login'
+import userService from '../../services/userService'
+import { useDispatch } from 'react-redux'
+import { login } from '../../reducers/userReducer'
+import personalService from '../../services/personalService'
+import { initialPersonalPlan } from '../../reducers/personalReducer'
 
 const Homepage = () => {
-  const { Title } = Typography;
-  const dispatch = useDispatch();
+  const { Title } = Typography
+  const dispatch = useDispatch()
 
   const responseGoogle = async (response) => {
     // TODO Save only token and make request to server
-    const user = await userService.postGoogle(response.profileObj);
-    console.log(user);
-    window.localStorage.setItem('loggedInUser', JSON.stringify(user));
-    personalService.setToken(user.token);
-    dispatch(login(user));
-    dispatch(initialPersonalPlan(user));
-  };
+    const user = await userService.postGoogle(response.profileObj)
+    window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+    personalService.setToken(user.token)
+    dispatch(login(user))
+    dispatch(initialPersonalPlan(user))
+  }
 
   return (
     <div className="center-div border text-align-center homepage">
@@ -64,7 +63,7 @@ const Homepage = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Homepage;
+export default Homepage

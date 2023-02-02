@@ -1,18 +1,18 @@
-import React from 'react';
-import { Table, Space, Layout } from 'antd';
-import { toTime } from '../../functions/helperFunctions';
-import { useDispatch } from 'react-redux';
-import { removeExpense } from '../../reducers/personalReducer';
-import RemoveButton from '../shared/RemoveButton';
-import ModifyButton from '../shared/ModifyButton';
-import '../../styles.css';
+import React from 'react'
+import { Table, Space, Layout } from 'antd'
+import { toTime } from '../../functions/helperFunctions'
+import { useDispatch } from 'react-redux'
+import { removeExpense } from '../../reducers/personalReducer'
+import RemoveButton from '../shared/RemoveButton'
+import ModifyButton from '../shared/ModifyButton'
+import '../../styles.css'
 
 // Component that displays list of personal/ family expenses
 
 const ExpensesList = ({ expenses }) => {
-  const dispatch = useDispatch();
-  const { Column, ColumnGroup } = Table;
-  const { Content, Footer } = Layout;
+  const dispatch = useDispatch()
+  const { Column, ColumnGroup } = Table
+  const { Content, Footer } = Layout
 
   return (
     <div>
@@ -55,7 +55,7 @@ const ExpensesList = ({ expenses }) => {
         Created by Artjom Savin, University of Helsinki
       </Footer>
     </div>
-  );
-};
+  )
+}
 
-export default ExpensesList;
+export default ExpensesList

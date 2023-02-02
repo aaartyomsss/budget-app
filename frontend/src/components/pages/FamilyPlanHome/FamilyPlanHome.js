@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { createFamilyPlan } from '../../../reducers/familyPlanReducer';
-import { Popover, Button, Tabs, Badge } from 'antd';
-import FamilyPlansList from './extra/FamilyPlansList';
-import InvitePeople from './extra/InvitePeople';
-import MyInvitations from './extra/MyInvitations';
-import './assets/FamilyPlanHome.css';
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { createFamilyPlan } from '../../../reducers/familyPlanReducer'
+import { Popover, Button, Tabs, Badge } from 'antd'
+import FamilyPlansList from './extra/FamilyPlansList'
+import InvitePeople from './extra/InvitePeople'
+import MyInvitations from './extra/MyInvitations'
+import './assets/FamilyPlanHome.css'
 
-const REQUEST_SENT = 'SENT';
+const REQUEST_SENT = 'SENT'
 
 const FamilyPlanHome = () => {
-  const { TabPane } = Tabs;
-  const user = useSelector(({ user }) => user);
-  const familyPlans = useSelector(({ familyPlanReducer }) => familyPlanReducer);
+  const { TabPane } = Tabs
+  const user = useSelector(({ user }) => user)
+  const familyPlans = useSelector(({ familyPlanReducer }) => familyPlanReducer)
   const invitationsReceived = useSelector(({ invitationReducer }) => {
     return invitationReducer.received.filter(
       (invitation) => invitation.status === REQUEST_SENT
-    );
-  });
+    )
+  })
 
   // No plans block
   if (familyPlans.length === 0 && invitationsReceived.length === 0) {
@@ -29,7 +29,7 @@ const FamilyPlanHome = () => {
           <CreatePlanPopover user={user} />
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -61,8 +61,8 @@ const FamilyPlanHome = () => {
         <MyInvitations invitationsReceived={invitationsReceived} user={user} />
       </TabPane>
     </Tabs>
-  );
-};
+  )
+}
 
 const CreatePlanForm = ({ setValue, sendValue }) => {
   return (
@@ -83,18 +83,18 @@ const CreatePlanForm = ({ setValue, sendValue }) => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
 const CreatePlanPopover = ({ user }) => {
-  const dispatch = useDispatch();
-  const [visible, setVisible] = useState(false);
-  const [formValue, setFormValue] = useState('');
+  const dispatch = useDispatch()
+  const [visible, setVisible] = useState(false)
+  const [formValue, setFormValue] = useState('')
 
   const createPlan = (e) => {
-    e.preventDefault();
-    dispatch(createFamilyPlan(formValue, user.id));
-  };
+    e.preventDefault()
+    dispatch(createFamilyPlan(formValue, user.id))
+  }
 
   return (
     <Popover
@@ -108,7 +108,7 @@ const CreatePlanPopover = ({ user }) => {
     >
       <Button>Create plan</Button>
     </Popover>
-  );
-};
+  )
+}
 
-export default FamilyPlanHome;
+export default FamilyPlanHome
