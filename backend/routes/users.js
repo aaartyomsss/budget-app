@@ -105,11 +105,6 @@ userRouter.post('/', async (req, res) => {
   try {
     const savedUser = await user.save();
 
-    console.log('----------------------------------------');
-    console.log(config.GMAIL_USER);
-    console.log(config.GMAIL_PASSWORD);
-    console.log('----------------------------------------');
-
     // Sending email block of code
     let transporter = nodemailer.createTransport({
       service: 'Gmail',

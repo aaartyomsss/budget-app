@@ -76,7 +76,7 @@ const App = () => {
           <Success button={false} />
         </Route>
 
-        <Route path="/family-plan/:familyPlanId">
+        <Route path="/family-plan/:id">
           <FamilyExpensesContainer />
         </Route>
 

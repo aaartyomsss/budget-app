@@ -5,9 +5,9 @@ import { dateFormatter } from '../../functions/helperFunctions';
 import ExpensesList from './ExpensesList';
 
 const FamilyExpensesContainer = () => {
-  const { familyPlanId } = useParams();
+  const { id } = useParams();
   const familyPlanExpenses = useSelector(({ familyPlanReducer }) => {
-    const plan = familyPlanReducer.filter((plan) => plan.id === familyPlanId);
+    const plan = familyPlanReducer.filter((plan) => plan.id === id);
     return plan[0].expenses;
   });
   familyPlanExpenses.forEach((obj) => {

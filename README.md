@@ -31,6 +31,11 @@ Now starts the part of 2022 development:
 
 21. Basic unit tests for reducers - 0.5h
 22. Fixing login/ sign up styling + setting up proper nodemailer environment - 0.75h
+23. Add expenses to family plan - 0.5h
 
-CURRENT:
-GOAL: 122.5
+Intially, whilst being a lazy programmer - I was all for the JS. After working for some time in the industry and taking a deep dive into the TS, I have realised how important typing is. After not touching the project for over a year it is also a challenge to revive and maintain it. Thus, the decision was made that maybe it is for the best to migrate slowly everything to typescript:
+
+24. TS migration - 0.5h
+
+CURRENT: 80.75h
+GOAL: 122.5h
