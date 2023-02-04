@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../assets/FamilyPlanCard.css';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import '../assets/FamilyPlanCard.css'
 
 type Props = {
   id: number;
@@ -18,7 +18,7 @@ const FamilyPlanCard = ({ id, planName, totalUsers, totalExpenses }: Props) => {
       <span>{totalUsers}</span>
       <span>{totalExpenses}</span>
     </div>
-  );
-};
+  )
+}
 
-export default FamilyPlanCard;
+export default FamilyPlanCard

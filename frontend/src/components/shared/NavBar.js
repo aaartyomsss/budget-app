@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { PageHeader } from 'antd';
-import DropdownMenu from './DropdownMenu';
-import { useLocation, useHistory, useParams } from 'react-router-dom';
-import { Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react'
+import { PageHeader } from 'antd'
+import DropdownMenu from './DropdownMenu'
+import { useLocation, useHistory } from 'react-router-dom'
+import { Button } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 
 const NavBar = ({ user }) => {
-  const location = useLocation();
-  const history = useHistory();
-  const params = useParams();
-  const subTitle = user === null ? '' : `Welcome ${user.name}`;
-  const [currentPage, setCurrentPage] = useState(null);
+  const location = useLocation()
+  const history = useHistory()
+  const subTitle = user === null ? '' : `Welcome ${user.name}`
+  const [currentPage, setCurrentPage] = useState(null)
 
   // Following hook checks what is the location and therefore
   // Based on it displays neccessary extras, i.e. buttons
   useEffect(() => {
-    // TODO: Apparently there is a need for a hack
-    console.log(location.pathname, params, location);
-    setCurrentPage(location.pathname);
-  }, [location.pathname]);
+    setCurrentPage(location.pathname)
+  }, [location.pathname])
 
   const returnAddSpending = () => {
     return currentPage === '/personal-plan' ? (
@@ -26,8 +23,8 @@ const NavBar = ({ user }) => {
         <PlusOutlined />
         Add expense
       </Button>
-    ) : null;
-  };
+    ) : null
+  }
 
   return (
     <div style={{ border: '1px solid black' }}>
@@ -37,7 +34,7 @@ const NavBar = ({ user }) => {
         extra={[returnAddSpending(), user ? <DropdownMenu key="1" /> : null]}
       />
     </div>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

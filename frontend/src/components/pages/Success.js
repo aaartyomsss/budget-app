@@ -5,20 +5,20 @@ import '../../styles.css'
 
 const Success = ({ button }) => {
 
-    const history = useHistory()
+  const history = useHistory()
 
-    const extras = button ? [<Button key='proceed' onClick={() => history.push('/login')}>Proceed to login</Button>] : []
+  const extras = button ? [<Button key='proceed' onClick={() => history.push('/login')}>Proceed to login</Button>] : []
 
-    return (
-        <div className='center-div'>
-            <Result 
-                status='success'
-                title='Registration completed'
-                subTitle='Activation link was sent to your e-mail'
-                extra={extras}
-            />
-        </div>
-    )
+  return (
+    <div className='center-div'>
+      <Result
+        status='success'
+        title='Registration completed'
+        subTitle='Activation link was sent to your e-mail'
+        extra={extras}
+      />
+    </div>
+  )
 
 }
 

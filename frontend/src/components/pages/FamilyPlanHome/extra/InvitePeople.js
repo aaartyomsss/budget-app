@@ -1,62 +1,62 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Input, Select, message } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
-import familyPlanService from '../../../../services/familyPlanService';
-import debounce from 'lodash.debounce';
-import InviteUserCard from './InviteUserCard';
-import { sendRequest } from '../../../../reducers/invitationReducer';
-import '../assets/InvitePeople.css';
+import React, { useState, useEffect, useMemo } from 'react'
+import { Input, Select, message } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import familyPlanService from '../../../../services/familyPlanService'
+import debounce from 'lodash.debounce'
+import InviteUserCard from './InviteUserCard'
+import { sendRequest } from '../../../../reducers/invitationReducer'
+import '../assets/InvitePeople.css'
 
 const InvitePeople = ({ user }) => {
-  const { Option } = Select;
-  const dispatch = useDispatch();
-  const [queryResults, setQueryResults] = useState([]);
-  const [planForInvitation, setPlanForInvitation] = useState(null);
+  const { Option } = Select
+  const dispatch = useDispatch()
+  const [queryResults, setQueryResults] = useState([])
+  const [planForInvitation, setPlanForInvitation] = useState(null)
 
   const invitations = useSelector(
     ({ invitationReducer }) => invitationReducer.sent
-  );
-  const familyPlans = useSelector(({ familyPlanReducer }) => familyPlanReducer);
+  )
+  const familyPlans = useSelector(({ familyPlanReducer }) => familyPlanReducer)
 
   const onSearch = async (e) => {
-    e.preventDefault();
-    const value = e.target.value;
+    e.preventDefault()
+    const value = e.target.value
     if (value !== '') {
       const { data } = await familyPlanService.searchUser(value),
-        { foundUsers } = data;
+        { foundUsers } = data
       if (foundUsers) {
         const result = foundUsers.filter(
           (foundUser) => foundUser.id !== user.id
-        );
-        setQueryResults(result);
+        )
+        setQueryResults(result)
       }
     }
-  };
+  }
 
   const sendInvite = (recepientId) => {
     if (!planForInvitation)
-      return message.error('You have not selected a plan');
+      return message.error('You have not selected a plan')
 
-    const [id, planName] = planForInvitation.split(':');
+    const [id, planName] = planForInvitation.split(':')
     const params = {
       recepientId,
       planId: id,
       requester: user.id,
       planName: planName,
-    };
-    dispatch(sendRequest(params));
-  };
+    }
+    dispatch(sendRequest(params))
+  }
 
   const handlePlanSelection = (val) => {
-    setPlanForInvitation(val);
-  };
+    setPlanForInvitation(val)
+  }
 
-  const debounceHandler = useMemo(() => debounce(onSearch, 300), []);
+  const debounceHandler = useMemo(() => debounce(onSearch, 300), [])
 
   // Stop the invocation of the debounced function
   // after unmounting
   useEffect(() => {
-    return () => debounceHandler.cancel();
+    return () => debounceHandler.cancel()
   }, []); // eslint-disable-line
 
   return (
@@ -71,7 +71,7 @@ const InvitePeople = ({ user }) => {
             <Option key={plan.id} value={`${plan.id}:${plan.planName}`}>
               {plan.planName}
             </Option>
-          );
+          )
         })}
       </Select>
       <div className="text-container">
@@ -87,11 +87,11 @@ const InvitePeople = ({ user }) => {
                 key={foundUser.id}
                 {...{ foundUser, invitations, sendInvite }}
               />
-            );
+            )
           })}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InvitePeople;
+export default InvitePeople

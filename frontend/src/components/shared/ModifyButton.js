@@ -6,19 +6,19 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 // Modify button in list to change info about expense
-const ModifyButton = ({expense}) => {
+const ModifyButton = ({ expense }) => {
 
-    const dispatch = useDispatch()
-    const history = useHistory()
+  const dispatch = useDispatch()
+  const history = useHistory()
 
-    const handleModify = obj => {
-        dispatch(setCache(obj))
-        history.push('/spending-form')
-    }
+  const handleModify = obj => {
+    dispatch(setCache(obj))
+    history.push('/spending-form')
+  }
 
-    return (
-        <Button onClick={() => handleModify(expense)}><EditOutlined /></Button>
-    )
+  return (
+    <Button onClick={() => handleModify(expense)}><EditOutlined /></Button>
+  )
 
 }
 

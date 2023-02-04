@@ -1,48 +1,48 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from './reducers/userReducer';
-import 'antd/dist/antd.css';
-import Homepage from './components/pages/Homepage';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import Login from './components/pages/Login';
-import SingUp from './components/pages/SignUp';
-import NavBar from './components/shared/NavBar';
-import Success from './components/pages/Success';
-import personalService from './services/personalService';
-import { initialPersonalPlan } from './reducers/personalReducer';
-import { initialFamilyPlans } from './reducers/familyPlanReducer';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from './reducers/userReducer'
+import 'antd/dist/antd.css'
+import Homepage from './components/pages/Homepage'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Login from './components/pages/Login'
+import SingUp from './components/pages/SignUp'
+import NavBar from './components/shared/NavBar'
+import Success from './components/pages/Success'
+import personalService from './services/personalService'
+import { initialPersonalPlan } from './reducers/personalReducer'
+import { initialFamilyPlans } from './reducers/familyPlanReducer'
 import {
   setSentRequests,
   setReceivedRequests,
-} from './reducers/invitationReducer';
-import PersonalExpensesContainer from './components/pages/PersonalExpensesContainer';
-import FamilyExpensesContainer from './components/pages/FamilyExpensesContainer';
-import SpendingForm from './components/pages/SpendingForm';
-import MyProfile from './components/pages/MyProfile';
-import Overview from './components/pages/Overview';
-import FamilyPlanHome from './components/pages/FamilyPlanHome/FamilyPlanHome';
+} from './reducers/invitationReducer'
+import PersonalExpensesContainer from './components/pages/PersonalExpensesContainer'
+import FamilyExpensesContainer from './components/pages/FamilyExpensesContainer'
+import SpendingForm from './components/pages/SpendingForm'
+import MyProfile from './components/pages/MyProfile'
+import Overview from './components/pages/Overview'
+import FamilyPlanHome from './components/pages/FamilyPlanHome/FamilyPlanHome'
 
 const App = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const personalExpenses = useSelector((state) => state.personalExpenses);
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user)
+  const personalExpenses = useSelector((state) => state.personalExpenses)
 
   useEffect(() => {
     // TODO ? Save only token and make request to server ?
-    const userJSON = window.localStorage.getItem('loggedInUser');
+    const userJSON = window.localStorage.getItem('loggedInUser')
     if (userJSON) {
       const fetch = async () => {
-        const parsedUser = JSON.parse(userJSON);
-        personalService.setToken(parsedUser.token);
-        dispatch(setSentRequests(parsedUser.id));
-        dispatch(setReceivedRequests(parsedUser.id));
-        dispatch(initialPersonalPlan(parsedUser));
-        dispatch(initialFamilyPlans(parsedUser));
-        dispatch(login(parsedUser));
-      };
-      fetch();
+        const parsedUser = JSON.parse(userJSON)
+        personalService.setToken(parsedUser.token)
+        dispatch(setSentRequests(parsedUser.id))
+        dispatch(setReceivedRequests(parsedUser.id))
+        dispatch(initialPersonalPlan(parsedUser))
+        dispatch(initialFamilyPlans(parsedUser))
+        dispatch(login(parsedUser))
+      }
+      fetch()
     }
-  }, [dispatch]); // eslint-disable-line
+  }, [dispatch]) // eslint-disable-line
 
   return (
     <div className="App">
@@ -93,7 +93,7 @@ const App = () => {
         </Route>
       </Switch>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
