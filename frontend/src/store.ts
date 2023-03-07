@@ -7,6 +7,14 @@ import cacheReducer from './reducers/cacheReducer'
 import familyPlanReducer from './reducers/familyPlanReducer'
 import invitationReducer from './reducers/invitationReducer'
 
+export interface Store {
+  user: Object
+  personalExpenses: Object
+  cache: Object
+  familyPlanReducer: Object
+  invitationReducer: Object
+}
+
 const reducer = combineReducers({
   user: userReducer,
   personalExpenses: personalReducer,

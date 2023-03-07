@@ -17,20 +17,21 @@ const NavBar = ({ user }) => {
     setCurrentPage(location.pathname)
   }, [location.pathname])
 
+  const returnAddSpending = () => {
+    return currentPage === '/personal-plan' ? (
+      <Button key="2" onClick={() => history.push('/spending-form')}>
+        <PlusOutlined />
+        Add expense
+      </Button>
+    ) : null
+  }
+
   return (
     <div style={{ border: '1px solid black' }}>
       <PageHeader
         title="Budget App"
         subTitle={subTitle}
-        extra={[
-          currentPage === '/personal-plan' ? (
-            <Button key="2" onClick={() => history.push('/spending-form')}>
-              <PlusOutlined />
-              Add expense
-            </Button>
-          ) : null,
-          user ? <DropdownMenu key="1" /> : null,
-        ]}
+        extra={[returnAddSpending(), user ? <DropdownMenu key="1" /> : null]}
       />
     </div>
   )

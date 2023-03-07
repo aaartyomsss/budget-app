@@ -2,7 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../assets/FamilyPlanCard.css'
 
-const FamilyPlanCard = ({ id, planName, totalUsers, totalExpenses }) => {
+type Props = {
+  id: number;
+  planName: string;
+  totalUsers: number;
+  totalExpenses: number;
+};
+
+const FamilyPlanCard = ({ id, planName, totalUsers, totalExpenses }: Props) => {
   return (
     <div className="plan-card-wrapper">
       <span>

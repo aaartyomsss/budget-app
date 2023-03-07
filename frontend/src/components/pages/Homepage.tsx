@@ -58,7 +58,7 @@ const Homepage = () => {
         <GoogleLogin
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
-          clientId={process.env.REACT_APP_CLIENT_ID}
+          clientId={import.meta.env.REACT_APP_CLIENT_ID}
           cookiePolicy={'single_host_origin'}
         />
       </div>
