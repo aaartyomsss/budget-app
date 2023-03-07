@@ -21,11 +21,12 @@ import SpendingForm from './components/pages/SpendingForm'
 import MyProfile from './components/pages/MyProfile'
 import Overview from './components/pages/Overview'
 import FamilyPlanHome from './components/pages/FamilyPlanHome/FamilyPlanHome'
+import { Store } from './store'
 
 const App = () => {
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user)
-  const personalExpenses = useSelector((state) => state.personalExpenses)
+  const user = useSelector((state: Store) => state.user)
+  const personalExpenses = useSelector((state: Store) => state.personalExpenses)
 
   useEffect(() => {
     // TODO ? Save only token and make request to server ?

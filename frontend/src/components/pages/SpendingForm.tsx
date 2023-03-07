@@ -8,11 +8,12 @@ import { useHistory } from 'react-router-dom'
 import { clearCache } from '../../reducers/cacheReducer'
 import '../../styles.css'
 import CustomSelectCategory from '../forms/CustomSelectCategory'
+import { Store } from '../../store'
 
 const SpendingForm = () => {
   const dispatch = useDispatch()
   // To modify expense
-  const cache = useSelector((state) => state.cache)
+  const cache = useSelector((state: Store) => state.cache)
 
   const history = useHistory()
 

@@ -2,12 +2,11 @@ import React from 'react'
 import { Select } from 'antd'
 import { getAllMonths, getAllYears } from '../../functions/overviewDropdown'
 import { useSelector } from 'react-redux'
-
+import { Store } from '../../store'
 
 const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
-
   const { Option } = Select
-  const personalExpenses = useSelector(state => state.personalExpenses)
+  const personalExpenses = useSelector((state: Store) => state.personalExpenses)
 
   const years = getAllYears(personalExpenses)
   const months = getAllMonths(personalExpenses)
@@ -20,8 +19,12 @@ const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
           onChange={(value) => setYear(value)}
           value={year}
         >
-          {years.map(year => {
-            return <Option key={year} value={year}>{year}</Option>
+          {years.map((year: string) => {
+            return (
+              <Option key={year} value={year}>
+                {year}
+              </Option>
+            )
           })}
         </Select>
       </div>
@@ -34,8 +37,12 @@ const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
           onChange={(value) => setYear(value)}
           value={year}
         >
-          {years.map(year => {
-            return <Option key={year} value={year}>{year}</Option>
+          {years.map((year) => {
+            return (
+              <Option key={year} value={year}>
+                {year}
+              </Option>
+            )
           })}
         </Select>
         <Select
@@ -43,14 +50,17 @@ const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
           onChange={(value) => setMonth(value)}
           value={month}
         >
-          {months.map(month => {
-            return <Option key={month} value={month}>{month}</Option>
+          {months.map((month) => {
+            return (
+              <Option key={month} value={month}>
+                {month}
+              </Option>
+            )
           })}
         </Select>
       </div>
     )
   }
-
 }
 
 export default OverviewDropdown

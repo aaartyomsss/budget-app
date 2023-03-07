@@ -10,9 +10,10 @@ import {
 import { PieChart, Pie, ResponsiveContainer, Cell, Legend } from 'recharts'
 import { Row, Col } from 'antd'
 import './OverviewPerMonth.css'
+import { Store } from '../../store'
 
 const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
-  const personalExpenses = useSelector((state) => state.personalExpenses)
+  const personalExpenses = useSelector((state: Store) => state.personalExpenses)
   const formattedExpenses = getExpensesPerYearAndMonth(
     personalExpenses,
     selectedYear,
