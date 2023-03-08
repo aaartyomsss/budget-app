@@ -6,13 +6,16 @@ import personalReducer from './reducers/personalReducer'
 import cacheReducer from './reducers/cacheReducer'
 import familyPlanReducer from './reducers/familyPlanReducer'
 import invitationReducer from './reducers/invitationReducer'
+import { Expense, FamilyPlan } from './types/expense'
+import { User } from './types/user'
+import { Invitation } from './types/invitation'
 
 export interface Store {
-  user: Object
-  personalExpenses: Object
+  user: User
+  personalExpenses: Expense[]
   cache: Object
-  familyPlanReducer: Object
-  invitationReducer: Object
+  familyPlanReducer: FamilyPlan[]
+  invitationReducer: Invitation
 }
 
 const reducer = combineReducers({

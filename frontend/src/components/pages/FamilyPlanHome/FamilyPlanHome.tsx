@@ -6,15 +6,17 @@ import FamilyPlansList from './extra/FamilyPlansList'
 import InvitePeople from './extra/InvitePeople'
 import MyInvitations from './extra/MyInvitations'
 import './assets/FamilyPlanHome.css'
+import { Store } from '../../../store'
 
 const REQUEST_SENT = 'SENT'
 
 const FamilyPlanHome = () => {
   const { TabPane } = Tabs
-  const user = useSelector(({ user }) => user)
-  const familyPlans = useSelector(({ familyPlanReducer }) => familyPlanReducer)
-  const invitationsReceived = useSelector(({ invitationReducer }) => {
-    return invitationReducer.received.filter(
+  const user = useSelector<Store>(({ user }) => user)
+  const familyPlans = useSelector((state: Store) => state.familyPlanReducer)
+  const invitationsReceived = useSelector((state: Store) => {
+    console.log(state.invitationReducer)
+    return state.invitationReducer.received.filter(
       (invitation) => invitation.status === REQUEST_SENT
     )
   })

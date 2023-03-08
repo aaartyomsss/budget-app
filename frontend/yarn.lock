@@ -586,6 +586,13 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+"@types/antd@^1.0.0":
+  "integrity" "sha512-wnRh+S6vPMahsuSN6lFJQzNXuhUKr9JKic1L/NMdIChsuu9Fc+mDyF7H17eFPQlgpLVdT0DyYIgB1di8DA9AuQ=="
+  "resolved" "https://registry.npmjs.org/@types/antd/-/antd-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "antd" "*"
+
 "@types/aria-query@^4.2.0":
   "integrity" "sha512-iIgQNzCm0v7QMhhe4Jjn9uRh+I6GoPmt03CbEtwx3ao8/EfoQcmgtqH4vQ5Db/lxiIGaWDv6nwvunuh0RyX0+A=="
   "resolved" "https://registry.npmjs.org/@types/aria-query/-/aria-query-4.2.0.tgz"
@@ -858,7 +865,7 @@
   "resolved" "https://registry.npmjs.org/ansi-styles/-/ansi-styles-5.2.0.tgz"
   "version" "5.2.0"
 
-"antd@^4.10.2":
+"antd@*", "antd@^4.10.2":
   "integrity" "sha512-Qr3AYkeqpd3i/c6M7pjca7Y6XlaIv/p6gD3aqe7/0o8Ueg50G7Aeh+TOaiUfXLGDhnVoNEdaVdDiv8aIaoWB5A=="
   "resolved" "https://registry.npmjs.org/antd/-/antd-4.24.7.tgz"
   "version" "4.24.7"

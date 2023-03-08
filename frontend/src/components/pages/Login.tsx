@@ -29,7 +29,7 @@ const Login = () => {
       dispatch(initialPersonalPlan(user))
       dispatch(initialFamilyPlans(user))
       history.push('/personal-plan')
-    } catch (error) {
+    } catch (error: any) {
       if (error.message === 'Request failed with status code 401') {
         message.error('Invalid credentials')
       }

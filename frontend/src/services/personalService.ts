@@ -1,9 +1,9 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/personal-plan'
+const baseUrl = 'http://localhost:3000/api/personal-plan'
 
-let token = null
+let token: string | null = null
 
-const setToken = (t) => {
+const setToken = (t: string) => {
   token = t
 }
 

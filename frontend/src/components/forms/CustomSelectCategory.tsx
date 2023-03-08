@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { Select, Divider, Input, Button } from 'antd'
 import { capitalizeString } from '../../functions/helperFunctions'
 import { useSelector } from 'react-redux'
+import { Store } from '../../store'
 
 // Following component will allow user to pick already entered previously category,
 // Or add new one
 const CustomSelectCategory = ({ value = {}, onChange }) => {
   // To add existing categories to the form-field
-  const categories = useSelector(({ personalExpenses }) =>
-    personalExpenses.map((exp) => capitalizeString(exp.type))
+  const categories = useSelector((state: Store) =>
+    state.personalExpenses.map((exp) => capitalizeString(exp.type))
   )
   const categoriesWithoutDuplicates = [...new Set(categories)]
   const { Option } = Select

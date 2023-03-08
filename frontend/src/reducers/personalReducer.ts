@@ -1,7 +1,8 @@
 import personalService from '../services/personalService'
 import { dateFormatter, capitalizeString } from '../functions/helperFunctions'
+import { Expense } from '../types/expense'
 
-const personalReducer = (state = [], action) => {
+const personalReducer = (state: Expense[] = [], action) => {
   switch (action.type) {
     case 'INIT': {
       let usersExpenses = action.user.personalPlan

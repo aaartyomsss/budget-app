@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/family-plan-request'
+const baseUrl = 'http://localhost:3000/api/family-plan-request'
 
 const getSentRequests = async (userId) => {
   const { data } = await axios.get(`${baseUrl}/sent-requests/${userId}`)

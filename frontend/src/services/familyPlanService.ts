@@ -1,6 +1,6 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/family-plan'
-const searchUrl = 'http://localhost:3001/api/users/search'
+const baseUrl = 'http://localhost:3000/api/family-plan'
+const searchUrl = 'http://localhost:3000/api/users/search'
 
 const createPlan = async (planName, userId) => {
   const res = await axios.post(`${baseUrl}/initialize-plan`, {
