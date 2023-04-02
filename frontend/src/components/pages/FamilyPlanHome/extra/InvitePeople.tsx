@@ -6,17 +6,25 @@ import debounce from 'lodash.debounce'
 import InviteUserCard from './InviteUserCard'
 import { sendRequest } from '../../../../reducers/invitationReducer'
 import '../assets/InvitePeople.css'
+import { Store } from '../../../../store'
+import { IInvitation } from '../../../../types/invitation'
+import { FamilyPlan } from '../../../../types/expense'
+import { User } from '../../../../types/user'
 
 const InvitePeople = ({ user }) => {
   const { Option } = Select
   const dispatch = useDispatch()
   const [queryResults, setQueryResults] = useState([])
-  const [planForInvitation, setPlanForInvitation] = useState(null)
+  const [planForInvitation, setPlanForInvitation] = useState<string | null>(
+    null
+  )
 
-  const invitations = useSelector(
+  const invitations = useSelector<Store, IInvitation[]>(
     ({ invitationReducer }) => invitationReducer.sent
   )
-  const familyPlans = useSelector(({ familyPlanReducer }) => familyPlanReducer)
+  const familyPlans = useSelector<Store, FamilyPlan[]>(
+    ({ familyPlanReducer }) => familyPlanReducer
+  )
 
   const onSearch = async (e) => {
     e.preventDefault()
@@ -34,8 +42,7 @@ const InvitePeople = ({ user }) => {
   }
 
   const sendInvite = (recepientId) => {
-    if (!planForInvitation)
-      return message.error('You have not selected a plan')
+    if (!planForInvitation) return message.error('You have not selected a plan')
 
     const [id, planName] = planForInvitation.split(':')
     const params = {
@@ -47,7 +54,7 @@ const InvitePeople = ({ user }) => {
     dispatch(sendRequest(params))
   }
 
-  const handlePlanSelection = (val) => {
+  const handlePlanSelection = (val: string) => {
     setPlanForInvitation(val)
   }
 
@@ -57,7 +64,7 @@ const InvitePeople = ({ user }) => {
   // after unmounting
   useEffect(() => {
     return () => debounceHandler.cancel()
-  }, []); // eslint-disable-line
+  }, []) // eslint-disable-line
 
   return (
     <div>
@@ -81,7 +88,7 @@ const InvitePeople = ({ user }) => {
       </div>
       <div className="user-list">
         {queryResults &&
-          queryResults.map((foundUser) => {
+          queryResults.map((foundUser: User) => {
             return (
               <InviteUserCard
                 key={foundUser.id}

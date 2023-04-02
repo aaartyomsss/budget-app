@@ -6,7 +6,13 @@ import { Store } from '../../store'
 
 // Following component will allow user to pick already entered previously category,
 // Or add new one
-const CustomSelectCategory = ({ value = {}, onChange }) => {
+
+type Props = {
+  value?: any
+  onChange?: (o: any) => void
+}
+
+const CustomSelectCategory = ({ value = {}, onChange }: Props) => {
   // To add existing categories to the form-field
   const categories = useSelector((state: Store) =>
     state.personalExpenses.map((exp) => capitalizeString(exp.type))
@@ -19,11 +25,13 @@ const CustomSelectCategory = ({ value = {}, onChange }) => {
 
   // Handling form field behavior
   const triggerChange = (changedValue) => {
-    onChange({
-      type,
-      ...value,
-      ...changedValue,
-    })
+    if (onChange) {
+      onChange({
+        type,
+        ...value,
+        ...changedValue,
+      })
+    }
   }
 
   const concatOptions = () => {

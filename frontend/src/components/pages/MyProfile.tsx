@@ -9,7 +9,7 @@ import '../../styles.css'
 const MyProfile = ({ user }) => {
   const { Meta } = Card
   // State that handles visibility of Popover
-  const [visibility, setVisibility] = useState(false)
+  const [_, setVisibility] = useState(false)
 
   // If user refreshesh page at the tab, component shloud receive user first
   if (!user) {
@@ -27,7 +27,7 @@ const MyProfile = ({ user }) => {
           key="pop-over"
           trigger="click"
           title="Change password"
-          visibility={visibility}
+          // visibility={visibility}
           content={
             <ChangePassword
               type="loggedIn"

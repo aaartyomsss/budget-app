@@ -1,4 +1,4 @@
-const cacheReducer = (state = null, action) => {
+const cacheReducer = (state: any = null, action) => {
 
   switch (action.type) {
     case 'SET':

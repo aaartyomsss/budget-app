@@ -3,7 +3,7 @@ const baseUrl = 'http://localhost:3000/api/personal-plan'
 
 let token: string | null = null
 
-const setToken = (t: string) => {
+const setToken = (t: string | null) => {
   token = t
 }
 

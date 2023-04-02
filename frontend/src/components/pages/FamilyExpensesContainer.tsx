@@ -19,7 +19,7 @@ const FamilyExpensesContainer = () => {
     if (!reqPattern.test(obj.date)) {
       obj.date = dateFormatter(obj.date)
     }
-    return (obj.key = obj.id)
+    return Object.assign({ key: obj.id }, obj)
   })
   return <ExpensesList expenses={familyPlanExpenses} />
 }

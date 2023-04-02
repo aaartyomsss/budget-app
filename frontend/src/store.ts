@@ -13,7 +13,7 @@ import { Invitation } from './types/invitation'
 export interface Store {
   user: User
   personalExpenses: Expense[]
-  cache: Object
+  cache: any
   familyPlanReducer: FamilyPlan[]
   invitationReducer: Invitation
 }

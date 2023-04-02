@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import '../assets/FamilyPlanCard.css'
 
 type Props = {
-  id: number;
-  planName: string;
-  totalUsers: number;
-  totalExpenses: number;
-};
+  id: string
+  planName: string
+  totalUsers: number
+  totalExpenses: number
+}
 
 const FamilyPlanCard = ({ id, planName, totalUsers, totalExpenses }: Props) => {
   return (
