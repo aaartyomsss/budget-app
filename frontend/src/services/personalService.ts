@@ -1,0 +1,39 @@
+import axios from 'axios'
+const baseUrl = 'http://localhost:3000/api/personal-plan'
+
+let token: string | null = null
+
+const setToken = (t: string | null) => {
+  token = t
+}
+
+const getAll = async () => {
+  const res = await axios.get(baseUrl)
+  return res.data
+}
+
+const addExpense = async (toAdd) => {
+  const config = {
+    headers: { Authorization: `bearer ${token}` },
+  }
+
+  const res = await axios.post(baseUrl, toAdd, config)
+  return res.data
+}
+
+const removeExpense = async (id) => {
+  const config = {
+    headers: { Authorization: `bearer ${token}` },
+  }
+
+  const res = await axios.delete(`${baseUrl}/${id}`, config)
+  return res.data
+}
+
+const modifyExpense = async (id, newExpense) => {
+  const res = await axios.patch(`${baseUrl}/${id}`, newExpense)
+
+  return res.data
+}
+
+export default { getAll, addExpense, setToken, removeExpense, modifyExpense }

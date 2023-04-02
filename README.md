@@ -31,9 +31,17 @@ Now starts the part of 2022 development:
 
 21. Basic unit tests for reducers - 0.5h
 22. Fixing login/ sign up styling + setting up proper nodemailer environment - 0.75h
-23. Setting up CI/CD pipeline - 0.25h
-24. ESlint configuration + fixes - 0.5h
-25. Add extra steps to pipeline - 0.25h
+23. Add expenses to family plan - 0.5h
 
-CURRENT:
-GOAL: 122.5
+Intially, whilst being a lazy programmer - I was all for the JS. After working for some time in the industry and taking a deep dive into the TS, I have realised how important typing is. After not touching the project for over a year it is also a challenge to revive and maintain it. Thus, the decision was made that maybe it is for the best to migrate slowly everything to typescript:
+
+24. TS migration - 0.5h
+25. Setting up CI/CD pipeline - 0.25h
+26. ESlint configuration + fixes - 0.5h
+27. Add extra steps to pipeline - 0.25h
+28. Typescript migration debugging - 1.25h (Thre is smth wrong with webpack)
+29. Migrate CRA/ Webpack to Vite - 4.25h (problem was in npm version + js extensions)
+30. Fix TS errors and general code improvements - 2h
+
+CURRENT: 86.5h
+GOAL: 122.5h
