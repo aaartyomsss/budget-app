@@ -3,11 +3,14 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { dateFormatter } from '../../functions/helperFunctions'
 import ExpensesList from './ExpensesList'
+import { Store } from '../../store'
 
 const FamilyExpensesContainer = () => {
-  const { familyPlanId } = useParams()
-  const familyPlanExpenses = useSelector(({ familyPlanReducer }) => {
-    const plan = familyPlanReducer.filter((plan) => plan.id === familyPlanId)
+  const { familyPlanId } = useParams<{ familyPlanId: string }>()
+  const familyPlanExpenses = useSelector((state: Store) => {
+    const plan = state.familyPlanReducer.filter(
+      (plan) => plan.id === familyPlanId
+    )
     return plan[0].expenses
   })
   familyPlanExpenses.forEach((obj) => {
@@ -16,7 +19,7 @@ const FamilyExpensesContainer = () => {
     if (!reqPattern.test(obj.date)) {
       obj.date = dateFormatter(obj.date)
     }
-    return (obj.key = obj.id)
+    return Object.assign({ key: obj.id }, obj)
   })
   return <ExpensesList expenses={familyPlanExpenses} />
 }

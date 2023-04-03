@@ -1,6 +1,10 @@
 import familyPlanRequestService from '../services/familyPlanRequestService'
+import { Invitation } from '../types/invitation'
 
-const invitationReducer = (state = { sent: [], received: [] }, action) => {
+const invitationReducer = (
+  state: Invitation = { sent: [], received: [] },
+  action
+) => {
   switch (action.type) {
     case SET_SENT_REQUESTS:
       return { ...state, sent: action.data }

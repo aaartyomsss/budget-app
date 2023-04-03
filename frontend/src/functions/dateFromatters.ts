@@ -1,7 +1,4 @@
-
-
-export const getYear = date => {
-
+export const getYear = (date): string => {
   const deteminer = new RegExp('-')
 
   if (deteminer.test(date)) {
@@ -11,11 +8,9 @@ export const getYear = date => {
   const year = date.split('/')[2]
 
   return year
-
-
 }
 
-export const getMonth = date => {
+export const getMonth = (date): string => {
   const deteminer = new RegExp('-')
 
   if (deteminer.test(date)) {

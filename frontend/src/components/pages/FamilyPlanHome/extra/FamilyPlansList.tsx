@@ -1,9 +1,21 @@
 import React from 'react'
 import FamilyPlanCard from './FamilyPlanCard'
 import '../assets/FamilyPlansList.css'
+import { FamilyPlan } from '../../../../types/expense'
 
-const FamilyPlansList = ({ familyPlans }) => {
-  let data = []
+type Props = {
+  familyPlans: FamilyPlan[]
+}
+
+export type SimpleFamilyPlan = {
+  id: string
+  planName: string
+  totalUsers: number
+  totalExpenses: number
+}
+
+const FamilyPlansList = ({ familyPlans }: Props) => {
+  let data: SimpleFamilyPlan[] = []
   familyPlans.forEach((plan) => {
     data.push({
       id: plan.id,

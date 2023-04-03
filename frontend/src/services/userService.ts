@@ -1,10 +1,11 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/login'
-const userUrl = 'http://localhost:3001/api/users'
-const googleUrl = 'http://localhost:3001/api/google'
+import { User } from '../types/user'
+const baseUrl = 'http://localhost:3000/api/login'
+const userUrl = 'http://localhost:3000/api/users'
+const googleUrl = 'http://localhost:3000/api/google'
 
 const login = async (creds) => {
-  const res = await axios.post(baseUrl, creds)
+  const res = await axios.post<User>(baseUrl, creds)
   return res.data
 }
 

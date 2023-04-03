@@ -6,10 +6,15 @@ import { removeExpense } from '../../reducers/personalReducer'
 import RemoveButton from '../shared/RemoveButton'
 import ModifyButton from '../shared/ModifyButton'
 import '../../styles.css'
+import { Expense } from '../../types/expense'
 
 // Component that displays list of personal/ family expenses
 
-const ExpensesList = ({ expenses }) => {
+type Props = {
+  expenses: Expense[]
+}
+
+const ExpensesList = ({ expenses }: Props) => {
   const dispatch = useDispatch()
   const { Column, ColumnGroup } = Table
   const { Content, Footer } = Layout
@@ -25,7 +30,9 @@ const ExpensesList = ({ expenses }) => {
                 title="Spent"
                 dataIndex="amountSpent"
                 key="amountSpent"
-                sorter={(a, b) => a.amountSpent - b.amountSpent}
+                sorter={(a: Expense, b: Expense) =>
+                  a.amountSpent - b.amountSpent
+                }
               />
               <Column title="Category" dataIndex="type" key="type" />
               <Column
@@ -33,12 +40,14 @@ const ExpensesList = ({ expenses }) => {
                 dataIndex="date"
                 key="date"
                 defaultSortOrder="descend"
-                sorter={(a, b) => toTime(a.date) - toTime(b.date)}
+                sorter={(a: Expense, b: Expense) =>
+                  toTime(a.date).getTime() - toTime(b.date).getTime()
+                }
               />
               <Column
                 title="Actions"
                 key="actions"
-                render={(_text, record) => (
+                render={(_text, record: Expense) => (
                   <Space size="middle">
                     <RemoveButton
                       onClick={() => dispatch(removeExpense(record.id))}

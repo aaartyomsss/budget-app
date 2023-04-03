@@ -1,7 +1,17 @@
-interface Expense {
+export interface Expense {
+  id: string
   title: string
-  date: Date
+  date: string
   type: string
   amountSpent: number
-  user: number
+  user: string
+}
+
+export interface FamilyPlan {
+  id: string
+  created_by: string
+  created_at: string
+  expenses: Expense[]
+  planName: string
+  users: string[]
 }

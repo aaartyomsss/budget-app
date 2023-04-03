@@ -14,35 +14,35 @@ import {
 const DropdownMenu = () => {
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="my-profile">
         <Link to="/my-profile">
           <IdcardOutlined />
           My profile
         </Link>
       </Menu.Item>
 
-      <Menu.Item>
+      <Menu.Item key="personal-plan">
         <Link to="/personal-plan">
           <UserOutlined />
           Personal expenses
         </Link>
       </Menu.Item>
 
-      <Menu.Item>
+      <Menu.Item key="family-plans">
         <Link to="/family-plans">
           <TeamOutlined />
           Family plan
         </Link>
       </Menu.Item>
 
-      <Menu.Item>
+      <Menu.Item key="my-earnings">
         <Link to="/">
           <EuroCircleOutlined />
           My earnings
         </Link>
       </Menu.Item>
 
-      <Menu.Item>
+      <Menu.Item key="personal-overview">
         <Link to="/personal-overview">
           <PieChartOutlined />
           Overview

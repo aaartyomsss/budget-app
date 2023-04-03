@@ -1,6 +1,6 @@
+import { User } from '../types/user'
 
-
-const userReducer = (state = null, action) => {
+const userReducer = (state: User | null = null, action) => {
   switch (action.type) {
     case 'LOGIN':
       return action.user
@@ -11,17 +11,17 @@ const userReducer = (state = null, action) => {
   }
 }
 
-export const login = user => {
+export const login = (user: User) => {
   return {
     type: 'LOGIN',
-    user
+    user,
   }
 }
 
 export const logout = () => {
   return {
     type: 'LOGOUT',
-    user: null
+    user: null,
   }
 }
 

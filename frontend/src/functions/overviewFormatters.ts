@@ -1,6 +1,8 @@
 // Following function filters spending for graph overview per ea month
 export const filterPerMonth = (data, year) => {
-  const filtered = data.filter(e => parseInt(e.date.split(/\/|-/)[2]) === parseInt(year))
+  const filtered = data.filter(
+    (e) => parseInt(e.date.split(/\/|-/)[2]) === parseInt(year)
+  )
   const result = [
     {
       month: 'Jan',
@@ -51,7 +53,7 @@ export const filterPerMonth = (data, year) => {
       value: 0,
     },
   ]
-  filtered.forEach(expense => {
+  filtered.forEach((expense) => {
     switch (expense.date.split(/\/|-/)[1]) {
       case '01':
         result[0].value += expense.amountSpent
@@ -96,10 +98,10 @@ export const filterPerMonth = (data, year) => {
   return result
 }
 
-export const highestSpentMonth = expenses => {
+export const highestSpentMonth = (expenses) => {
   let spentMostIn = 0
   let maxAmountSpent = 0
-  expenses.forEach(obj => {
+  expenses.forEach((obj) => {
     if (obj.value > spentMostIn) {
       spentMostIn = obj.month
       maxAmountSpent = obj.value
@@ -108,18 +110,26 @@ export const highestSpentMonth = expenses => {
   return { spentMostIn, maxAmountSpent }
 }
 
-export const filterPerCategory = (expenses, categories) => {
-  let data = []
+export interface FilteredPerCategory {
+  category: string
+  spent: number
+}
 
-  categories.forEach(category => {
-    data = [...data, {
-      'category': category,
-      'spent': 0
-    }]
+export const filterPerCategory = (expenses, categories) => {
+  let data: FilteredPerCategory[] = []
+
+  categories.forEach((category) => {
+    data = [
+      ...data,
+      {
+        category: category,
+        spent: 0,
+      },
+    ]
   })
 
-  data.forEach(obj => {
-    expenses.forEach(exp => {
+  data.forEach((obj) => {
+    expenses.forEach((exp) => {
       if (obj['category'] === exp.type) {
         obj['spent'] += exp.amountSpent
       }
@@ -129,10 +139,10 @@ export const filterPerCategory = (expenses, categories) => {
   return data
 }
 
-export const spentMostPerMonth = expensesPerCategory => {
+export const spentMostPerMonth = (expensesPerCategory) => {
   let maxSpent = 0
   let maxSpentCategory = 0
-  expensesPerCategory.forEach(obj => {
+  expensesPerCategory.forEach((obj) => {
     if (obj.spent > maxSpent) {
       maxSpent = obj.spent
       maxSpentCategory = obj.category
@@ -141,10 +151,10 @@ export const spentMostPerMonth = expensesPerCategory => {
   return { maxSpent, maxSpentCategory }
 }
 
-export const spentLeastPerMonth = expensesPerCategory => {
+export const spentLeastPerMonth = (expensesPerCategory) => {
   let leastSpent = Infinity
   let leastSpentCategory = ''
-  expensesPerCategory.forEach(obj => {
+  expensesPerCategory.forEach((obj) => {
     if (obj.spent < leastSpent) {
       leastSpent = obj.spent
       leastSpentCategory = obj.category
@@ -153,12 +163,16 @@ export const spentLeastPerMonth = expensesPerCategory => {
   return { leastSpent, leastSpentCategory }
 }
 
-export const getAllCategories = expensesList => {
-  const categories = expensesList.map(exp => exp.type)
+export const getAllCategories = (expensesList) => {
+  const categories = expensesList.map((exp) => exp.type)
   return [...new Set(categories)]
 }
 
 export const getExpensesPerYearAndMonth = (expensesList, year, month) => {
-  const expensesPerYear = expensesList.filter(obj => parseInt(obj.date.split('/')[2]) === parseInt(year))
-  return expensesPerYear.filter(obj => parseInt(obj.date.split('/')[1]) === parseInt(month))
+  const expensesPerYear = expensesList.filter(
+    (obj) => parseInt(obj.date.split('/')[2]) === parseInt(year)
+  )
+  return expensesPerYear.filter(
+    (obj) => parseInt(obj.date.split('/')[1]) === parseInt(month)
+  )
 }

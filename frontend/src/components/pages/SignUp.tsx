@@ -38,7 +38,7 @@ const SignUp = () => {
 
   return (
     <div className="center-div" style={{ marginTop: '10rem' }}>
-      <Form from={form} onFinish={handleSubmit} {...layout}>
+      <Form form={form} onFinish={handleSubmit} {...layout}>
         <Form.Item
           name="username"
           label="Username"

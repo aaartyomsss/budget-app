@@ -1,7 +1,8 @@
 import familyPlanService from '../services/familyPlanService'
 import { dateFormatter, capitalizeString } from '../functions/helperFunctions'
+import { FamilyPlan } from '../types/expense'
 
-const familyPlanReducer = (state = [], action) => {
+const familyPlanReducer = (state: FamilyPlan[] = [], action) => {
   switch (action.type) {
     case INIT: {
       let familyPlans = action.user.familyPlans

@@ -41,6 +41,8 @@ Intially, whilst being a lazy programmer - I was all for the JS. After working f
 27. Add extra steps to pipeline - 0.25h
 28. Typescript migration debugging - 1.25h (Thre is smth wrong with webpack)
 29. Migrate CRA/ Webpack to Vite - 4.25h (problem was in npm version + js extensions)
+30. Fix TS errors and general code improvements - 2h
+31. Resolving merge conflicts - 0.25h
 
-CURRENT: 85.75h
+CURRENT: 86.75h
 GOAL: 122.5h
