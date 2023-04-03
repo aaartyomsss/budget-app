@@ -43,6 +43,7 @@ Intially, whilst being a lazy programmer - I was all for the JS. After working f
 29. Migrate CRA/ Webpack to Vite - 4.25h (problem was in npm version + js extensions)
 30. Fix TS errors and general code improvements - 2h
 31. Resolving merge conflicts - 0.25h
+32. Fix eslint - 0.5h
 
-CURRENT: 86.75h
+CURRENT: 87.25h
 GOAL: 122.5h
