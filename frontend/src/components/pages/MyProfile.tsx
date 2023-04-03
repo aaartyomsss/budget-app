@@ -9,7 +9,7 @@ import '../../styles.css'
 const MyProfile = ({ user }) => {
   const { Meta } = Card
   // State that handles visibility of Popover
-  const [_, setVisibility] = useState(false)
+  const [, setVisibility] = useState(false)
 
   // If user refreshesh page at the tab, component shloud receive user first
   if (!user) {
