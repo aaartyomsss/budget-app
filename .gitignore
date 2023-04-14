@@ -1,3 +1,5 @@
 .vscode
 frontend/.eslintcache
 dist
+mongo_data
+.env
