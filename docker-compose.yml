@@ -39,7 +39,25 @@ services:
     depends_on:
       - redis
       - elasticsearch
+      - mongodb
     command: ['npm', 'start']
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: on-failure
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-root_dev}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD:-root_password_dev}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE:-database_dev}
+      - MONGO_USERNAME=${MONGO_USERNAME:-user_dev}
+      - MONGO_PASSWORD=${MONGO_PASSWORD:-password_dev}
+    volumes:
+      - ./mongo/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+      - ./mongo_data:/data/db
+    networks:
+      - budget-app
   redis:
     image: redis:6-alpine
     container_name: redis

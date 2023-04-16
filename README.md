@@ -44,6 +44,8 @@ Intially, whilst being a lazy programmer - I was all for the JS. After working f
 30. Fix TS errors and general code improvements - 2h
 31. Resolving merge conflicts - 0.25h
 32. Fix eslint - 0.5h
+33. Dockerizing mongo - 3.5h
 
-CURRENT: 87.25h
+CURRENT: 90.75h
+
 GOAL: 122.5h
