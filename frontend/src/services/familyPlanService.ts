@@ -1,9 +1,7 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3000/api/family-plan'
-const searchUrl = 'http://localhost:3000/api/users/search'
 
 const createPlan = async (planName, userId) => {
-  const res = await axios.post(`${baseUrl}/initialize-plan`, {
+  const res = await axios.post(`family-plan/initialize-plan`, {
     planName,
     userId,
   })
@@ -11,7 +9,7 @@ const createPlan = async (planName, userId) => {
 }
 
 const searchUser = async (query) => {
-  const res = await axios.get(`${searchUrl}/${query}`)
+  const res = await axios.get(`users/search/${query}`)
   return res
 }
 

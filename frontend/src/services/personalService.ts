@@ -1,5 +1,4 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3000/api/personal-plan'
 
 let token: string | null = null
 
@@ -8,7 +7,7 @@ const setToken = (t: string | null) => {
 }
 
 const getAll = async () => {
-  const res = await axios.get(baseUrl)
+  const res = await axios.get('personal-plan/')
   return res.data
 }
 
@@ -17,7 +16,7 @@ const addExpense = async (toAdd) => {
     headers: { Authorization: `bearer ${token}` },
   }
 
-  const res = await axios.post(baseUrl, toAdd, config)
+  const res = await axios.post('personal-plan', toAdd, config)
   return res.data
 }
 
@@ -26,12 +25,12 @@ const removeExpense = async (id) => {
     headers: { Authorization: `bearer ${token}` },
   }
 
-  const res = await axios.delete(`${baseUrl}/${id}`, config)
+  const res = await axios.delete(`personal-plan/${id}`, config)
   return res.data
 }
 
 const modifyExpense = async (id, newExpense) => {
-  const res = await axios.patch(`${baseUrl}/${id}`, newExpense)
+  const res = await axios.patch(`personal-plan/${id}`, newExpense)
 
   return res.data
 }
