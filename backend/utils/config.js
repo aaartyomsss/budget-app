@@ -18,6 +18,7 @@ const MONGO_PASSWORD = process.env.MONGO_PASSWORD
 const MONGO_DB = process.env.MONGO_DB
 
 const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/${MONGO_DB}`
+const MONGO_TEST_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/api_test_db`
 
 module.exports = {
   PORT,
@@ -34,4 +35,5 @@ module.exports = {
   MONGO_PASSWORD,
   MONGO_DB,
   MONGO_URL,
+  MONGO_TEST_URL,
 }
