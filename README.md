@@ -45,8 +45,8 @@ Intially, whilst being a lazy programmer - I was all for the JS. After working f
 31. Resolving merge conflicts - 0.25h
 32. Fix eslint - 0.5h
 33. Dockerizing mongo - 3.5h
-34. NGINX production setup and dev env fixes + mongoDB fixes - 6h
+34. NGINX production setup and dev env fixes + mongoDB fixes - 7h
 
-CURRENT: 96.75h
+CURRENT: 97.75h
 
 GOAL: 122.5h
