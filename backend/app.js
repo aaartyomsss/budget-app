@@ -42,12 +42,12 @@ app.use(
 )
 
 // Routes
-app.use('/api/users', userRouter)
-app.use('/api/login', loginRouter)
-app.use('/api/google', googleAuth)
-app.use('/api/personal-plan', personalPlan)
-app.use('/api/family-plan-request', familyPlanRequestRouter)
-app.use('/api/family-plan', familyPlanRouter)
+app.use('/users', userRouter)
+app.use('/login', loginRouter)
+app.use('/google', googleAuth)
+app.use('/personal-plan', personalPlan)
+app.use('/family-plan-request', familyPlanRequestRouter)
+app.use('/family-plan', familyPlanRouter)
 
 //Error handling middleware
 app.use(middleware.errorHandler)

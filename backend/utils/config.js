@@ -16,8 +16,11 @@ const GMAIL_PASSWORD = process.env.GMAIL_PASSWORD
 const MONGO_USERNAME = process.env.MONGO_USERNAME
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD
 const MONGO_DB = process.env.MONGO_DB
+const FRONTEND_BASE_URL = process.env.FRONTEND_BASE_URL
+const REDIS_HOST = process.env.REDIS_HOST
 
-const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/${MONGO_DB}`
+const MONGO_HOST = process.env.MONGO_HOST
+const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:27017/${MONGO_DB}`
 
 module.exports = {
   PORT,
@@ -34,4 +37,6 @@ module.exports = {
   MONGO_PASSWORD,
   MONGO_DB,
   MONGO_URL,
+  FRONTEND_BASE_URL,
+  REDIS_HOST,
 }

@@ -22,6 +22,9 @@ import MyProfile from './components/pages/MyProfile'
 import Overview from './components/pages/Overview'
 import FamilyPlanHome from './components/pages/FamilyPlanHome/FamilyPlanHome'
 import { Store } from './store'
+import axios from 'axios'
+
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_BASE_URL
 
 const App = () => {
   const dispatch = useDispatch()
