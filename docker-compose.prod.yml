@@ -1,10 +1,10 @@
 version: '3'
 services:
-  frontend:
+  prod-frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend
+      dockerfile: prod.Dockerfile
+    container_name: prod-frontend
     ports:
       - 5000:5000
     networks:
@@ -12,27 +12,29 @@ services:
     volumes:
       - /app/node_modules
       - ./frontend:/app
+      - frontend-build:/usr/src/app/dist
     depends_on:
-      - backend
+      - prod-backend
     environment:
       - VITE_BACKEND_BASE_URL=${BACKEND_BASE_URL}
-  nginx:
+  prod-nginx:
     image: nginx:1.20.1-alpine
     volumes:
-      - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      - frontend-build:/usr/share/nginx/html
     ports:
       - 8080:80
     container_name: budget-reverse-proxy
     networks:
       - budget-app
     depends_on:
-      - frontend
-      - backend
-  backend:
+      - prod-frontend
+      - prod-backend
+  prod-backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
-    container_name: backend
+      dockerfile: prod.Dockerfile
+    container_name: prod-backend
     volumes:
       - ./backend:/usr/src/app/backend
       - /usr/src/app/backend/node_modules
@@ -40,43 +42,42 @@ services:
       - 3000:3000
     environment:
       - ELASTICSEARCH_HOST=elasticsearch:9200
-      - MONGO_USERNAME=${MONGO_USERNAME:-api_user}
-      - MONGO_PASSWORD=${MONGO_PASSWORD:-api1234}
-      - MONGO_DB=${MONGO_DB:-api_dev_db}
       - FRONTEND_BASE_URL=${FRONTEND_BASE_URL}
-      - REDIS_HOST=${REDIS_HOST:-redis}
-      - MONGO_HOST=mongodb
+      - REDIS_HOST=${REDIS_HOST:-prod-redis}
+      - MONGO_HOST=prod-mongodb
     networks:
       - budget-app
     depends_on:
-      - redis
-      - elasticsearch
-      - mongodb
+      - prod-redis
+      - prod-elasticsearch
+      - prod-mongodb
     command: ['npm', 'start']
-  mongodb:
+  prod-mongodb:
     image: mongo
-    container_name: mongodb
+    container_name: prod-mongodb
     restart: on-failure
     ports:
       - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-root_dev}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD:-root_password_dev}
-      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE:-root}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE:-database_dev}
+      - MONGO_USERNAME=${MONGO_USERNAME:-user_dev}
+      - MONGO_PASSWORD=${MONGO_PASSWORD:-password_dev}
     volumes:
-      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-      - ./mongo_data:/data/db
+      - ./mongo/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+      - ./mongo_data_prod:/data/db
     networks:
       - budget-app
-  redis:
+  prod-redis:
     image: redis:6-alpine
-    container_name: redis
+    container_name: prod-redis
     networks:
       - budget-app
     ports:
       - 6379:6379
-  elasticsearch:
-    container_name: elasticsearch
+  prod-elasticsearch:
+    container_name: prod-elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
     volumes:
       - esdata:/usr/share/elasticsearch/data
@@ -98,3 +99,4 @@ volumes:
   esdata:
   frontend:
   backend:
+  frontend-build:

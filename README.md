@@ -51,6 +51,8 @@ Intially, whilst being a lazy programmer - I was all for the JS. After working f
 Downside is that I simply cannot pass .env variables to it, which is quite bad from data exposure POV. So technically, will have to either comment sh script out or
 push it without the sensitive variables.
 
-CURRENT: 92.5h
+35. NGINX production setup and dev env fixes + mongoDB fixes - 7h
+
+CURRENT: 100h
 
 GOAL: 122.5h
