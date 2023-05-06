@@ -52,7 +52,11 @@ Downside is that I simply cannot pass .env variables to it, which is quite bad f
 push it without the sensitive variables.
 
 35. NGINX production setup and dev env fixes + mongoDB fixes - 7h
+36. Continue to work on the tests setup - 2.25h
 
-CURRENT: 100h
+^^^ There was some hardcore connection related bug, which is worked around by
+disconnecting from DB in the beforeEach block first.
+
+CURRENT: 102.25h
 
 GOAL: 122.5h

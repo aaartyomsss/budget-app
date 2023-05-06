@@ -7,10 +7,7 @@ const redisUtils = require('../redis/index')
 
 // for fetching
 personalPlan.get('/', async (req, res) => {
-  const expenses = await redisUtils.getOrSetCache('users', async () => {
-    const all = await Expense.find({})
-    return all
-  })
+  const expenses = await Expense.find({})
   res.json(expenses)
 })
 

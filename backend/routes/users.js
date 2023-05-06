@@ -136,6 +136,7 @@ userRouter.post('/', async (req, res) => {
   }
 })
 
+// TODO: This should be fixed
 userRouter.get('/search/:query', async (req, res) => {
   const query = req.params.query
   User.search(
