@@ -1,7 +1,5 @@
-const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
-const mongoosastic = require('mongoosastic');
-const ESClient = require('../elasticSearch/index');
+const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -46,22 +44,19 @@ const userSchema = new mongoose.Schema({
       ref: 'FamilyPlan',
     },
   ],
-});
+})
 
-userSchema.plugin(uniqueValidator);
-userSchema.plugin(mongoosastic, {
-  esClient: ESClient,
-});
+userSchema.plugin(uniqueValidator)
 
 userSchema.set('toJSON', {
   transform: (document, returnedObj) => {
-    returnedObj.id = returnedObj._id.toString();
-    delete returnedObj._id;
-    delete returnedObj.__v;
-    delete returnedObj.passwordHash;
+    returnedObj.id = returnedObj._id.toString()
+    delete returnedObj._id
+    delete returnedObj.__v
+    delete returnedObj.passwordHash
   },
-});
+})
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema)
 
-module.exports = User;
+module.exports = User

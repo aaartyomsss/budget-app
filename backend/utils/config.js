@@ -21,6 +21,9 @@ const REDIS_HOST = process.env.REDIS_HOST
 
 const MONGO_HOST = process.env.MONGO_HOST
 const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:27017/${MONGO_DB}`
+const MONGO_TEST_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/api_test_db`
+
+const MONGODB_URI = process.env.NODE_ENV === 'test' ? MONGO_TEST_URL : MONGO_URL
 
 module.exports = {
   PORT,
@@ -36,7 +39,7 @@ module.exports = {
   MONGO_USERNAME,
   MONGO_PASSWORD,
   MONGO_DB,
-  MONGO_URL,
   FRONTEND_BASE_URL,
   REDIS_HOST,
+  MONGODB_URI,
 }

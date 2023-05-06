@@ -13,15 +13,15 @@ const personalPlan = require('./routes/personalPlan')
 const familyPlanRequestRouter = require('./routes/familyPlanRequest')
 const familyPlanRouter = require('./routes/familyPlan')
 
-if (config.MONGO_URL && !mongoose.connection.readyState) {
-  logger.info('Connection to ', config.MONGO_URL)
+if (config.MONGODB_URI) {
+  logger.info('Connection to ', config.MONGODB_URI)
   mongoose
-    .connect(config.MONGO_URL, {
+    .connect(config.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
     .then(() => {
-      logger.info('Connected to database')
+      logger.info('Connected to database: ', config.MONGODB_URI)
     })
     .catch((e) => {
       logger.error('Database init error: ', e.message)

@@ -45,8 +45,18 @@ Intially, whilst being a lazy programmer - I was all for the JS. After working f
 31. Resolving merge conflicts - 0.25h
 32. Fix eslint - 0.5h
 33. Dockerizing mongo - 3.5h
-34. NGINX production setup and dev env fixes + mongoDB fixes - 7h
+34. Backend unit tests initialization - 2.5h
 
-CURRENT: 97.75h
+^^^ The intiializaiton of testing has taken such a long time due to having issue with mongosh script. After a long time of debugging had to set it to js file.
+Downside is that I simply cannot pass .env variables to it, which is quite bad from data exposure POV. So technically, will have to either comment sh script out or
+push it without the sensitive variables.
+
+35. NGINX production setup and dev env fixes + mongoDB fixes - 7h
+36. Continue to work on the tests setup - 2.25h
+
+^^^ There was some hardcore connection related bug, which is worked around by
+disconnecting from DB in the beforeEach block first.
+
+CURRENT: 102.25h
 
 GOAL: 122.5h
