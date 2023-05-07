@@ -3,10 +3,10 @@ const Expense = require('../models/Expense')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const config = require('../utils/config')
-const redisUtils = require('../redis/index')
+const { isAuthenticated } = require('../utils/middleware')
 
 // for fetching
-personalPlan.get('/', async (req, res) => {
+personalPlan.get('/', isAuthenticated, async (req, res) => {
   const expenses = await Expense.find({})
   res.json(expenses)
 })

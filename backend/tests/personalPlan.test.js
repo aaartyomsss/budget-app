@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 const request = require('supertest')
 const app = require('../app')
-const { MONGO_TEST_URL, MONGODB_URI } = require('../utils/config')
+const { MONGODB_URI } = require('../utils/config')
 const Expense = require('../models/Expense')
 const User = require('../models/User')
+const { createUserAndToken } = require('./testUtils')
 
 beforeEach(async () => {
   await mongoose.disconnect()
@@ -23,19 +24,15 @@ beforeEach(async () => {
 })
 
 describe('GET /api/personal-plan', () => {
-  it('should return empty list', async () => {
-    const res = await request(app).get('/personal-plan')
-    expect(res.statusCode).toBe(200)
-    expect(res.body.length).toBe(0)
-  })
-
-  it('Should return a plan with expenses', async () => {
+  it('Test unauthenticated', async () => {
     const user = new User({
       username: 'username',
       email: 'a@gmail.com',
       name: 'Name',
       passwordHash: 'Hashssss',
+      confirmed: true,
     })
+
     await user.save()
     const expense = new Expense({
       title: 'TITLE',
@@ -45,9 +42,27 @@ describe('GET /api/personal-plan', () => {
       date: '2022-12-12',
     })
     await expense.save()
-    expect(user).toBeDefined()
 
     const res = await request(app).get('/personal-plan')
+    expect(res.statusCode).toBe(403)
+  })
+
+  it('Test getting an expense as a user', async () => {
+    const { token, user } = await createUserAndToken()
+    const expense = new Expense({
+      title: 'TITLE',
+      type: 'MY TYPE',
+      amountSpent: 30,
+      user: user._id,
+      date: '2022-12-12',
+    })
+
+    await expense.save()
+
+    const res = await request(app)
+      .get('/personal-plan')
+      .set('Authorization', `Bearer ${token}`)
+
     expect(res.statusCode).toBe(200)
     expect(res.body.length).toBe(1)
   })
