@@ -57,6 +57,8 @@ push it without the sensitive variables.
 ^^^ There was some hardcore connection related bug, which is worked around by
 disconnecting from DB in the beforeEach block first.
 
-CURRENT: 102.25h
+37. Add reusable permission check for user to be authenticated + backend tests - 0.5h
+
+CURRENT: 102.75h
 
 GOAL: 122.5h
