@@ -8,7 +8,7 @@ import { PlusOutlined } from '@ant-design/icons'
 const NavBar = ({ user }) => {
   const location = useLocation()
   const history = useHistory()
-  const subTitle = user === null ? '' : `Welcome ${user.name}`
+  const subTitle = !user ? '' : `Welcome ${user.name}`
   const [currentPage, setCurrentPage] = useState<string | null>(null)
 
   // Following hook checks what is the location and therefore

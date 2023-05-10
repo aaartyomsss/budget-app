@@ -13,6 +13,7 @@ const PersonalExpensesContainer = ({ expenses }) => {
 
     return (obj.key = obj.id)
   })
+
   return <ExpensesList expenses={expenses} />
 }
 

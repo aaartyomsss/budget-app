@@ -66,6 +66,35 @@ describe('GET /api/personal-plan', () => {
     expect(res.statusCode).toBe(200)
     expect(res.body.length).toBe(1)
   })
+
+  it('Returns multiple expenses for the same user', async () => {
+    const { token, user } = await createUserAndToken()
+    const expense = new Expense({
+      title: 'TITLE',
+      type: 'MY TYPE',
+      amountSpent: 30,
+      user: user._id,
+      date: '2022-12-12',
+    })
+
+    const expense2 = new Expense({
+      title: 'TITLE2',
+      type: 'MY TYPE2',
+      amountSpent: 301,
+      user: user._id,
+      date: '2022-02-12',
+    })
+
+    await expense.save()
+    await expense2.save()
+
+    const res = await request(app)
+      .get('/personal-plan')
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(res.statusCode).toBe(200)
+    expect(res.body.length).toBe(2)
+  })
 })
 
 afterEach(async () => {

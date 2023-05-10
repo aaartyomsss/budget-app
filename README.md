@@ -58,7 +58,8 @@ push it without the sensitive variables.
 disconnecting from DB in the beforeEach block first.
 
 37. Add reusable permission check for user to be authenticated + backend tests - 0.5h
+38. Fix personal plan fetching in frontend + refactor the plan retrieval endpoint - 0.5h
 
-CURRENT: 102.75h
+CURRENT: 103.25h
 
 GOAL: 122.5h

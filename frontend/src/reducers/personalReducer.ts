@@ -33,10 +33,13 @@ const personalReducer = (state: Expense[] = [], action) => {
   }
 }
 
-export const initialPersonalPlan = (user) => {
-  return {
-    type: 'INIT',
-    user,
+export const initialPersonalPlan = () => {
+  return async (dispatch) => {
+    const expenses = await personalService.getAll()
+    dispatch({
+      type: 'ADD',
+      data: expenses,
+    })
   }
 }
 

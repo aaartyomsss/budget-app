@@ -4,10 +4,12 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const config = require('../utils/config')
 const { isAuthenticated } = require('../utils/middleware')
+const mongoose = require('mongoose')
 
 // for fetching
 personalPlan.get('/', isAuthenticated, async (req, res) => {
-  const expenses = await Expense.find({})
+  const userId = req.user?.id
+  const expenses = await Expense.find({ user: mongoose.Types.ObjectId(userId) })
   res.json(expenses)
 })
 
