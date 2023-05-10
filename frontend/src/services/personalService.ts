@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Expense } from '../types/expense'
 
 let token: string | null = null
 
@@ -7,7 +8,10 @@ const setToken = (t: string | null) => {
 }
 
 const getAll = async () => {
-  const res = await axios.get('personal-plan/')
+  const config = {
+    headers: { Authorization: `bearer ${token}` },
+  }
+  const res = await axios.get<Expense[]>('personal-plan/', config)
   return res.data
 }
 

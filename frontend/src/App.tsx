@@ -40,7 +40,7 @@ const App = () => {
         personalService.setToken(parsedUser.token)
         dispatch(setSentRequests(parsedUser.id))
         dispatch(setReceivedRequests(parsedUser.id))
-        dispatch(initialPersonalPlan(parsedUser))
+        dispatch(initialPersonalPlan())
         dispatch(initialFamilyPlans(parsedUser))
         dispatch(login(parsedUser))
       }
