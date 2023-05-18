@@ -50,19 +50,16 @@ export const logoutClear = () => {
   }
 }
 
-export const addExpense = (values) => {
-  return async (dispatch) => {
-    const expense = await personalService.addExpense(values)
-    dispatch({
-      type: 'ADD',
-      data: expense,
-    })
+export const addExpense = (expense: Expense) => {
+  return {
+    type: 'ADD',
+    data: expense,
   }
 }
 
 export const removeExpense = (id) => {
   return async (dispatch) => {
-    const removed = await personalService.removeExpense(id) // eslint-disable-line
+    await personalService.removeExpense(id)
     dispatch({
       type: 'REMOVE',
       data: id,

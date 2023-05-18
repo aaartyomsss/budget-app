@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Select, Divider, Input, Button } from 'antd'
+import React, { useEffect, useRef, useState } from 'react'
+import { Select, Divider, Input, Button, message } from 'antd'
 import { capitalizeString } from '../../functions/helperFunctions'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { initialPersonalPlan } from '../../reducers/personalReducer'
 import { Store } from '../../store'
 
 // Following component will allow user to pick already entered previously category,
@@ -14,9 +15,20 @@ type Props = {
 
 const CustomSelectCategory = ({ value = {}, onChange }: Props) => {
   // To add existing categories to the form-field
+  const dispatch = useDispatch()
   const categories = useSelector((state: Store) =>
     state.personalExpenses.map((exp) => capitalizeString(exp.type))
   )
+
+  useEffect(() => {
+    const getExpenses = async () => {
+      console.log('CALLED HERE IN EPXS')
+      dispatch(initialPersonalPlan())
+      console.log('DONE CALLING')
+    }
+    getExpenses()
+  }, [])
+
   const categoriesWithoutDuplicates = [...new Set(categories)]
   const { Option } = Select
 
@@ -65,13 +77,15 @@ const CustomSelectCategory = ({ value = {}, onChange }: Props) => {
           <Divider style={{ margin: '4px 0' }} />
           <div>
             <Input value={type} onChange={addedCategory} />
-            <Button onClick={concatOptions}>Add new category</Button>
+            <Button disabled={type === ''} onClick={concatOptions}>
+              Add new category
+            </Button>
           </div>
         </div>
       )}
     >
-      {items.map((item) => (
-        <Option key={item} value={item}>
+      {items.map((item, i) => (
+        <Option key={`${item}${i}`} value={item}>
           {item}
         </Option>
       ))}

@@ -8,7 +8,6 @@ import Login from './components/pages/Login'
 import SingUp from './components/pages/SignUp'
 import NavBar from './components/shared/NavBar'
 import Success from './components/pages/Success'
-import personalService from './services/personalService'
 import { initialPersonalPlan } from './reducers/personalReducer'
 import { initialFamilyPlans } from './reducers/familyPlanReducer'
 import {
@@ -25,6 +24,11 @@ import { Store } from './store'
 import axios from 'axios'
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_BASE_URL
+const user = window.localStorage.getItem('loggedInUser')
+console.log('USER: ', user, ' @@@@@@@@@@@@@@@@@@@@@@')
+axios.defaults.headers.common['Authorization'] = user
+  ? `bearer ${JSON.parse(user).token}`
+  : undefined
 
 const App = () => {
   const dispatch = useDispatch()
@@ -37,7 +41,6 @@ const App = () => {
     if (userJSON) {
       const fetch = async () => {
         const parsedUser = JSON.parse(userJSON)
-        personalService.setToken(parsedUser.token)
         dispatch(setSentRequests(parsedUser.id))
         dispatch(setReceivedRequests(parsedUser.id))
         dispatch(initialPersonalPlan())

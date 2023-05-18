@@ -1,8 +1,9 @@
 import React from 'react'
-import { Form, DatePicker, Input, Button } from 'antd'
+import { Form, DatePicker, Input, Button, message } from 'antd'
 import { serverDateFormatter } from '../../functions/helperFunctions'
 import { useDispatch, useSelector } from 'react-redux'
 import { addExpense, modifyExpense } from '../../reducers/personalReducer'
+import personalService from '../../services/personalService'
 import moment from 'moment'
 import { useHistory } from 'react-router-dom'
 import { clearCache } from '../../reducers/cacheReducer'
@@ -17,13 +18,18 @@ const SpendingForm = () => {
 
   const history = useHistory()
 
-  const onAdd = (fieldsValue) => {
+  const onAdd = async (fieldsValue) => {
     const values = {
       ...fieldsValue,
       type: fieldsValue['type'].type,
       date: serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY')),
     }
-    dispatch(addExpense(values))
+    const res = await personalService.addExpense(values)
+    if (res.status !== 201) {
+      message.error(res.data.error)
+      return
+    }
+    dispatch(addExpense(res.data))
     history.push('/personal-plan')
   }
 

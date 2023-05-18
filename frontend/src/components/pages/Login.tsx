@@ -22,11 +22,10 @@ const Login = () => {
       // TODO Save only token and make request to server
       const user = await loginService.login(values)
       window.localStorage.setItem('loggedInUser', JSON.stringify(user))
-      personalService.setToken(user.token)
       dispatch(login(user))
       dispatch(setSentRequests(user.id))
       dispatch(setReceivedRequests(user.id))
-      dispatch(initialPersonalPlan(user))
+      dispatch(initialPersonalPlan())
       dispatch(initialFamilyPlans(user))
       history.push('/personal-plan')
     } catch (error: any) {
