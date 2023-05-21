@@ -1,9 +1,10 @@
+import { LogoutOutlined } from '@ant-design/icons'
+import axios from 'axios'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { logout } from '../../reducers/userReducer'
-import { useHistory, Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { logoutClear } from '../../reducers/personalReducer'
-import { LogoutOutlined } from '@ant-design/icons'
+import { logout } from '../../reducers/userReducer'
 
 const Logout = () => {
   const dispatch = useDispatch()
@@ -11,13 +12,14 @@ const Logout = () => {
 
   const handleLogout = () => {
     window.localStorage.clear()
+    axios.defaults.headers.common['Authorization'] = undefined
     dispatch(logout())
     dispatch(logoutClear())
     history.push('/')
   }
 
   return (
-    <Link onClick={handleLogout} to="/">
+    <Link onClick={handleLogout} to='/'>
       <LogoutOutlined />
       Logout
     </Link> // eslint-disable-line
