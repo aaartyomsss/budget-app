@@ -1,35 +1,27 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { Expense } from '../types/expense'
 
-let token: string | null = null
-
-const setToken = (t: string | null) => {
-  token = t
-}
-
 const getAll = async () => {
-  const config = {
-    headers: { Authorization: `bearer ${token}` },
-  }
-  const res = await axios.get<Expense[]>('personal-plan/', config)
+  const res = await axios.get<Expense[]>('personal-plan/')
   return res.data
 }
 
 const addExpense = async (toAdd) => {
-  const config = {
-    headers: { Authorization: `bearer ${token}` },
+  try {
+    const res = await axios.post('personal-plan', toAdd)
+    return { data: res.data, status: res.status }
+  } catch (_error) {
+    const error = _error as AxiosError
+    if (error.response) {
+      const res = error.response
+      return { data: res.data, status: res.status }
+    }
+    return { data: 'Error occured', status: 500 }
   }
-
-  const res = await axios.post('personal-plan', toAdd, config)
-  return res.data
 }
 
 const removeExpense = async (id) => {
-  const config = {
-    headers: { Authorization: `bearer ${token}` },
-  }
-
-  const res = await axios.delete(`personal-plan/${id}`, config)
+  const res = await axios.delete(`personal-plan/${id}`)
   return res.data
 }
 
@@ -39,4 +31,4 @@ const modifyExpense = async (id, newExpense) => {
   return res.data
 }
 
-export default { getAll, addExpense, setToken, removeExpense, modifyExpense }
+export default { getAll, addExpense, removeExpense, modifyExpense }

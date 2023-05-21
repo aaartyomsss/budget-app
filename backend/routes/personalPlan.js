@@ -27,18 +27,22 @@ personalPlan.post('/', async (req, res) => {
   // Helper function return either google or a regular user to avoid code repetition
   const user = await User.findById(decoded.id)
 
-  const newExpense = new Expense({
-    title: body.title,
-    type: body.type,
-    amountSpent: body.amountSpent,
-    user: user._id,
-    date: body.date,
-  })
+  try {
+    const newExpense = new Expense({
+      title: body.title,
+      type: body.type,
+      amountSpent: body.amountSpent,
+      user: user._id,
+      date: body.date,
+    })
 
-  const savedExpense = await newExpense.save()
-  user.personalPlan = user.personalPlan.concat(savedExpense._id)
-  await user.save()
-  res.json(savedExpense)
+    const savedExpense = await newExpense.save()
+    user.personalPlan = user.personalPlan.concat(savedExpense._id)
+    await user.save()
+    res.status(201).json(savedExpense)
+  } catch (error) {
+    res.status(400).json({ error: error?._message || 'Error occured' })
+  }
 })
 
 // Updating/ Changing expenses info

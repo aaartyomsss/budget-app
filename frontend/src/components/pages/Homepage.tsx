@@ -17,9 +17,8 @@ const Homepage = () => {
     // TODO Save only token and make request to server
     const user = await userService.postGoogle(response.profileObj)
     window.localStorage.setItem('loggedInUser', JSON.stringify(user))
-    personalService.setToken(user.token)
     dispatch(login(user))
-    dispatch(initialPersonalPlan(user))
+    dispatch(initialPersonalPlan())
   }
 
   console.log(import.meta.env)
