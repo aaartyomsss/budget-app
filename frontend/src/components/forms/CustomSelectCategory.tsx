@@ -22,18 +22,21 @@ const CustomSelectCategory = ({ value = {}, onChange }: Props) => {
 
   useEffect(() => {
     const getExpenses = async () => {
-      console.log('CALLED HERE IN EPXS')
       dispatch(initialPersonalPlan())
-      console.log('DONE CALLING')
     }
     getExpenses()
   }, [])
 
   const categoriesWithoutDuplicates = [...new Set(categories)]
+
   const { Option } = Select
 
   const [items, setItems] = useState(categoriesWithoutDuplicates)
   const [type, setValue] = useState('')
+
+  useEffect(() => {
+    setItems(categoriesWithoutDuplicates)
+  }, [categoriesWithoutDuplicates.length])
 
   // Handling form field behavior
   const triggerChange = (changedValue) => {
