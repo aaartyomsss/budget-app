@@ -25,7 +25,7 @@ import axios from 'axios'
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_BASE_URL
 const user = window.localStorage.getItem('loggedInUser')
-console.log('USER: ', user, ' @@@@@@@@@@@@@@@@@@@@@@')
+
 axios.defaults.headers.common['Authorization'] = user
   ? `bearer ${JSON.parse(user).token}`
   : undefined
@@ -33,30 +33,27 @@ axios.defaults.headers.common['Authorization'] = user
 const App = () => {
   const dispatch = useDispatch()
   const user = useSelector((state: Store) => state.user)
-  const personalExpenses = useSelector((state: Store) => state.personalExpenses)
 
   useEffect(() => {
     // TODO ? Save only token and make request to server ?
-    const userJSON = window.localStorage.getItem('loggedInUser')
-    if (userJSON) {
-      const fetch = async () => {
-        const parsedUser = JSON.parse(userJSON)
-        dispatch(setSentRequests(parsedUser.id))
-        dispatch(setReceivedRequests(parsedUser.id))
-        dispatch(initialPersonalPlan())
-        dispatch(initialFamilyPlans(parsedUser))
-        dispatch(login(parsedUser))
-      }
-      fetch()
+    const fetch = async () => {
+      const userJSON = window.localStorage.getItem('loggedInUser')
+      const parsedUser = JSON.parse(userJSON!)
+      dispatch(setSentRequests(parsedUser.id))
+      dispatch(setReceivedRequests(parsedUser.id))
+      dispatch(initialPersonalPlan())
+      dispatch(initialFamilyPlans(parsedUser))
+      dispatch(login(parsedUser))
     }
-  }, [dispatch]) // eslint-disable-line
+    fetch()
+  }, []) // eslint-disable-line
 
   return (
     <div className="App">
       <NavBar user={user} />
       <Switch>
         <Route path="/personal-plan">
-          <PersonalExpensesContainer expenses={personalExpenses} />
+          <PersonalExpensesContainer />
         </Route>
 
         <Route path="/my-profile">

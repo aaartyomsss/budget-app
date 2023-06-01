@@ -15,7 +15,6 @@ const FamilyPlanHome = () => {
   const user = useSelector<Store>(({ user }) => user)
   const familyPlans = useSelector((state: Store) => state.familyPlanReducer)
   const invitationsReceived = useSelector((state: Store) => {
-    console.log(state.invitationReducer)
     return state.invitationReducer.received.filter(
       (invitation) => invitation.status === REQUEST_SENT
     )
