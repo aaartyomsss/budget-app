@@ -25,7 +25,6 @@ import axios from 'axios'
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_BASE_URL
 const user = window.localStorage.getItem('loggedInUser')
-
 axios.defaults.headers.common['Authorization'] = user
   ? `bearer ${JSON.parse(user).token}`
   : undefined
