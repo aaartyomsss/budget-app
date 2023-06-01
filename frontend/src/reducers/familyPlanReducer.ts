@@ -5,7 +5,7 @@ import { FamilyPlan } from '../types/expense'
 const familyPlanReducer = (state: FamilyPlan[] = [], action) => {
   switch (action.type) {
     case INIT: {
-      let familyPlans = action.user.familyPlans
+      let familyPlans = action.user?.familyPlans || []
       familyPlans.forEach((plan) => {
         if (plan.lenght) {
           plan.forEach((exp) => {

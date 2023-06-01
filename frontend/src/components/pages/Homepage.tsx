@@ -21,8 +21,6 @@ const Homepage = () => {
     dispatch(initialPersonalPlan())
   }
 
-  console.log(import.meta.env)
-
   return (
     <div className="center-div border text-align-center homepage">
       <Typography>

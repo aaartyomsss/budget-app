@@ -5,14 +5,14 @@ import { Expense } from '../types/expense'
 const personalReducer = (state: Expense[] = [], action) => {
   switch (action.type) {
     case 'INIT': {
-      let usersExpenses = action.user.personalPlan
+      let usersExpenses = action.data
       if (usersExpenses && usersExpenses.lenght) {
         usersExpenses.forEach((exp) => {
           exp.date = dateFormatter(exp.date)
           exp.type = capitalizeString(exp.type)
         })
       }
-      return usersExpenses
+      return usersExpenses || []
     }
     case 'CLEAR':
       return action.data
@@ -37,7 +37,7 @@ export const initialPersonalPlan = () => {
   return async (dispatch) => {
     const expenses = await personalService.getAll()
     dispatch({
-      type: 'ADD',
+      type: 'INIT',
       data: expenses,
     })
   }

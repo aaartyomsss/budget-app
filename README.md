@@ -59,10 +59,10 @@ disconnecting from DB in the beforeEach block first.
 
 37. Add reusable permission check for user to be authenticated + backend tests - 0.5h
 38. Fix personal plan fetching in frontend + refactor the plan retrieval endpoint - 0.5h
-39. Add error handling to SpendingForm.tsx - 0.75h
-40. Fixing auth header not being set on any route besides '/' - 0.5h
-    TODO: Do smth on login and fix logout issue.
+39. Add error handling to SpendingForm.tsx - 1h
+40. Fixing auth header not being set on any route besides '/' - 0.75h
+41. Fix listing of expenses - 0.75h
 
-CURRENT: 104.5h
+CURRENT: 105.75h
 
 GOAL: 122.5h
