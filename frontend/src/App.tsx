@@ -9,7 +9,6 @@ import SingUp from './components/pages/SignUp'
 import NavBar from './components/shared/NavBar'
 import Success from './components/pages/Success'
 import { initialPersonalPlan } from './reducers/personalReducer'
-import { initialFamilyPlans } from './reducers/familyPlanReducer'
 import {
   setSentRequests,
   setReceivedRequests,
@@ -41,7 +40,6 @@ const App = () => {
       dispatch(setSentRequests(parsedUser.id))
       dispatch(setReceivedRequests(parsedUser.id))
       dispatch(initialPersonalPlan())
-      dispatch(initialFamilyPlans(parsedUser))
       dispatch(login(parsedUser))
     }
     fetch()

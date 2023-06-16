@@ -3,7 +3,6 @@ import axios from 'axios'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { initialFamilyPlans } from '../../reducers/familyPlanReducer'
 import {
   setReceivedRequests,
   setSentRequests,
@@ -27,7 +26,6 @@ const Login = () => {
       dispatch(setSentRequests(user.id))
       dispatch(setReceivedRequests(user.id))
       dispatch(initialPersonalPlan())
-      dispatch(initialFamilyPlans(user))
       history.push('/personal-plan')
     } catch (error: any) {
       if (error.message === 'Request failed with status code 401') {
@@ -57,13 +55,13 @@ const Login = () => {
 
   return (
     <div
-      className='center-div'
+      className="center-div"
       style={{ width: '30%', height: '100%', marginTop: '10rem' }}
     >
       <Form onFinish={handleSubmit} {...layout}>
         <Form.Item
-          name='username'
-          label='Username'
+          name="username"
+          label="Username"
           rules={[
             {
               required: true,
@@ -74,8 +72,8 @@ const Login = () => {
         </Form.Item>
 
         <Form.Item
-          name='password'
-          label='Password'
+          name="password"
+          label="Password"
           rules={[
             {
               required: true,
@@ -86,7 +84,7 @@ const Login = () => {
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
-          <Button htmlType='submit' type='primary'>
+          <Button htmlType="submit" type="primary">
             Login
           </Button>
         </Form.Item>

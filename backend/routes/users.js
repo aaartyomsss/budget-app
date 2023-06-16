@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../utils/config')
 require('dotenv/config')
 const nodemailer = require('nodemailer')
-const confiramtionUrl = 'http://localhost:3001/api/users/confirmation'
+const confiramtionUrl = `${config.FRONTEND_BASE_URL}api/users/confirmation`
 
 userRouter.get('/', async (req, res) => {
   const users = await User.find({})
@@ -13,7 +13,6 @@ userRouter.get('/', async (req, res) => {
 })
 
 userRouter.get('/:id', async (req, res) => {
-  // TODO set redis caching and manage mutations on expenses
   const user = await User.findById(req.params.id).populate(
     'personalPlan familyPlans'
   )
@@ -31,7 +30,7 @@ userRouter.get('/confirmation/:token', async (req, res) => {
   user.confirmed = true
   try {
     await user.save()
-    res.redirect(`${config.FRONTEND_BASE_URL}/activated`)
+    res.redirect(`${config.FRONTEND_BASE_URL}activated`)
   } catch (error) {}
 })
 
@@ -93,17 +92,17 @@ userRouter.post('/', async (req, res) => {
     parseInt(config.SALT_ROUNDS)
   )
 
-  const user = new User({
-    username: body.username,
-    name: body.name,
-    email: body.email,
-    passwordHash,
-  })
-
-  const emailToken = jwt.sign(user.toJSON(), config.EMAIL_TOKEN)
-
   try {
+    const user = new User({
+      username: body.username,
+      name: body.name,
+      email: body.email,
+      passwordHash,
+    })
+
     const savedUser = await user.save()
+
+    const emailToken = jwt.sign(user.toJSON(), config.EMAIL_TOKEN)
 
     // Sending email block of code
     let transporter = nodemailer.createTransport({
@@ -114,12 +113,20 @@ userRouter.post('/', async (req, res) => {
       },
     })
 
+    const html = `<p>Thank you for your registration</p><p>By clicking following link you will activate your account</p><p><p><a>${confiramtionUrl}/${emailToken}</a></p>`
+    console.log(process.env.NODE_ENV, process.env.NODE_ENV === 'dev')
+    if (process.env.NODE_ENV === 'dev') {
+      console.log('------------------')
+      console.log(html)
+      console.log('------------------')
+    }
+
     const mailOptions = {
       from: '"Test Budget App" <noreplyconfirmationtest@gmail.com>', // sender address
       to: `${user.email}`, // list of receivers
       subject: 'Confirm your account', // Subject line
       text: `Hi, ${user.name}`, // plain text body
-      html: `<p>Thank you for your registration.</p><p>By clicking following link you will activate your account:</p><p><a>${confiramtionUrl}/${emailToken}</a></p>`,
+      html,
     }
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -152,6 +159,16 @@ userRouter.get('/search/:query', async (req, res) => {
         const id = user._id
         return { username, id }
       })
+      const token = req.token
+      const decodedUser = jwt.verify(token, process.env.SECRET)
+      if (decodedUser) {
+        console.log('!!!!!!!!!!!!!!!!!!!! ', foundUsers)
+        const filteredOutSelf = foundUsers.filter(
+          (u) => u.id !== decodedUser.id
+        )
+        console.log('!!!!!!!!!!!!!!!!!!!! ', filteredOutSelf)
+        return res.json({ foundUsers: filteredOutSelf })
+      }
       return res.json({ foundUsers })
     }
   )

@@ -9,7 +9,10 @@ const mongoose = require('mongoose')
 // for fetching
 personalPlan.get('/', isAuthenticated, async (req, res) => {
   const userId = req.user?.id
-  const expenses = await Expense.find({ user: mongoose.Types.ObjectId(userId) })
+  const expenses = await Expense.find({
+    user: mongoose.Types.ObjectId(userId),
+    isPersonal: true,
+  })
   res.json(expenses)
 })
 

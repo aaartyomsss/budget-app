@@ -2,9 +2,11 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 
 const createUserAndToken = async () => {
+  const randInt = Math.floor(Math.random() * 1000000) + 1
+
   const user = new User({
-    username: 'username',
-    email: 'a@gmail.com',
+    username: `username${randInt}`,
+    email: `a${randInt}@gmail.com`,
     name: 'Name',
     passwordHash: 'Hashssss',
     confirmed: true,

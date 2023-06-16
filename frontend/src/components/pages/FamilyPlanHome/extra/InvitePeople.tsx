@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Input, Select, message } from 'antd'
+import { Input, Select, Spin, message } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import familyPlanService from '../../../../services/familyPlanService'
 import debounce from 'lodash.debounce'
@@ -14,6 +14,7 @@ import { User } from '../../../../types/user'
 const InvitePeople = ({ user }) => {
   const { Option } = Select
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
   const [queryResults, setQueryResults] = useState([])
   const [planForInvitation, setPlanForInvitation] = useState<string | null>(
     null
@@ -28,6 +29,7 @@ const InvitePeople = ({ user }) => {
 
   const onSearch = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const value = e.target.value
     if (value !== '') {
       const { data } = await familyPlanService.searchUser(value),
@@ -39,6 +41,7 @@ const InvitePeople = ({ user }) => {
         setQueryResults(result)
       }
     }
+    setLoading(false)
   }
 
   const sendInvite = (recepientId) => {
@@ -66,37 +69,66 @@ const InvitePeople = ({ user }) => {
     return () => debounceHandler.cancel()
   }, []) // eslint-disable-line
 
-  return (
-    <div>
-      <Input placeholder="Enter username" onChange={debounceHandler} />
-      <Select
-        placeholder="Select a plan to which you want to invite the user"
-        onChange={handlePlanSelection}
-      >
-        {familyPlans.map((plan) => {
-          return (
-            <Option key={plan.id} value={`${plan.id}:${plan.planName}`}>
-              {plan.planName}
-            </Option>
-          )
-        })}
-      </Select>
-      <div className="text-container">
-        <span className="secondary-text">
-          Users found: {queryResults.length}
-        </span>
-      </div>
-      <div className="user-list">
-        {queryResults &&
-          queryResults.map((foundUser: User) => {
+  const renderInputs = () => {
+    return (
+      <>
+        <Input placeholder="Enter username" onChange={debounceHandler} />
+        <Select
+          placeholder="Select a plan to which you want to invite the user"
+          onChange={handlePlanSelection}
+        >
+          {familyPlans.map((plan) => {
             return (
-              <InviteUserCard
-                key={foundUser.id}
-                {...{ foundUser, invitations, sendInvite }}
-              />
+              <Option key={plan.id} value={`${plan.id}:${plan.planName}`}>
+                {plan.planName}
+              </Option>
             )
           })}
-      </div>
+        </Select>
+      </>
+    )
+  }
+
+  const renderContent = () => {
+    if (loading)
+      return (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '10rem',
+          }}
+        >
+          <Spin size="large" />
+        </div>
+      )
+
+    return (
+      <>
+        <div className="text-container">
+          <span className="secondary-text">
+            Users found: {queryResults.length}
+          </span>
+        </div>
+        <div className="user-list">
+          {queryResults &&
+            queryResults.map((foundUser: User) => {
+              return (
+                <InviteUserCard
+                  key={foundUser.id}
+                  {...{ foundUser, invitations, sendInvite }}
+                />
+              )
+            })}
+        </div>
+      </>
+    )
+  }
+
+  return (
+    <div>
+      {renderInputs()}
+      {renderContent()}
     </div>
   )
 }
