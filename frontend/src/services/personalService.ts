@@ -1,14 +1,14 @@
 import axios, { AxiosError } from 'axios'
-import { Expense } from '../types/expense'
+import { CreateExpense, Expense } from '../types/expense'
 
 const getAll = async () => {
   const res = await axios.get<Expense[]>('personal-plan/')
   return res.data
 }
 
-const addExpense = async (toAdd) => {
+const addExpense = async (toAdd: CreateExpense) => {
   try {
-    const res = await axios.post('personal-plan', toAdd)
+    const res = await axios.post<Expense>('personal-plan', toAdd)
     return { data: res.data, status: res.status }
   } catch (_error) {
     const error = _error as AxiosError

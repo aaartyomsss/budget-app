@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, DatePicker, Input, Button, message } from 'antd'
+import { Form, DatePicker, Input, Button, message, Modal } from 'antd'
 import { serverDateFormatter } from '../../functions/helperFunctions'
 import { useDispatch, useSelector } from 'react-redux'
 import { addExpense, modifyExpense } from '../../reducers/personalReducer'
@@ -10,8 +10,17 @@ import { clearCache } from '../../reducers/cacheReducer'
 import '../../styles.css'
 import CustomSelectCategory from '../forms/CustomSelectCategory'
 import { Store } from '../../store'
+import { CreateExpense } from '../../types/expense'
+import familyPlanService from '../../services/familyPlanService'
+import { SetState } from '../../types/common'
 
-const SpendingForm = () => {
+type Props = {
+  isModalOpen: boolean
+  setIsModalOpen: SetState<boolean>
+  familyPlanId?: string
+}
+
+const SpendingForm = (props: Props) => {
   const dispatch = useDispatch()
   // To modify expense
   const cache = useSelector((state: Store) => state.cache)
@@ -23,14 +32,18 @@ const SpendingForm = () => {
       ...fieldsValue,
       type: fieldsValue['type'].type,
       date: serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY')),
-    }
-    const res = await personalService.addExpense(values)
+    } as CreateExpense
+
+    const res = props.familyPlanId
+      ? await familyPlanService.addExpensesToThePlan(props.familyPlanId, values)
+      : await personalService.addExpense(values)
+
     if (res.status !== 201) {
       message.error(res.data.error)
       return
     }
     dispatch(addExpense(res.data))
-    history.push('/personal-plan')
+    props.setIsModalOpen(false)
   }
 
   const onModify = (fieldsValue) => {
@@ -42,12 +55,12 @@ const SpendingForm = () => {
     const passID = cache.id
     dispatch(modifyExpense(passID, values))
     dispatch(clearCache())
-    history.push('/personal-plan')
+    props.setIsModalOpen(false)
   }
 
   const layout = {
     labelCol: {
-      span: 4,
+      span: 6,
     },
     wrapperCol: {
       span: 16,
@@ -55,13 +68,13 @@ const SpendingForm = () => {
   }
   const tailLayout = {
     wrapperCol: {
-      offset: 4,
+      offset: 6,
       span: 16,
     },
   }
 
   return (
-    <div style={{ margin: '2em 0em' }} className="center-div border-form">
+    <Modal open={props.isModalOpen} title="Add expense">
       <Form
         onFinish={cache ? onModify : onAdd}
         {...layout}
@@ -102,7 +115,7 @@ const SpendingForm = () => {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </Modal>
   )
 }
 

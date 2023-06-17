@@ -7,6 +7,13 @@ export interface Expense {
   user: string
 }
 
+export interface CreateExpense {
+  title: string
+  date?: string
+  type: string
+  amountSpent: number
+}
+
 export interface FamilyPlan {
   id: string
   created_by: string

@@ -49,7 +49,7 @@ const DropdownMenu = () => {
         </Link>
       </Menu.Item>
 
-      <Menu.Item>
+      <Menu.Item key="logout">
         <Logout />
       </Menu.Item>
     </Menu>

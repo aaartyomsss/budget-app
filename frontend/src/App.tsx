@@ -15,7 +15,7 @@ import {
 } from './reducers/invitationReducer'
 import PersonalExpensesContainer from './components/pages/PersonalExpensesContainer'
 import FamilyExpensesContainer from './components/pages/FamilyExpensesContainer'
-import SpendingForm from './components/pages/SpendingForm'
+import SpendingForm from './components/shared/SpendingForm'
 import MyProfile from './components/pages/MyProfile'
 import Overview from './components/pages/Overview'
 import FamilyPlanHome from './components/pages/FamilyPlanHome/FamilyPlanHome'
@@ -83,10 +83,6 @@ const App = () => {
 
         <Route path="/family-plans">
           <FamilyPlanHome />
-        </Route>
-
-        <Route path="/spending-form">
-          <SpendingForm />
         </Route>
 
         <Route path="/">

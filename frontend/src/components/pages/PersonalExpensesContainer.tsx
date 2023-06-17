@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { dateFormatter } from '../../functions/helperFunctions'
 import ExpensesList from './ExpensesList'
 import { useSelector } from 'react-redux'
 import { Store } from '../../store'
+import { Button } from 'antd'
+import SpendingForm from '../shared/SpendingForm'
 
 const PersonalExpensesContainer = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const personalExpenses = useSelector((state: Store) => state.personalExpenses)
 
   const expenses = personalExpenses.map((obj) => {
@@ -23,7 +26,13 @@ const PersonalExpensesContainer = () => {
     return _obj
   })
 
-  return <ExpensesList expenses={expenses} />
+  return (
+    <>
+      <Button onClick={() => setIsModalOpen(true)}>Add</Button>
+      <ExpensesList expenses={expenses} />
+      <SpendingForm isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+    </>
+  )
 }
 
 export default PersonalExpensesContainer
