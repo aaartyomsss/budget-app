@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table, Space, Layout } from 'antd'
-import { toTime } from '../../functions/helperFunctions'
+import { dateFormatter, toTime } from '../../functions/helperFunctions'
 import { useDispatch } from 'react-redux'
 import { removeExpense } from '../../reducers/personalReducer'
 import RemoveButton from '../shared/RemoveButton'
@@ -43,6 +43,7 @@ const ExpensesList = ({ expenses }: Props) => {
                 sorter={(a: Expense, b: Expense) =>
                   toTime(a.date).getTime() - toTime(b.date).getTime()
                 }
+                render={(dateString) => dateFormatter(dateString)}
               />
               <Column
                 title="Actions"

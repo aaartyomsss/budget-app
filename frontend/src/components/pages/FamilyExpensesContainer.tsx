@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { dateFormatter } from '../../functions/helperFunctions'
 import ExpensesList from './ExpensesList'
-import { Store } from '../../store'
 import familyPlanService from '../../services/familyPlanService'
 import { FamilyPlan } from '../../types/expense'
+import { Button } from 'antd'
+import SpendingForm from '../shared/SpendingForm'
 
 const FamilyExpensesContainer = () => {
+  // TODO: Update the state
   const [familyPlan, setFamilyPlan] = useState<FamilyPlan>()
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { id } = useParams<{ id: string }>()
 
   useEffect(() => {
@@ -33,7 +34,22 @@ const FamilyExpensesContainer = () => {
   //   }
   //   return Object.assign({ key: obj.id }, obj)
   // })
-  return <ExpensesList expenses={[]} />
+  return (
+    <>
+      <Button
+        className="add-expense-button"
+        onClick={() => setIsModalOpen(true)}
+      >
+        Add
+      </Button>
+      <ExpensesList expenses={familyPlan?.expenses || []} />
+      <SpendingForm
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        familyPlanId={familyPlan?.id}
+      />
+    </>
+  )
 }
 
 export default FamilyExpensesContainer

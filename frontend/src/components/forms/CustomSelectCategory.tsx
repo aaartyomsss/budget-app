@@ -20,6 +20,8 @@ const CustomSelectCategory = ({ value = {}, onChange }: Props) => {
     state.personalExpenses.map((exp) => capitalizeString(exp.type))
   )
 
+  // TODO: Fix this to adopt family plans
+
   useEffect(() => {
     const getExpenses = async () => {
       dispatch(initialPersonalPlan())
