@@ -1,10 +1,10 @@
+import { Button } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import ExpensesList from './ExpensesList'
 import familyPlanService from '../../services/familyPlanService'
-import { FamilyPlan } from '../../types/expense'
-import { Button } from 'antd'
+import { Expense, FamilyPlan } from '../../types/expense'
 import SpendingForm from '../shared/SpendingForm'
+import ExpensesList from './ExpensesList'
 
 const FamilyExpensesContainer = () => {
   // TODO: Update the state
@@ -19,6 +19,16 @@ const FamilyExpensesContainer = () => {
     }
     getAndSetPlan()
   }, [])
+
+  const onAddFamilyExpenses = (e: Expense) => {
+    setFamilyPlan((plan) => {
+      if (plan)
+        return {
+          ...plan,
+          expenses: plan.expenses.concat(e),
+        }
+    })
+  }
 
   // const familyPlanExpenses = useSelector((state: Store) => {
   //   const plan = state.familyPlanReducer.filter(
@@ -37,7 +47,7 @@ const FamilyExpensesContainer = () => {
   return (
     <>
       <Button
-        className="add-expense-button"
+        className='add-expense-button'
         onClick={() => setIsModalOpen(true)}
       >
         Add
@@ -47,6 +57,7 @@ const FamilyExpensesContainer = () => {
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         familyPlanId={familyPlan?.id}
+        onAddFamilyExpenses={onAddFamilyExpenses}
       />
     </>
   )

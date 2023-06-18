@@ -1,31 +1,29 @@
-import React from 'react'
-import { Form, DatePicker, Input, Button, message, Modal } from 'antd'
-import { serverDateFormatter } from '../../functions/helperFunctions'
-import { useDispatch, useSelector } from 'react-redux'
-import { addExpense, modifyExpense } from '../../reducers/personalReducer'
-import personalService from '../../services/personalService'
+import { Button, DatePicker, Form, Input, Modal, message } from 'antd'
 import moment from 'moment'
-import { useHistory } from 'react-router-dom'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { serverDateFormatter } from '../../functions/helperFunctions'
 import { clearCache } from '../../reducers/cacheReducer'
-import '../../styles.css'
-import CustomSelectCategory from '../forms/CustomSelectCategory'
-import { Store } from '../../store'
-import { CreateExpense } from '../../types/expense'
+import { addExpense, modifyExpense } from '../../reducers/personalReducer'
 import familyPlanService from '../../services/familyPlanService'
+import personalService from '../../services/personalService'
+import { Store } from '../../store'
+import '../../styles.css'
 import { SetState } from '../../types/common'
+import { CreateExpense, Expense } from '../../types/expense'
+import CustomSelectCategory from '../forms/CustomSelectCategory'
 
 type Props = {
   isModalOpen: boolean
   setIsModalOpen: SetState<boolean>
   familyPlanId?: string
+  onAddFamilyExpenses?: (e: Expense) => void
 }
 
 const SpendingForm = (props: Props) => {
   const dispatch = useDispatch()
   // To modify expense
   const cache = useSelector((state: Store) => state.cache)
-
-  const history = useHistory()
 
   const onAdd = async (fieldsValue) => {
     const values = {
@@ -42,7 +40,11 @@ const SpendingForm = (props: Props) => {
       message.error(res.data.error)
       return
     }
-    dispatch(addExpense(res.data))
+
+    props.familyPlanId && props.onAddFamilyExpenses
+      ? props.onAddFamilyExpenses(res.data)
+      : dispatch(addExpense(res.data))
+
     props.setIsModalOpen(false)
   }
 
@@ -74,7 +76,12 @@ const SpendingForm = (props: Props) => {
   }
 
   return (
-    <Modal open={props.isModalOpen} title="Add expense">
+    <Modal
+      open={props.isModalOpen}
+      title='Add expense'
+      footer={null}
+      onCancel={() => props.setIsModalOpen(false)}
+    >
       <Form
         onFinish={cache ? onModify : onAdd}
         {...layout}
@@ -86,31 +93,31 @@ const SpendingForm = (props: Props) => {
         }}
       >
         <Form.Item
-          label="Title"
-          name="title"
+          label='Title'
+          name='title'
           rules={[{ required: true, message: 'This field is required' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="Amount spent"
-          name="amountSpent"
+          label='Amount spent'
+          name='amountSpent'
           rules={[{ required: true, message: 'This field is required' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="Category"
-          name="type"
+          label='Category'
+          name='type'
           rules={[{ required: true, message: 'This field is required' }]}
         >
-          <CustomSelectCategory />
+          <CustomSelectCategory familyPlanId={props.familyPlanId} />
         </Form.Item>
-        <Form.Item label="Date" name="date">
+        <Form.Item label='Date' name='date'>
           <DatePicker format={'DD/MM/YYYY'} />
         </Form.Item>
         <Form.Item {...tailLayout}>
-          <Button htmlType="submit" type="primary">
+          <Button htmlType='submit' type='primary'>
             {cache ? 'Modify' : 'Add'}
           </Button>
         </Form.Item>

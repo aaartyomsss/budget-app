@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Select, Divider, Input, Button, message } from 'antd'
-import { capitalizeString } from '../../functions/helperFunctions'
+import { Button, Divider, Input, Select } from 'antd'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { capitalizeString } from '../../functions/helperFunctions'
 import { initialPersonalPlan } from '../../reducers/personalReducer'
 import { Store } from '../../store'
 
@@ -11,14 +11,23 @@ import { Store } from '../../store'
 type Props = {
   value?: any
   onChange?: (o: any) => void
+  familyPlanId?: string
 }
 
-const CustomSelectCategory = ({ value = {}, onChange }: Props) => {
+const CustomSelectCategory = ({
+  value = {},
+  onChange,
+  familyPlanId,
+}: Props) => {
   // To add existing categories to the form-field
   const dispatch = useDispatch()
-  const categories = useSelector((state: Store) =>
-    state.personalExpenses.map((exp) => capitalizeString(exp.type))
-  )
+  const categories = useSelector((state: Store) => {
+    if (!familyPlanId)
+      return state.personalExpenses.map((exp) => capitalizeString(exp.type))
+    const plan = state.familyPlanReducer.find((p) => p.id === familyPlanId)
+    console.log(plan)
+    return plan?.expenses.map((ex) => capitalizeString(ex.type)) || []
+  })
 
   // TODO: Fix this to adopt family plans
 
@@ -74,7 +83,7 @@ const CustomSelectCategory = ({ value = {}, onChange }: Props) => {
 
   return (
     <Select
-      placeholder="Choose existing category or add new one"
+      placeholder='Choose existing category or add new one'
       onChange={onCategoryChange}
       dropdownRender={(menu) => (
         <div>

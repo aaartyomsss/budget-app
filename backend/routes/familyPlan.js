@@ -6,7 +6,7 @@ const { isAuthenticated } = require('../utils/middleware')
 
 familyPlanRouter.get('/plans', isAuthenticated, async (req, res) => {
   const userId = req.user?.id
-  const plans = await FamilyPlan.find({ users: userId })
+  const plans = await FamilyPlan.find({ users: userId }).populate('expenses')
   res.json(plans)
 })
 
