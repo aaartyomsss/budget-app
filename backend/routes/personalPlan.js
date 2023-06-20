@@ -74,12 +74,12 @@ personalPlan.delete('/:id', async (req, res) => {
 
   const toDelete = await Expense.findById(req.params.id)
   const user = await User.findById(decodedUser.id)
-  if (toDelete.user.toString() === user.id.toString()) {
+  if (toDelete.user.toString() === user.id.toString() && toDelete.isPersonal) {
     const removed = await Expense.remove(toDelete)
     user.personalPlan = user.personalPlan.splice(-1)
     await user.save()
   } else {
-    return res.status(401).json({ error: 'incorrect token' })
+    return res.status(403).json({ error: 'Forbidden action' })
   }
 
   res.status(204).end()

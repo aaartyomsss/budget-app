@@ -1,7 +1,5 @@
-import axios from 'axios'
-import { FamilyPlan } from '../types/expense'
-import { Expense, CreateExpense } from '../types/expense'
-import { AxiosError } from 'axios'
+import axios, { AxiosError } from 'axios'
+import { CreateExpense, Expense, FamilyPlan } from '../types/expense'
 
 const createPlan = async (planName, userId) => {
   const res = await axios.post(`family-plan/initialize-plan`, {
@@ -35,6 +33,11 @@ const addExpensesToThePlan = async (id: string, payload: CreateExpense) => {
   }
 }
 
+const removeExpenseFromThePlan = async (planId: string, expenseId: string) => {
+  const res = await axios.delete(`family-plan/plans/${planId}/${expenseId}`)
+  return res
+}
+
 const searchUser = async (query) => {
   const res = await axios.get(`users/search/${query}`)
   return res
@@ -46,4 +49,5 @@ export default {
   getUserPlans,
   getPlan,
   addExpensesToThePlan,
+  removeExpenseFromThePlan,
 }

@@ -71,6 +71,36 @@ familyPlanRouter.post('/initialize-plan', async (req, res) => {
   }
 })
 
-//TODO add addition, updating, deletition of expenses
+familyPlanRouter.patch(
+  '/plans/:id/:expenseId',
+  isAuthenticated,
+  async (req, res) => {
+    // TODO: Add patch
+    res.status(200).json({})
+  }
+)
+
+familyPlanRouter.delete(
+  '/plans/:id/:expenseId',
+  isAuthenticated,
+  async (req, res) => {
+    // TODO: Add tests for that
+    const { id } = req.params
+    const plan = await FamilyPlan.findById(id).populate('expenses')
+    const userId = req.user?.id
+    if (!plan.users.includes(userId)) {
+      return res.status(403).send({ error: 'Unauthenticated' })
+    }
+
+    const qExpenseId = req.params.expenseId
+    const expense = plan.expenses.find((e) => e.id === qExpenseId)
+    if (expense) {
+      await expense.remove()
+      plan.expenses = plan.expenses.filter((e) => e.id !== qExpenseId)
+      await plan.save()
+      res.status(204).json({})
+    }
+  }
+)
 
 module.exports = familyPlanRouter

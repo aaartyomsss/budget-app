@@ -52,7 +52,11 @@ const FamilyExpensesContainer = () => {
       >
         Add
       </Button>
-      <ExpensesList expenses={familyPlan?.expenses || []} />
+      <ExpensesList
+        expenses={familyPlan?.expenses || []}
+        familyPlanId={familyPlan?.id}
+        setFamilyPlan={setFamilyPlan}
+      />
       <SpendingForm
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
