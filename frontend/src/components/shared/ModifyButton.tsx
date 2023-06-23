@@ -1,25 +1,22 @@
-import React from 'react'
-import { Button } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
-import { setCache } from '../../reducers/cacheReducer'
+import { Button } from 'antd'
+import React from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-
+import { setCache } from '../../reducers/cacheReducer'
 // Modify button in list to change info about expense
-const ModifyButton = ({ expense }) => {
-
+const ModifyButton = ({ expense, onClick }) => {
   const dispatch = useDispatch()
-  const history = useHistory()
 
-  const handleModify = obj => {
+  const handleModify = (obj) => {
     dispatch(setCache(obj))
-    history.push('/spending-form')
+    onClick()
   }
 
   return (
-    <Button onClick={() => handleModify(expense)}><EditOutlined /></Button>
+    <Button onClick={() => handleModify(expense)}>
+      <EditOutlined />
+    </Button>
   )
-
 }
 
 export default ModifyButton

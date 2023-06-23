@@ -36,7 +36,7 @@ personalPlan.post('/', async (req, res) => {
       type: body.type,
       amountSpent: body.amountSpent,
       user: user._id,
-      date: body.date,
+      date: body.date || new Date(),
     })
 
     const savedExpense = await newExpense.save()
@@ -55,7 +55,7 @@ personalPlan.patch('/:id', async (req, res) => {
     title: req.body.title,
     amountSpent: req.body.amountSpent,
     type: req.body.type,
-    date: req.body.date,
+    date: req.body.date || new Date(),
   }
 
   const toUpdate = await Expense.findOneAndUpdate(filter, update, {

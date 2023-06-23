@@ -1,7 +1,7 @@
 export interface Expense {
   id: string
   title: string
-  date: string
+  date: string | null
   type: string
   amountSpent: number
   user: string

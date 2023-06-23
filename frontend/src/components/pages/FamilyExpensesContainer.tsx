@@ -30,21 +30,6 @@ const FamilyExpensesContainer = () => {
     })
   }
 
-  // const familyPlanExpenses = useSelector((state: Store) => {
-  //   const plan = state.familyPlanReducer.filter(
-  //     (plan) => plan.id === familyPlanId
-  //   )
-  //   return plan[0].expenses
-  // })
-  // familyPlanExpenses.forEach((obj) => {
-  //   // RegEx that will ignore already formatted dates
-  //   const reqPattern = /[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]/
-  //   if (!reqPattern.test(obj.date)) {
-  //     obj.date = dateFormatter(obj.date)
-  //   }
-  //   return Object.assign({ key: obj.id }, obj)
-  // })
-
   const expensesWithKey = familyPlan?.expenses.map((e) => ({ ...e, key: e.id }))
 
   return (
@@ -59,6 +44,7 @@ const FamilyExpensesContainer = () => {
         expenses={expensesWithKey || []}
         familyPlanId={familyPlan?.id}
         setFamilyPlan={setFamilyPlan}
+        setIsModalOpen={setIsModalOpen}
       />
       <SpendingForm
         isModalOpen={isModalOpen}

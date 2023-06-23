@@ -19,7 +19,7 @@ const PersonalExpensesContainer = () => {
       >
         Add
       </Button>
-      <ExpensesList expenses={expenses} />
+      <ExpensesList expenses={expenses} setIsModalOpen={setIsModalOpen} />
       <SpendingForm isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </>
   )

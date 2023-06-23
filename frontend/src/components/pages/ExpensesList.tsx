@@ -13,11 +13,14 @@ import RemoveButton from '../shared/RemoveButton'
 
 type Props = {
   expenses: (Expense & { key: any })[]
+  setIsModalOpen: SetState<boolean>
   familyPlanId?: string
   setFamilyPlan?: SetState<FamilyPlan | undefined>
 }
 
-const ExpensesList = ({ expenses, familyPlanId, setFamilyPlan }: Props) => {
+const ExpensesList = (props: Props) => {
+  const { expenses, familyPlanId, setFamilyPlan, setIsModalOpen } = props
+
   const dispatch = useDispatch()
   const { Column, ColumnGroup } = Table
   const { Content, Footer } = Layout
@@ -63,9 +66,10 @@ const ExpensesList = ({ expenses, familyPlanId, setFamilyPlan }: Props) => {
                 dataIndex='date'
                 key='date'
                 defaultSortOrder='descend'
-                sorter={(a: Expense, b: Expense) =>
-                  toTime(a.date).getTime() - toTime(b.date).getTime()
-                }
+                sorter={(a: Expense, b: Expense) => {
+                  if (!a.date || !b.date) return -1
+                  return toTime(a.date).getTime() - toTime(b.date).getTime()
+                }}
                 render={(dateString) => dateFormatter(dateString)}
               />
               <Column
@@ -74,7 +78,10 @@ const ExpensesList = ({ expenses, familyPlanId, setFamilyPlan }: Props) => {
                 render={(_text, record: Expense) => (
                   <Space size='middle'>
                     <RemoveButton onClick={() => onRemove(record)} />
-                    <ModifyButton expense={record} />
+                    <ModifyButton
+                      expense={record}
+                      onClick={() => setIsModalOpen(true)}
+                    />
                   </Space>
                 )}
               />

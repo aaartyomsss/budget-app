@@ -62,7 +62,6 @@ const SpendingForm = (props: Props) => {
   }
 
   const onModalCancel = () => {
-    console.log('Here we should clear state? ? ? ')
     dispatch(clearCache())
     form.resetFields()
     props.setIsModalOpen(false)
@@ -98,7 +97,7 @@ const SpendingForm = (props: Props) => {
           ['title']: cache ? cache.title : '', // eslint-disable-line
           ['type']: '', // eslint-disable-line
           ['amountSpent']: cache ? cache.amountSpent : '', // eslint-disable-line
-          ['date']: cache ? moment(cache.date, 'DD/MM/YYYY') : moment(), // eslint-disable-line
+          ['date']: cache ? moment(cache.date) : moment(), // eslint-disable-line
         }}
       >
         <Form.Item
