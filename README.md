@@ -75,7 +75,8 @@ disconnecting from DB in the beforeEach block first.
     g. General small fixes
 
 43. Modify family expense and mamual testing - 0.5h
+44. Improve login and signup forms mobile UI - 0.5h
 
-CURRENT: 112.25h
+CURRENT: 112.75h
 
 GOAL: 122.5h

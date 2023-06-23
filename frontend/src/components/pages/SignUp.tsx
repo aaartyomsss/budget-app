@@ -1,10 +1,12 @@
+import { Button, Form, Input, message } from 'antd'
 import React from 'react'
-import { Form, Input, Button, message } from 'antd'
+import { useHistory } from 'react-router-dom'
+import { useMobile } from '../../hooks/useMobile'
 import userService from '../../services/userService'
 import '../../styles.css'
-import { useHistory } from 'react-router-dom'
 
 const SignUp = () => {
+  const isMobile = useMobile(768)
   const [form] = Form.useForm()
   const history = useHistory()
 
@@ -18,7 +20,7 @@ const SignUp = () => {
   }
   const tailFormItemLayout = {
     wrapperCol: {
-      offset: 4,
+      offset: !isMobile ? 4 : 0,
       span: 16,
     },
   }
@@ -37,11 +39,14 @@ const SignUp = () => {
   })
 
   return (
-    <div className="center-div" style={{ marginTop: '10rem' }}>
+    <div
+      className='center-div'
+      style={{ marginTop: '10rem', paddingInline: isMobile ? 16 : 0 }}
+    >
       <Form form={form} onFinish={handleSubmit} {...layout}>
         <Form.Item
-          name="username"
-          label="Username"
+          name='username'
+          label='Username'
           rules={[
             {
               required: true,
@@ -53,8 +58,8 @@ const SignUp = () => {
         </Form.Item>
 
         <Form.Item
-          name="name"
-          label="Name"
+          name='name'
+          label='Name'
           rules={[
             {
               required: true,
@@ -66,8 +71,8 @@ const SignUp = () => {
         </Form.Item>
 
         <Form.Item
-          name="email"
-          label="E-mail"
+          name='email'
+          label='E-mail'
           rules={[
             {
               type: 'email',
@@ -80,8 +85,8 @@ const SignUp = () => {
         </Form.Item>
 
         <Form.Item
-          name="password"
-          label="Password"
+          name='password'
+          label='Password'
           rules={[
             {
               required: true,
@@ -98,8 +103,8 @@ const SignUp = () => {
         </Form.Item>
 
         <Form.Item
-          name="confirm"
-          label="Confirm Password"
+          name='confirm'
+          label='Confirm Password'
           dependencies={['password']}
           hasFeedback
           rules={[
@@ -122,7 +127,7 @@ const SignUp = () => {
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type='primary' htmlType='submit'>
             Sign Up
           </Button>
         </Form.Item>
