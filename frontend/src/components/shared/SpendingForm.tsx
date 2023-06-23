@@ -3,6 +3,7 @@ import moment from 'moment'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { serverDateFormatter } from '../../functions/helperFunctions'
+import { useMobile } from '../../hooks/useMobile'
 import { clearCache } from '../../reducers/cacheReducer'
 import { addExpense, modifyExpense } from '../../reducers/personalReducer'
 import familyPlanService from '../../services/familyPlanService'
@@ -22,6 +23,7 @@ type Props = {
 }
 
 const SpendingForm = (props: Props) => {
+  const isMobile = useMobile(768)
   const dispatch = useDispatch()
   // To modify expense
   const cache = useSelector((state: Store) => state.cache)
@@ -93,7 +95,7 @@ const SpendingForm = (props: Props) => {
   }
   const tailLayout = {
     wrapperCol: {
-      offset: 6,
+      offset: isMobile ? 0 : 6,
       span: 16,
     },
   }

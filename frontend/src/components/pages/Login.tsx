@@ -3,6 +3,7 @@ import axios from 'axios'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { useMobile } from '../../hooks/useMobile'
 import {
   setReceivedRequests,
   setSentRequests,
@@ -11,8 +12,10 @@ import { initialPersonalPlan } from '../../reducers/personalReducer'
 import { login } from '../../reducers/userReducer'
 import loginService from '../../services/userService'
 import '../../styles.css'
+import './Login.css'
 
 const Login = () => {
+  const isMobile = useMobile(768)
   const dispatch = useDispatch()
   const history = useHistory()
   // TODO Refactor this
@@ -40,7 +43,7 @@ const Login = () => {
 
   const layout = {
     labelCol: {
-      span: 4,
+      span: !isMobile ? 8 : 4,
     },
     wrapperCol: {
       span: 16,
@@ -48,17 +51,14 @@ const Login = () => {
   }
   const tailFormItemLayout = {
     wrapperCol: {
-      offset: 4,
       span: 16,
+      offset: !isMobile ? 8 : 0,
     },
   }
 
   return (
-    <div
-      className='center-div'
-      style={{ width: '30%', height: '100%', marginTop: '10rem' }}
-    >
-      <Form onFinish={handleSubmit} {...layout} style={{ width: 500 }}>
+    <div className='login-form-container'>
+      <Form onFinish={handleSubmit} {...layout} style={{ width: 300 }}>
         <Form.Item
           name='username'
           label='Username'

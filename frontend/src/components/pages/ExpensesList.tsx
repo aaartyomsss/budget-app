@@ -49,7 +49,7 @@ const ExpensesList = (props: Props) => {
     <div>
       <Layout style={{ height: '100%' }}>
         <Content>
-          <Table dataSource={expenses}>
+          <Table dataSource={expenses} style={{ overflow: 'scroll' }}>
             <ColumnGroup>
               <Column title='Title' dataIndex='title' key='title' />
               <Column

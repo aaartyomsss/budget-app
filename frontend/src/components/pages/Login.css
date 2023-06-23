@@ -1,0 +1,13 @@
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 12rem;
+  align-items: center;
+}
+
+
+@media screen and (max-width: 767px) {
+  .login-form-container {
+    margin-top: 12rem;
+  }
+}

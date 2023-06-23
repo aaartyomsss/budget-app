@@ -10,7 +10,6 @@ familyPlanRouter.get('/plans', isAuthenticated, async (req, res) => {
   res.json(plans)
 })
 
-
 function isUserInPlan(req, plan) {
   const userId = req.user?.id
   return plan.users.includes(userId)
@@ -32,13 +31,9 @@ familyPlanRouter.post('/plans/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params
   const plan = await FamilyPlan.findById(id)
 
-
   if (!isUserInPlan(req, plan)) {
     return res.status(403).send({ error: 'Unauthenticated' })
   }
-
-  const body = req.body
-  const userId = req.user?.id
 
   const userId = req.user?.id
   if (!plan.users.includes(userId)) {
@@ -120,6 +115,8 @@ familyPlanRouter.patch(
     res
       .status(400)
       .json({ error: 'Did not find the expenses with given params' })
+  }
+)
 
 familyPlanRouter.delete(
   '/plans/:id/:expenseId',
