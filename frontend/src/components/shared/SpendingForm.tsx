@@ -9,7 +9,7 @@ import familyPlanService from '../../services/familyPlanService'
 import personalService from '../../services/personalService'
 import { Store } from '../../store'
 import '../../styles.css'
-import { SetState } from '../../types/common'
+import type { SetState } from '../../types/common'
 import { CreateExpense, Expense } from '../../types/expense'
 import CustomSelectCategory from '../forms/CustomSelectCategory'
 
@@ -18,6 +18,7 @@ type Props = {
   setIsModalOpen: SetState<boolean>
   familyPlanId?: string
   onAddFamilyExpenses?: (e: Expense) => void
+  onModifyFamilyExpense?: (e: Expense) => void
 }
 
 const SpendingForm = (props: Props) => {
@@ -49,15 +50,30 @@ const SpendingForm = (props: Props) => {
     props.setIsModalOpen(false)
   }
 
-  const onModify = (fieldsValue) => {
+  const onModify = async (fieldsValue) => {
     const values = {
       ...fieldsValue,
       type: fieldsValue['type'].type,
       date: serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY')),
     }
     const passID = cache.id
-    dispatch(modifyExpense(passID, values))
-    dispatch(clearCache())
+    const res = props.familyPlanId
+      ? await familyPlanService.modifyExpenseFromThePlan(
+          props.familyPlanId,
+          passID,
+          values
+        )
+      : await personalService.modifyExpense(passID, values)
+
+    if (![200, 201].includes(res.status)) {
+      message.error(res.data.error)
+      return
+    }
+
+    props.familyPlanId && props.onModifyFamilyExpense
+      ? props.onModifyFamilyExpense(res.data)
+      : dispatch(modifyExpense(res.data))
+
     props.setIsModalOpen(false)
   }
 

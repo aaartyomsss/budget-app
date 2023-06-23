@@ -28,7 +28,7 @@ const removeExpense = async (id) => {
 const modifyExpense = async (id, newExpense) => {
   const res = await axios.patch(`personal-plan/${id}`, newExpense)
 
-  return res.data
+  return res
 }
 
 export default { getAll, addExpense, removeExpense, modifyExpense }

@@ -21,6 +21,11 @@ const DropdownMenu = () => {
       icon: <IdcardOutlined />,
     },
     {
+      key: 'personal-plan',
+      label: <Link to='/personal-plan'>Personal expenses</Link>,
+      icon: <UserOutlined />,
+    },
+    {
       key: 'family-plans',
       label: <Link to='/family-plans'>Family plan</Link>,
       icon: <TeamOutlined />,
@@ -29,17 +34,12 @@ const DropdownMenu = () => {
       key: 'my-earning',
       label: <Link to='/'>My earnings</Link>,
       icon: <EuroCircleOutlined />,
+      disabled: true,
     },
     {
       key: 'personal-overview',
       label: <Link to='/personal-overview'>Overview</Link>,
       icon: <PieChartOutlined />,
-    },
-    {
-      key: 'personal-plan',
-      label: <Link to='/personal-plan'>Personal expenses</Link>,
-      icon: <UserOutlined />,
-      disabled: true,
     },
     {
       key: 'logout',

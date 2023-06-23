@@ -38,6 +38,19 @@ const removeExpenseFromThePlan = async (planId: string, expenseId: string) => {
   return res
 }
 
+
+const modifyExpenseFromThePlan = async (
+  planId: string,
+  expenseId: string,
+  values: any
+) => {
+  const res = await axios.patch<Expense>(
+    `family-plan/plans/${planId}/${expenseId}`,
+    values
+  )
+  return res
+}
+
 const searchUser = async (query) => {
   const res = await axios.get(`users/search/${query}`)
   return res
@@ -50,4 +63,5 @@ export default {
   getPlan,
   addExpensesToThePlan,
   removeExpenseFromThePlan,
+  modifyExpenseFromThePlan,
 }

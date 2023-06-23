@@ -74,6 +74,8 @@ disconnecting from DB in the beforeEach block first.
     f. Patching of the expense
     g. General small fixes
 
-CURRENT: 111.75h
+43. Modify family expense and mamual testing - 0.5h
+
+CURRENT: 112.25h
 
 GOAL: 122.5h

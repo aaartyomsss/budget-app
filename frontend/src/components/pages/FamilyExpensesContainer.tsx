@@ -30,6 +30,20 @@ const FamilyExpensesContainer = () => {
     })
   }
 
+  const onModifyFamilyExpense = (e: Expense) => {
+    setFamilyPlan((plan) => {
+      if (plan) {
+        return {
+          ...plan,
+          expenses: plan.expenses.map((exp) => {
+            if (exp.id !== e.id) return exp
+            return e
+          }),
+        }
+      }
+    })
+  }
+
   const expensesWithKey = familyPlan?.expenses.map((e) => ({ ...e, key: e.id }))
 
   return (
@@ -51,6 +65,8 @@ const FamilyExpensesContainer = () => {
         setIsModalOpen={setIsModalOpen}
         familyPlanId={familyPlan?.id}
         onAddFamilyExpenses={onAddFamilyExpenses}
+        onModifyFamilyExpense={onModifyFamilyExpense}
+
       />
     </>
   )
