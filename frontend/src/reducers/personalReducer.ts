@@ -1,5 +1,5 @@
+import { capitalizeString, dateFormatter } from '../functions/helperFunctions'
 import personalService from '../services/personalService'
-import { dateFormatter, capitalizeString } from '../functions/helperFunctions'
 import { Expense } from '../types/expense'
 
 const personalReducer = (state: Expense[] = [], action) => {
@@ -67,13 +67,10 @@ export const removeExpense = (id) => {
   }
 }
 
-export const modifyExpense = (id, newExpense) => {
-  return async (dispatch) => {
-    const modified = await personalService.modifyExpense(id, newExpense)
-    dispatch({
-      type: 'MODIFIED',
-      data: modified,
-    })
+export const modifyExpense = (modifiedExpense: Expense) => {
+  return {
+    type: 'MODIFIED',
+    data: modifiedExpense,
   }
 }
 

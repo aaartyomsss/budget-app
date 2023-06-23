@@ -10,6 +10,11 @@ familyPlanRouter.get('/plans', isAuthenticated, async (req, res) => {
   res.json(plans)
 })
 
+function isUserInPlan(req, plan) {
+  const userId = req.user?.id
+  return plan.users.includes(userId)
+}
+
 familyPlanRouter.get('/plans/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params
   const plan = await FamilyPlan.findById(id).populate('expenses')
@@ -26,12 +31,14 @@ familyPlanRouter.post('/plans/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params
   const plan = await FamilyPlan.findById(id)
 
-  const userId = req.user?.id
-  if (!plan.users.includes(userId)) {
+  console.log('> ?? ? ?? ? ')
+  if (!isUserInPlan(req, plan)) {
     return res.status(403).send({ error: 'Unauthenticated' })
   }
+  console.log('@@@@@@@@@')
 
   const body = req.body
+  const userId = req.user?.id
 
   try {
     const newExpense = new Expense({
@@ -75,8 +82,37 @@ familyPlanRouter.patch(
   '/plans/:id/:expenseId',
   isAuthenticated,
   async (req, res) => {
-    // TODO: Add patch
-    res.status(200).json({})
+    const { id, expenseId } = req.params
+    const plan = await FamilyPlan.findById(id)
+
+    if (!isUserInPlan(req, plan)) {
+      return res.status(403).send({ error: 'Unauthenticated' })
+    }
+
+    const expense = plan.expenses.find((e) => e.toString() === expenseId)
+
+    if (expense) {
+      const update = {
+        title: req.body.title,
+        amountSpent: req.body.amountSpent,
+        type: req.body.type,
+        date: req.body.date || new Date(),
+      }
+
+      const toUpdate = await Expense.findOneAndUpdate(
+        { _id: expenseId },
+        update,
+        {
+          new: true,
+        }
+      )
+
+      return res.status(200).json(toUpdate)
+    }
+
+    res
+      .status(400)
+      .json({ error: 'Did not find the expenses with given params' })
   }
 )
 
@@ -87,8 +123,8 @@ familyPlanRouter.delete(
     // TODO: Add tests for that
     const { id } = req.params
     const plan = await FamilyPlan.findById(id).populate('expenses')
-    const userId = req.user?.id
-    if (!plan.users.includes(userId)) {
+
+    if (!isUserInPlan(req, plan)) {
       return res.status(403).send({ error: 'Unauthenticated' })
     }
 
