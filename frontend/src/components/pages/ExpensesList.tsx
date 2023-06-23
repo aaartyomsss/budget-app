@@ -12,7 +12,7 @@ import RemoveButton from '../shared/RemoveButton'
 // Component that displays list of personal/ family expenses
 
 type Props = {
-  expenses: Expense[]
+  expenses: (Expense & { key: any })[]
   familyPlanId?: string
   setFamilyPlan?: SetState<FamilyPlan | undefined>
 }

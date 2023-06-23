@@ -1,18 +1,20 @@
+import { Button } from 'antd'
 import React, { useState } from 'react'
-import ExpensesList from './ExpensesList'
 import { useSelector } from 'react-redux'
 import { Store } from '../../store'
-import { Button } from 'antd'
 import SpendingForm from '../shared/SpendingForm'
+import ExpensesList from './ExpensesList'
 
 const PersonalExpensesContainer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const expenses = useSelector((state: Store) => state.personalExpenses)
+  const expenses = useSelector((state: Store) => {
+    return state.personalExpenses.map((e) => ({ ...e, key: e.id }))
+  })
 
   return (
     <>
       <Button
-        className="add-expense-button"
+        className='add-expense-button'
         onClick={() => setIsModalOpen(true)}
       >
         Add

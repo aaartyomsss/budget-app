@@ -24,6 +24,7 @@ const SpendingForm = (props: Props) => {
   const dispatch = useDispatch()
   // To modify expense
   const cache = useSelector((state: Store) => state.cache)
+  const [form] = Form.useForm()
 
   const onAdd = async (fieldsValue) => {
     const values = {
@@ -60,6 +61,13 @@ const SpendingForm = (props: Props) => {
     props.setIsModalOpen(false)
   }
 
+  const onModalCancel = () => {
+    console.log('Here we should clear state? ? ? ')
+    dispatch(clearCache())
+    form.resetFields()
+    props.setIsModalOpen(false)
+  }
+
   const layout = {
     labelCol: {
       span: 6,
@@ -80,10 +88,11 @@ const SpendingForm = (props: Props) => {
       open={props.isModalOpen}
       title='Add expense'
       footer={null}
-      onCancel={() => props.setIsModalOpen(false)}
+      onCancel={onModalCancel}
     >
       <Form
         onFinish={cache ? onModify : onAdd}
+        form={form}
         {...layout}
         initialValues={{
           ['title']: cache ? cache.title : '', // eslint-disable-line

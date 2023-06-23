@@ -44,6 +44,9 @@ const FamilyExpensesContainer = () => {
   //   }
   //   return Object.assign({ key: obj.id }, obj)
   // })
+
+  const expensesWithKey = familyPlan?.expenses.map((e) => ({ ...e, key: e.id }))
+
   return (
     <>
       <Button
@@ -53,7 +56,7 @@ const FamilyExpensesContainer = () => {
         Add
       </Button>
       <ExpensesList
-        expenses={familyPlan?.expenses || []}
+        expenses={expensesWithKey || []}
         familyPlanId={familyPlan?.id}
         setFamilyPlan={setFamilyPlan}
       />
