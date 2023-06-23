@@ -57,7 +57,6 @@ const SpendingForm = (props: Props) => {
       date: serverDateFormatter(fieldsValue['date'].format('DD/MM/YYYY')),
     }
     const passID = cache.id
-
     const res = props.familyPlanId
       ? await familyPlanService.modifyExpenseFromThePlan(
           props.familyPlanId,

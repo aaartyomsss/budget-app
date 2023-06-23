@@ -66,6 +66,7 @@ const FamilyExpensesContainer = () => {
         familyPlanId={familyPlan?.id}
         onAddFamilyExpenses={onAddFamilyExpenses}
         onModifyFamilyExpense={onModifyFamilyExpense}
+
       />
     </>
   )

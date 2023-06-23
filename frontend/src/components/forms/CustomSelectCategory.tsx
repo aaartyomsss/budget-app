@@ -25,7 +25,9 @@ const CustomSelectCategory = ({
     if (!familyPlanId)
       return state.personalExpenses.map((exp) => capitalizeString(exp.type))
 
+
     const plan = state.familyPlanReducer.find((p) => p.id === familyPlanId)
+
     return plan?.expenses.map((ex) => capitalizeString(ex.type)) || []
   })
 
