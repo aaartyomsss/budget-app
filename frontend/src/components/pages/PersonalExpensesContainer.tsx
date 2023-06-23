@@ -1,29 +1,28 @@
-import React from 'react'
-import { dateFormatter } from '../../functions/helperFunctions'
-import ExpensesList from './ExpensesList'
+import { Button } from 'antd'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Store } from '../../store'
+import SpendingForm from '../shared/SpendingForm'
+import ExpensesList from './ExpensesList'
 
 const PersonalExpensesContainer = () => {
-  const personalExpenses = useSelector((state: Store) => state.personalExpenses)
-
-  const expenses = personalExpenses.map((obj) => {
-    // RegEx that will ignore already formatted dates
-    const reqPattern = /[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]/
-
-    if (!reqPattern.test(obj.date)) {
-      obj.date = dateFormatter(obj.date)
-    }
-
-    const _obj = {
-      key: obj.id,
-      ...obj,
-    }
-
-    return _obj
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const expenses = useSelector((state: Store) => {
+    return state.personalExpenses.map((e) => ({ ...e, key: e.id }))
   })
 
-  return <ExpensesList expenses={expenses} />
+  return (
+    <>
+      <Button
+        className='add-expense-button'
+        onClick={() => setIsModalOpen(true)}
+      >
+        Add
+      </Button>
+      <ExpensesList expenses={expenses} setIsModalOpen={setIsModalOpen} />
+      <SpendingForm isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+    </>
+  )
 }
 
 export default PersonalExpensesContainer

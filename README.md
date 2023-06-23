@@ -62,7 +62,18 @@ disconnecting from DB in the beforeEach block first.
 39. Add error handling to SpendingForm.tsx - 1h
 40. Fixing auth header not being set on any route besides '/' - 0.75h
 41. Fix listing of expenses - 0.75h
+42. Family plan listing improvements and fixes - 6.0h
 
-CURRENT: 105.75h
+    included:
+
+    a. Addition of endpoints and backend tests for familyPlanRouter
+    b. Refactoring of spending form functionality
+    c. Add expense in frontend
+    d. Adapt CustomSelectCategory to family plans
+    e. Deletion of the expense in the plan
+    f. Patching of the expense
+    g. General small fixes
+
+CURRENT: 111.75h
 
 GOAL: 122.5h

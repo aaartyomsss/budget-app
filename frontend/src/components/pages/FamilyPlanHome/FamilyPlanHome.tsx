@@ -1,24 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { createFamilyPlan } from '../../../reducers/familyPlanReducer'
+import {
+  createFamilyPlan,
+  initialFamilyPlans,
+} from '../../../reducers/familyPlanReducer'
 import { Popover, Button, Tabs, Badge } from 'antd'
 import FamilyPlansList from './extra/FamilyPlansList'
 import InvitePeople from './extra/InvitePeople'
 import MyInvitations from './extra/MyInvitations'
 import './assets/FamilyPlanHome.css'
 import { Store } from '../../../store'
+import familyPlanService from '../../../services/familyPlanService'
 
 const REQUEST_SENT = 'SENT'
 
 const FamilyPlanHome = () => {
   const { TabPane } = Tabs
   const user = useSelector<Store>(({ user }) => user)
+  const dispatch = useDispatch()
   const familyPlans = useSelector((state: Store) => state.familyPlanReducer)
   const invitationsReceived = useSelector((state: Store) => {
     return state.invitationReducer.received.filter(
       (invitation) => invitation.status === REQUEST_SENT
     )
   })
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      const res = await familyPlanService.getUserPlans()
+      dispatch(initialFamilyPlans(res.data))
+    }
+    fetchPlans()
+  }, [])
 
   // No plans block
   if (familyPlans.length === 0 && invitationsReceived.length === 0) {

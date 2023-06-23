@@ -25,8 +25,14 @@ const FamilyPlansList = ({ familyPlans }: Props) => {
     })
   })
 
+  // TODO: Header and designs
   return (
     <div className="container">
+      <div>
+        <span>Name</span>
+        <span>Users</span>
+        <span>Expenses</span>
+      </div>
       {data.map((plan) => (
         <FamilyPlanCard
           key={plan.id}

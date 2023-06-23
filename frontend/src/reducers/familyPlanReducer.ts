@@ -5,14 +5,15 @@ import { FamilyPlan } from '../types/expense'
 const familyPlanReducer = (state: FamilyPlan[] = [], action) => {
   switch (action.type) {
     case INIT: {
-      let familyPlans = action.user?.familyPlans || []
-      familyPlans.forEach((plan) => {
+      const _familyPlans = action.plans || state
+      const familyPlans = _familyPlans.map((plan) => {
         if (plan.lenght) {
           plan.forEach((exp) => {
             exp.date = dateFormatter(exp.date)
             exp.type = capitalizeString(exp.type)
           })
         }
+        return plan
       })
       return familyPlans
     }
@@ -33,10 +34,10 @@ const familyPlanReducer = (state: FamilyPlan[] = [], action) => {
   }
 }
 
-export const initialFamilyPlans = (user) => {
+export const initialFamilyPlans = (plans: FamilyPlan[]) => {
   return {
     type: INIT,
-    user,
+    plans,
   }
 }
 

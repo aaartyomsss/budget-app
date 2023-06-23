@@ -9,7 +9,10 @@ const mongoose = require('mongoose')
 // for fetching
 personalPlan.get('/', isAuthenticated, async (req, res) => {
   const userId = req.user?.id
-  const expenses = await Expense.find({ user: mongoose.Types.ObjectId(userId) })
+  const expenses = await Expense.find({
+    user: mongoose.Types.ObjectId(userId),
+    isPersonal: true,
+  })
   res.json(expenses)
 })
 
@@ -33,7 +36,7 @@ personalPlan.post('/', async (req, res) => {
       type: body.type,
       amountSpent: body.amountSpent,
       user: user._id,
-      date: body.date,
+      date: body.date || new Date(),
     })
 
     const savedExpense = await newExpense.save()
@@ -52,7 +55,7 @@ personalPlan.patch('/:id', async (req, res) => {
     title: req.body.title,
     amountSpent: req.body.amountSpent,
     type: req.body.type,
-    date: req.body.date,
+    date: req.body.date || new Date(),
   }
 
   const toUpdate = await Expense.findOneAndUpdate(filter, update, {
@@ -71,12 +74,12 @@ personalPlan.delete('/:id', async (req, res) => {
 
   const toDelete = await Expense.findById(req.params.id)
   const user = await User.findById(decodedUser.id)
-  if (toDelete.user.toString() === user.id.toString()) {
+  if (toDelete.user.toString() === user.id.toString() && toDelete.isPersonal) {
     const removed = await Expense.remove(toDelete)
     user.personalPlan = user.personalPlan.splice(-1)
     await user.save()
   } else {
-    return res.status(401).json({ error: 'incorrect token' })
+    return res.status(403).json({ error: 'Forbidden action' })
   }
 
   res.status(204).end()

@@ -46,6 +46,10 @@ services:
       - FRONTEND_BASE_URL=${FRONTEND_BASE_URL}
       - REDIS_HOST=${REDIS_HOST:-redis}
       - MONGO_HOST=mongodb
+      - SESSION_SECRET=${SESSION_SECRET}
+      - SECRET=${SECRET}
+      - EMAIL_TOKEN=${EMAIL_TOKEN}
+      - SALT_ROUNDS=${SALT_ROUNDS}
     networks:
       - budget-app
     depends_on:

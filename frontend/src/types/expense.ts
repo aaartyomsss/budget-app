@@ -1,10 +1,17 @@
 export interface Expense {
   id: string
   title: string
-  date: string
+  date: string | null
   type: string
   amountSpent: number
   user: string
+}
+
+export interface CreateExpense {
+  title: string
+  date?: string
+  type: string
+  amountSpent: number
 }
 
 export interface FamilyPlan {
