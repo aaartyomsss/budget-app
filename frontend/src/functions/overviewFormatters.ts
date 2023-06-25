@@ -1,8 +1,12 @@
+import { DateTime } from 'luxon'
+import { Expense } from '../types/expense'
+
 // Following function filters spending for graph overview per ea month
-export const filterPerMonth = (data, year) => {
-  const filtered = data.filter(
-    (e) => parseInt(e.date.split(/\/|-/)[2]) === parseInt(year)
-  )
+export const filterPerMonth = (data: Expense[], year) => {
+  const filtered = data.filter((obj) => {
+    const dt = DateTime.fromISO(obj.date as string)
+    return dt.year === parseInt(year)
+  })
   const result = [
     {
       month: 'Jan',
@@ -54,46 +58,8 @@ export const filterPerMonth = (data, year) => {
     },
   ]
   filtered.forEach((expense) => {
-    switch (expense.date.split(/\/|-/)[1]) {
-      case '01':
-        result[0].value += expense.amountSpent
-        break
-      case '02':
-        result[1].value += expense.amountSpent
-        break
-      case '03':
-        result[2].value += expense.amountSpent
-        break
-      case '04':
-        result[3].value += expense.amountSpent
-        break
-      case '05':
-        result[4].value += expense.amountSpent
-        break
-      case '06':
-        result[5].value += expense.amountSpent
-        break
-      case '07':
-        result[6].value += expense.amountSpent
-        break
-      case '08':
-        result[7].value += expense.amountSpent
-        break
-      case '09':
-        result[8].value += expense.amountSpent
-        break
-      case '10':
-        result[9].value += expense.amountSpent
-        break
-      case '11':
-        result[10].value += expense.amountSpent
-        break
-      case '12':
-        result[11].value += expense.amountSpent
-        break
-      default:
-        break
-    }
+    const month = DateTime.fromISO(expense.date as string).month
+    result[month].value += expense.amountSpent
   })
   return result
 }
@@ -168,11 +134,17 @@ export const getAllCategories = (expensesList) => {
   return [...new Set(categories)]
 }
 
-export const getExpensesPerYearAndMonth = (expensesList, year, month) => {
-  const expensesPerYear = expensesList.filter(
-    (obj) => parseInt(obj.date.split('/')[2]) === parseInt(year)
-  )
-  return expensesPerYear.filter(
-    (obj) => parseInt(obj.date.split('/')[1]) === parseInt(month)
-  )
+export const getExpensesPerYearAndMonth = (
+  expensesList: Expense[],
+  year,
+  month
+) => {
+  const expensesPerYear = expensesList.filter((obj) => {
+    const dt = DateTime.fromISO(obj.date as string)
+    return dt.year === parseInt(year)
+  })
+  return expensesPerYear.filter((obj) => {
+    const dt = DateTime.fromISO(obj.date as string)
+    return dt.month === parseInt(month)
+  })
 }

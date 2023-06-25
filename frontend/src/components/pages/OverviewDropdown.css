@@ -1,0 +1,11 @@
+.overview-select-yearly {
+  text-align: center;
+  padding: 0 2px;
+}
+
+.overview-select-monthly {
+  width: 100%;
+    height: 2rem;
+   display: flex;
+   justify-content: space-evenly;
+}

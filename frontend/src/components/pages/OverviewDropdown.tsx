@@ -1,8 +1,9 @@
-import React from 'react'
 import { Select } from 'antd'
-import { getAllMonths, getAllYears } from '../../functions/overviewDropdown'
+import React from 'react'
 import { useSelector } from 'react-redux'
+import { getAllMonths, getAllYears } from '../../functions/overviewDropdown'
 import { Store } from '../../store'
+import './OverviewDropdown.css'
 
 const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
   const { Option } = Select
@@ -13,9 +14,9 @@ const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
 
   if (type === 'year') {
     return (
-      <div>
+      <div className='overview-select-yearly'>
         <Select
-          style={{ width: '100%' }}
+          style={{ width: '99%' }}
           onChange={(value) => setYear(value)}
           value={year}
         >
@@ -31,9 +32,9 @@ const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
     )
   } else {
     return (
-      <div>
+      <div className='overview-select-monthly'>
         <Select
-          style={{ width: '50%' }}
+          style={{ width: '49%' }}
           onChange={(value) => setYear(value)}
           value={year}
         >
@@ -46,7 +47,7 @@ const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
           })}
         </Select>
         <Select
-          style={{ width: '50%' }}
+          style={{ width: '49%' }}
           onChange={(value) => setMonth(value)}
           value={month}
         >

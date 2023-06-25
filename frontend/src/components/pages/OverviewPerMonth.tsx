@@ -1,24 +1,26 @@
+import { Col, Row } from 'antd'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts'
 import {
-  getAllCategories,
   filterPerCategory,
-  spentMostPerMonth,
-  spentLeastPerMonth,
+  getAllCategories,
   getExpensesPerYearAndMonth,
+  spentLeastPerMonth,
+  spentMostPerMonth,
 } from '../../functions/overviewFormatters'
-import { PieChart, Pie, ResponsiveContainer, Cell, Legend } from 'recharts'
-import { Row, Col } from 'antd'
-import './OverviewPerMonth.css'
 import { Store } from '../../store'
+import './OverviewPerMonth.css'
 
 const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
   const personalExpenses = useSelector((state: Store) => state.personalExpenses)
+
   const formattedExpenses = getExpensesPerYearAndMonth(
     personalExpenses,
     selectedYear,
     selectedMonth
   )
+
   const categories = getAllCategories(formattedExpenses)
   const data = filterPerCategory(formattedExpenses, categories)
   const { maxSpent, maxSpentCategory } = spentMostPerMonth(data)
@@ -26,7 +28,7 @@ const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
 
   if (formattedExpenses.length === 0) {
     return (
-      <div className="nothing-to-display">
+      <div className='nothing-to-display'>
         <p>You have no expenses to display</p>
       </div>
     )
@@ -51,9 +53,9 @@ const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
       <text
         x={x}
         y={y}
-        fill="white"
+        fill='white'
         textAnchor={x > cx ? 'start' : 'end'}
-        dominantBaseline="central"
+        dominantBaseline='central'
       >
         {`${(percent * 100).toFixed(0)}%`}
       </text>
@@ -63,7 +65,7 @@ const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
   const renderLegend = (props) => {
     const { payload } = props
     return (
-      <ul className="piechart-legend">
+      <ul className='piechart-legend'>
         {payload.map((entry, index) => (
           <li key={`item-${index}`} style={{ color: entry.color }}>
             {entry.payload.category}
@@ -74,16 +76,16 @@ const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
   }
 
   return (
-    <Row>
+    <Row className='overview-chart-container'>
       <Col span={16}>
-        <ResponsiveContainer height={750} width="100%" className="cont">
+        <ResponsiveContainer height={750} width='100%' className='cont'>
           <PieChart width={750} height={400}>
             <Legend height={50} content={renderLegend} />
             <Pie
               data={data}
-              dataKey="spent"
-              nameKey="name"
-              fill="#0f52ba"
+              dataKey='spent'
+              nameKey='name'
+              fill='#0f52ba'
               label={renderCustomizedLabel}
               labelLine={false}
             >
@@ -95,7 +97,7 @@ const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
         </ResponsiveContainer>
       </Col>
       <Col span={8}>
-        <div className="centering-div">
+        <div className='centering-div'>
           <p>
             Most spent category: <b>{maxSpentCategory}</b>
           </p>
