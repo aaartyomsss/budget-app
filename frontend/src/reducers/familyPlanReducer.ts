@@ -1,5 +1,5 @@
+import { capitalizeString, dateFormatter } from '../functions/helperFunctions'
 import familyPlanService from '../services/familyPlanService'
-import { dateFormatter, capitalizeString } from '../functions/helperFunctions'
 import { FamilyPlan } from '../types/expense'
 
 const familyPlanReducer = (state: FamilyPlan[] = [], action) => {
@@ -58,7 +58,7 @@ export const addAcceptedPlan = (plan) => {
   }
 }
 
-const INIT = 'INIT'
+const INIT = 'INIT_FAMILY'
 const ADD_PLAN = 'ADD_PLAN'
 
 // export const logoutClear = () => {

@@ -72,11 +72,13 @@ disconnecting from DB in the beforeEach block first.
     d. Adapt CustomSelectCategory to family plans
     e. Deletion of the expense in the plan
     f. Patching of the expense
-    g. General small fixes
+    g. General small fixes`
 
 43. Modify family expense and mamual testing - 0.5h
 44. Improve login and signup forms mobile UI - 0.5h
+45. Overview functionality fixes (tech and styling) - 0.5h
+46. Adjust mobile styling for expenses overview - 0.25h
 
-CURRENT: 112.75h
+CURRENT: 113.5h
 
 GOAL: 122.5h
