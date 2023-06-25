@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd'
+import { Row } from 'antd'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts'
@@ -77,7 +77,7 @@ const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
 
   return (
     <Row className='overview-chart-container'>
-      <Col span={16}>
+      <div className='overview-chart-container-chart'>
         <ResponsiveContainer height={750} width='100%' className='cont'>
           <PieChart width={750} height={400}>
             <Legend height={50} content={renderLegend} />
@@ -95,8 +95,8 @@ const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
             </Pie>
           </PieChart>
         </ResponsiveContainer>
-      </Col>
-      <Col span={8}>
+      </div>
+      <div className='overview-chart-container-info'>
         <div className='centering-div'>
           <p>
             Most spent category: <b>{maxSpentCategory}</b>
@@ -111,7 +111,7 @@ const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
             Total amount spent on that: <b>{leastSpent}</b>
           </p>
         </div>
-      </Col>
+      </div>
     </Row>
   )
 }

@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd'
+import { Row } from 'antd'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import {
@@ -36,7 +36,7 @@ const OverviewPerYear = ({ selectedYear }) => {
 
   return (
     <Row className='overview-chart-container'>
-      <Col span={16}>
+      <div className='overview-chart-container-chart'>
         <ResponsiveContainer height={750} width='100%'>
           <BarChart data={personalExpenses}>
             <CartesianGrid strokeDasharray='3 3' />
@@ -45,8 +45,8 @@ const OverviewPerYear = ({ selectedYear }) => {
             <Bar dataKey='value' fill='#0f52ba' />
           </BarChart>
         </ResponsiveContainer>
-      </Col>
-      <Col span={8}>
+      </div>
+      <div className='overview-chart-container-info'>
         <div className='centering-div'>
           <p>
             You have spent the most in <b>{spentMostIn}</b>, which was{' '}
@@ -57,7 +57,7 @@ const OverviewPerYear = ({ selectedYear }) => {
             <b>{spentThroughYear}</b>
           </p>
         </div>
-      </Col>
+      </div>
     </Row>
   )
 }
