@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { getAllMonths, getAllYears } from '../../../functions/overviewDropdown'
 import expensesOverviewService from '../../../services/expensesOverviewService'
 import personalService from '../../../services/personalService'
 import { Expense } from '../../../types/expense'
@@ -39,11 +40,24 @@ const Overview = () => {
   const [selectedMonth, setMonth] = useState('01')
   const [expenses, setExpenses] = useState<Expense[]>([])
 
+  const [yearsOptions, setYearsOptions] = useState<string[]>([])
+  const [monthsOptions, setMonthsOptions] = useState<string[]>([])
+
   useEffect(() => {
     const getAndSetExpenses = async () => {
       const promise = PROMISE_MAP[overviewType]
       const res = await promise()
-      setExpenses(res.data)
+      const exps = res.data
+      setExpenses(exps)
+
+      const _years = getAllYears(exps)
+      const _months = getAllMonths(exps)
+
+      setYearsOptions(_years)
+      setMonthsOptions(_months)
+
+      if (_years.length) setYear(parseInt(_years[0]))
+      if (_months.length) setMonth(_months[0])
     }
     getAndSetExpenses()
   }, [overviewType])
@@ -62,6 +76,8 @@ const Overview = () => {
           year={selectedYear}
           month={selectedMonth}
           setMonth={setMonth}
+          months={monthsOptions}
+          years={yearsOptions}
         />
 
         {filter === OverviewFilter.YEAR ? (

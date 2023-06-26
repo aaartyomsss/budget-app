@@ -1,11 +1,12 @@
 .overview-type-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding-top: 4px;
-  padding-inline: 8px;
+  margin: 0 auto;
+  width: 99%;
 }
 
 .overview-type-button {
   width: 100%;
-  margin: 0 4px;
+  margin: 0 2px;
 }

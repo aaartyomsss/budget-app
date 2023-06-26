@@ -1,16 +1,17 @@
 import { Select } from 'antd'
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { getAllMonths, getAllYears } from '../../../functions/overviewDropdown'
-import { Store } from '../../../store'
 import './OverviewDropdown.css'
 
-const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {
+const OverviewDropdown = ({
+  type,
+  setYear,
+  year,
+  month,
+  setMonth,
+  years,
+  months,
+}) => {
   const { Option } = Select
-  const personalExpenses = useSelector((state: Store) => state.personalExpenses)
-
-  const years = getAllYears(personalExpenses)
-  const months = getAllMonths(personalExpenses)
 
   if (type === 'year') {
     return (
