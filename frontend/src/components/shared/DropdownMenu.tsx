@@ -31,15 +31,15 @@ const DropdownMenu = () => {
       icon: <TeamOutlined />,
     },
     {
+      key: 'personal-overview',
+      label: <Link to='/personal-overview'>Overview</Link>,
+      icon: <PieChartOutlined />,
+    },
+    {
       key: 'my-earning',
       label: <Link to='/'>My earnings</Link>,
       icon: <EuroCircleOutlined />,
       disabled: true,
-    },
-    {
-      key: 'personal-overview',
-      label: <Link to='/personal-overview'>Overview</Link>,
-      icon: <PieChartOutlined />,
     },
     {
       key: 'logout',

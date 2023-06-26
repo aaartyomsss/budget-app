@@ -12,6 +12,7 @@ const googleAuth = require('./routes/googleAuth')
 const personalPlan = require('./routes/personalPlan')
 const familyPlanRequestRouter = require('./routes/familyPlanRequest')
 const familyPlanRouter = require('./routes/familyPlan')
+const overviewRouter = require('./routes/expensesOverview')
 
 if (config.MONGODB_URI) {
   logger.info('Connection to ', config.MONGODB_URI)
@@ -48,6 +49,7 @@ app.use('/google', googleAuth)
 app.use('/personal-plan', personalPlan)
 app.use('/family-plan-request', familyPlanRequestRouter)
 app.use('/family-plan', familyPlanRouter)
+app.use('/overview', overviewRouter)
 
 //Error handling middleware
 app.use(middleware.errorHandler)

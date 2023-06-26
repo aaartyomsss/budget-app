@@ -35,10 +35,10 @@ const personalReducer = (state: Expense[] = [], action) => {
 
 export const initialPersonalPlan = () => {
   return async (dispatch) => {
-    const expenses = await personalService.getAll()
+    const res = await personalService.getAll()
     dispatch({
       type: 'INIT',
-      data: expenses,
+      data: res.data,
     })
   }
 }

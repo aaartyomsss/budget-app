@@ -1,6 +1,5 @@
 import { Row } from 'antd'
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts'
 import {
   filterPerCategory,
@@ -8,15 +7,19 @@ import {
   getExpensesPerYearAndMonth,
   spentLeastPerMonth,
   spentMostPerMonth,
-} from '../../functions/overviewFormatters'
-import { Store } from '../../store'
+} from '../../../functions/overviewFormatters'
+import { Expense } from '../../../types/expense'
 import './OverviewPerMonth.css'
 
-const OverviewPerMonth = ({ selectedYear, selectedMonth }) => {
-  const personalExpenses = useSelector((state: Store) => state.personalExpenses)
+type Props = {
+  selectedYear: number
+  selectedMonth: string
+  expenses: Expense[]
+}
 
+const OverviewPerMonth = ({ selectedYear, selectedMonth, expenses }: Props) => {
   const formattedExpenses = getExpensesPerYearAndMonth(
-    personalExpenses,
+    expenses,
     selectedYear,
     selectedMonth
   )
