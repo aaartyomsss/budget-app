@@ -1,6 +1,5 @@
 import { Row } from 'antd'
 import React from 'react'
-import { useSelector } from 'react-redux'
 import {
   Bar,
   BarChart,
@@ -12,12 +11,16 @@ import {
 import {
   filterPerMonth,
   highestSpentMonth,
-} from '../../functions/overviewFormatters'
-import { Store } from '../../store'
+} from '../../../functions/overviewFormatters'
+import { Expense } from '../../../types/expense'
 import './Overview.css'
 
-const OverviewPerYear = ({ selectedYear }) => {
-  const expenses = useSelector((state: Store) => state.personalExpenses)
+type Props = {
+  selectedYear: number
+  expenses: Expense[]
+}
+
+const OverviewPerYear = ({ selectedYear, expenses }: Props) => {
   // all the data
   const personalExpenses = filterPerMonth(expenses, selectedYear)
   const { spentMostIn, maxAmountSpent } = highestSpentMonth(personalExpenses)

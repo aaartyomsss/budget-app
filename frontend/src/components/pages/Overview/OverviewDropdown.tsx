@@ -1,8 +1,8 @@
 import { Select } from 'antd'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { getAllMonths, getAllYears } from '../../functions/overviewDropdown'
-import { Store } from '../../store'
+import { getAllMonths, getAllYears } from '../../../functions/overviewDropdown'
+import { Store } from '../../../store'
 import './OverviewDropdown.css'
 
 const OverviewDropdown = ({ type, setYear, year, month, setMonth }) => {

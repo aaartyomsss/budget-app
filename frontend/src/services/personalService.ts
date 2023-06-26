@@ -3,7 +3,7 @@ import { CreateExpense, Expense } from '../types/expense'
 
 const getAll = async () => {
   const res = await axios.get<Expense[]>('personal-plan/')
-  return res.data
+  return res
 }
 
 const addExpense = async (toAdd: CreateExpense) => {
