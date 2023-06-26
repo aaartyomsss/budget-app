@@ -80,6 +80,8 @@ disconnecting from DB in the beforeEach block first.
 46. Adjust mobile styling for expenses overview - 0.25h
 47. Extend overview functionality - 1.5h
 
-CURRENT: 115h
+48. AWS deployment - 0.2h
+
+CURRENT: 115.2h
 
 GOAL: 122.5h
