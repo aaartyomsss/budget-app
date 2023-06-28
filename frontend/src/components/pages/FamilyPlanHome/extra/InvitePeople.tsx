@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useMemo } from 'react'
 import { Input, Select, Spin, message } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
-import familyPlanService from '../../../../services/familyPlanService'
 import debounce from 'lodash.debounce'
-import InviteUserCard from './InviteUserCard'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { sendRequest } from '../../../../reducers/invitationReducer'
-import '../assets/InvitePeople.css'
+import familyPlanService from '../../../../services/familyPlanService'
 import { Store } from '../../../../store'
-import { IInvitation } from '../../../../types/invitation'
 import { FamilyPlan } from '../../../../types/expense'
+import { IInvitation } from '../../../../types/invitation'
 import { User } from '../../../../types/user'
+import '../assets/InvitePeople.css'
+import InviteUserCard from './InviteUserCard'
 
 const InvitePeople = ({ user }) => {
   const { Option } = Select
@@ -40,6 +40,8 @@ const InvitePeople = ({ user }) => {
         )
         setQueryResults(result)
       }
+    } else {
+      setQueryResults([])
     }
     setLoading(false)
   }
@@ -71,10 +73,10 @@ const InvitePeople = ({ user }) => {
 
   const renderInputs = () => {
     return (
-      <>
-        <Input placeholder="Enter username" onChange={debounceHandler} />
+      <div className='side-by-side'>
+        <Input placeholder='Enter username' onChange={debounceHandler} />
         <Select
-          placeholder="Select a plan to which you want to invite the user"
+          placeholder='Select a plan to which you want to invite the user'
           onChange={handlePlanSelection}
         >
           {familyPlans.map((plan) => {
@@ -85,7 +87,7 @@ const InvitePeople = ({ user }) => {
             )
           })}
         </Select>
-      </>
+      </div>
     )
   }
 
@@ -99,18 +101,18 @@ const InvitePeople = ({ user }) => {
             marginTop: '10rem',
           }}
         >
-          <Spin size="large" />
+          <Spin size='large' />
         </div>
       )
 
     return (
       <>
-        <div className="text-container">
-          <span className="secondary-text">
+        <div className='text-container'>
+          <span className='secondary-text'>
             Users found: {queryResults.length}
           </span>
         </div>
-        <div className="user-list">
+        <div className='user-list'>
           {queryResults &&
             queryResults.map((foundUser: User) => {
               return (

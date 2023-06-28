@@ -79,8 +79,16 @@ disconnecting from DB in the beforeEach block first.
 45. Overview functionality fixes (tech and styling) - 0.5h
 46. Adjust mobile styling for expenses overview - 0.25h
 47. Extend overview functionality - 1.5h
-48. Family plan UI changes - 0.75h
+48. Family plan UI changes and fixes - 1.25h
 
-CURRENT: 115.75h
+    included:
+
+    a. Add user column to the plan
+    b. TODO: Fix bug that allows inviting user to the same plan
+    c. General UI fixes
+    d. TODO: Decline button does nothing
+    e. TODO: Categories do not work on page refresh
+
+CURRENT: 116.25h
 
 GOAL: 122.5h

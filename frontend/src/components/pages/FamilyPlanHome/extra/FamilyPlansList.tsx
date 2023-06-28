@@ -1,7 +1,8 @@
+import { Button, Table } from 'antd'
 import React from 'react'
-import FamilyPlanCard from './FamilyPlanCard'
-import '../assets/FamilyPlansList.css'
+import { useHistory } from 'react-router-dom'
 import { FamilyPlan } from '../../../../types/expense'
+import '../assets/FamilyPlansList.css'
 
 type Props = {
   familyPlans: FamilyPlan[]
@@ -12,36 +13,44 @@ export type SimpleFamilyPlan = {
   planName: string
   totalUsers: number
   totalExpenses: number
+  key: string
 }
 
 const FamilyPlansList = ({ familyPlans }: Props) => {
-  let data: SimpleFamilyPlan[] = []
-  familyPlans.forEach((plan) => {
-    data.push({
-      id: plan.id,
-      planName: plan.planName,
-      totalUsers: plan.users.length,
-      totalExpenses: plan.expenses.length,
-    })
-  })
+  const { Column, ColumnGroup } = Table
+  const history = useHistory()
 
-  // TODO: Header and designs
+  const data: SimpleFamilyPlan[] = familyPlans.map((plan) => ({
+    id: plan.id,
+    planName: plan.planName,
+    totalUsers: plan.users.length,
+    totalExpenses: plan.expenses.length,
+    key: plan.id,
+  }))
+
   return (
-    <div className="container">
-      <div>
-        <span>Name</span>
-        <span>Users</span>
-        <span>Expenses</span>
-      </div>
-      {data.map((plan) => (
-        <FamilyPlanCard
-          key={plan.id}
-          id={plan.id}
-          totalUsers={plan.totalUsers}
-          planName={plan.planName}
-          totalExpenses={plan.totalExpenses}
-        />
-      ))}
+    <div className='container'>
+      <Table dataSource={data}>
+        <ColumnGroup>
+          <Column title='Plan name' dataIndex='planName' key='planName' />
+          <Column title='Users' dataIndex='totalUsers' key='totalUsers' />
+          <Column
+            title='Expenses count'
+            dataIndex='totalExpenses'
+            key='totalExpenses'
+          />
+          <Column
+            title='Actions'
+            dataIndex='actions'
+            key='actions'
+            render={(_, obj: SimpleFamilyPlan) => (
+              <Button onClick={() => history.push(`/family-plan/${obj.id}`)}>
+                Open
+              </Button>
+            )}
+          />
+        </ColumnGroup>
+      </Table>
     </div>
   )
 }

@@ -54,12 +54,15 @@ familyPlanRouter.post('/plans/:id', isAuthenticated, async (req, res) => {
       date: body.date,
       isPersonal: false,
     })
+
     const savedExpense = await newExpense.save()
+
+    const populatedExpense = await savedExpense.populate('user').execPopulate()
 
     plan.expenses.push(savedExpense._id)
     await plan.save()
 
-    res.status(201).json(newExpense)
+    res.status(201).json(populatedExpense)
   } catch (error) {
     res.status(500).json({ error })
   }
