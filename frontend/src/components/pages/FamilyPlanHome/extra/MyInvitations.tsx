@@ -1,10 +1,10 @@
-import React from 'react'
 import { Button } from 'antd'
-import '../assets/MyInvitations.css'
+import React from 'react'
 import { useDispatch } from 'react-redux'
-import { answerRequest } from '../../../../reducers/invitationReducer'
 import { addAcceptedPlan } from '../../../../reducers/familyPlanReducer'
+import { answerRequest } from '../../../../reducers/invitationReducer'
 import familyPlanRequestService from '../../../../services/familyPlanRequestService'
+import '../assets/MyInvitations.css'
 
 const REQUEST_ACCEPTED = 'ACCEPTED'
 const REQUEST_DECLINED = 'DECLINED'
@@ -19,7 +19,7 @@ const MyInvitations = ({ invitationsReceived, user }) => {
       requestId
     )
     dispatch(answerRequest(answer, requestId))
-    if (answer === REQUEST_ACCEPTED) dispatch(addAcceptedPlan(data))
+    if (answer === REQUEST_ACCEPTED && data) dispatch(addAcceptedPlan(data))
   }
 
   if (invitationsReceived.length === 0) {
@@ -27,7 +27,7 @@ const MyInvitations = ({ invitationsReceived, user }) => {
   }
 
   return (
-    <div className="container">
+    <div className='container'>
       {invitationsReceived &&
         invitationsReceived.map((invite) => {
           if (invite.status === REQUEST_SENT) {
@@ -49,20 +49,20 @@ const MyInvitationCard = ({ invite, handleInvitation }) => {
   const { planName, requester } = invite
   const { username } = requester
   return (
-    <div className="card-container">
-      <span className="card-text">
+    <div className='card-container'>
+      <span className='card-text'>
         You have been invite to {planName} by <strong>{username}</strong>
       </span>
-      <span className="btn-container">
+      <span className='btn-container'>
         <Button
-          type="primary"
+          type='primary'
           onClick={() => handleInvitation(REQUEST_ACCEPTED, invite.id)}
         >
           Accept
         </Button>
         <Button
           danger
-          type="primary"
+          type='primary'
           onClick={() => handleInvitation(REQUEST_DECLINED, invite.id)}
         >
           Decline

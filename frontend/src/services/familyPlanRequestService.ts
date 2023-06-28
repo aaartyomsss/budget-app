@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { FamilyPlan } from '../types/expense'
 
 const getSentRequests = async (userId) => {
   const { data } = await axios.get(
@@ -21,7 +22,7 @@ const getReceivedRequests = async (userId) => {
 
 const answerRequest = async (answer, userId, requestId) => {
   const params = { answer, userId }
-  const { data } = await axios.patch(
+  const { data } = await axios.patch<FamilyPlan | null>(
     `family-plan-request/request-response/${requestId}`,
     params
   )
