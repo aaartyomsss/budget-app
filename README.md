@@ -79,7 +79,8 @@ disconnecting from DB in the beforeEach block first.
 45. Overview functionality fixes (tech and styling) - 0.5h
 46. Adjust mobile styling for expenses overview - 0.25h
 47. Extend overview functionality - 1.5h
+48. Family plan UI changes - 0.75h
 
-CURRENT: 115h
+CURRENT: 115.75h
 
 GOAL: 122.5h

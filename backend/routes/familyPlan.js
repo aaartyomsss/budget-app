@@ -17,7 +17,10 @@ function isUserInPlan(req, plan) {
 
 familyPlanRouter.get('/plans/:id', isAuthenticated, async (req, res) => {
   const { id } = req.params
-  const plan = await FamilyPlan.findById(id).populate('expenses')
+  const plan = await FamilyPlan.findById(id).populate({
+    path: 'expenses',
+    populate: { path: 'user', model: 'User' },
+  })
 
   const userId = req.user?.id
   if (!plan.users.includes(userId)) {
