@@ -64,3 +64,12 @@ body {
 .add-expense-button {
   margin: 8px 12px;
 }
+
+.side-by-side {
+  display: flex;
+  justify-content: space-between;
+}
+
+.side-by-side > * {
+  width: 49.5%;
+}

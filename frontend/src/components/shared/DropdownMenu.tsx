@@ -8,12 +8,22 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
-import { Button, Dropdown } from 'antd'
+import { Badge, Button, Dropdown } from 'antd'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Store } from '../../store'
 import Logout from './Logout'
 
+const REQUEST_SENT = 'SENT'
+
 const DropdownMenu = () => {
+  const invitationsReceived = useSelector((state: Store) => {
+    return state.invitationReducer.received.filter(
+      (invitation) => invitation.status === REQUEST_SENT
+    )
+  })
+
   const items: MenuProps['items'] = [
     {
       key: 'my-profile',
@@ -27,7 +37,13 @@ const DropdownMenu = () => {
     },
     {
       key: 'family-plans',
-      label: <Link to='/family-plans'>Family plan</Link>,
+      label: (
+        <Badge dot={!!invitationsReceived.length}>
+          <Link to='/family-plans' style={{ color: 'black' }}>
+            Family plan
+          </Link>
+        </Badge>
+      ),
       icon: <TeamOutlined />,
     },
     {
