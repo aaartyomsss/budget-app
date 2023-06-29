@@ -3,34 +3,51 @@ const { json } = require('express')
 const FamilyPlanRequest = require('../models/FamilyPlanRequest')
 const FamilyPlan = require('../models/FamilyPlan')
 const User = require('../models/User')
+const { isAuthenticated } = require('../utils/middleware')
 
 const REQUEST_SENT = 'SENT'
 const REQUEST_ACCEPTED = 'ACCEPTED'
 const REQUEST_DECLINED = 'DECLINED'
 
-familyPlanRequestRouter.post('/send-request', async (req, res) => {
-  const { requester, planName, recepientId, planId } = req.body
-  const recepient = await User.findById(recepientId)
+familyPlanRequestRouter.post(
+  '/send-request',
+  isAuthenticated,
+  async (req, res) => {
+    const { requester, planName, recepientId, planId } = req.body
+    const recepient = await User.findById(recepientId)
+    const plan = await FamilyPlan.findById(planId)
 
-  if (!recepient) {
-    return res.status(403).json({ error: 'User was not found' })
+    if (!recepient) {
+      return res.status(403).json({ error: 'User was not found' })
+    }
+
+    const userId = req.user?.id
+    if (!plan.users.includes(userId)) {
+      return res.status(403).send({ error: 'You do not belong to the plan' })
+    }
+
+    if (plan.users.includes(recepientId)) {
+      return res
+        .status(400)
+        .send({ error: 'Person has already been added to the plan' })
+    }
+
+    try {
+      const request = new FamilyPlanRequest({
+        status: REQUEST_SENT,
+        recepient: recepient._id,
+        requester,
+        planName,
+        planId,
+      })
+
+      await request.save()
+      res.json(request)
+    } catch (e) {
+      res.json({ error: e.message })
+    }
   }
-
-  try {
-    const request = new FamilyPlanRequest({
-      status: REQUEST_SENT,
-      recepient: recepient._id,
-      requester,
-      planName,
-      planId,
-    })
-
-    await request.save()
-    res.json(request)
-  } catch (e) {
-    res.json({ error: e.message })
-  }
-})
+)
 
 familyPlanRequestRouter.get('/sent-requests/:id', async (req, res) => {
   const requester = req.params.id

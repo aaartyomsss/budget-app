@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { sendRequest } from '../../../../reducers/invitationReducer'
+import familyPlanRequestService from '../../../../services/familyPlanRequestService'
 import familyPlanService from '../../../../services/familyPlanService'
 import { Store } from '../../../../store'
 import { FamilyPlan } from '../../../../types/expense'
@@ -46,7 +47,7 @@ const InvitePeople = ({ user }) => {
     setLoading(false)
   }
 
-  const sendInvite = (recepientId) => {
+  const sendInvite = async (recepientId) => {
     if (!planForInvitation) return message.error('You have not selected a plan')
 
     const [id, planName] = planForInvitation.split(':')
@@ -56,7 +57,13 @@ const InvitePeople = ({ user }) => {
       requester: user.id,
       planName: planName,
     }
-    dispatch(sendRequest(params))
+
+    const res = await familyPlanRequestService.sendRequest(params)
+    if (res.ok) {
+      dispatch(sendRequest(res.data))
+    } else {
+      message.error(res.data)
+    }
   }
 
   const handlePlanSelection = (val: string) => {

@@ -39,7 +39,9 @@ const DropdownMenu = () => {
       key: 'family-plans',
       label: (
         <Badge dot={!!invitationsReceived.length}>
-          <Link to='/family-plans'>Family plan</Link>
+          <Link to='/family-plans' style={{ color: 'black' }}>
+            Family plan
+          </Link>
         </Badge>
       ),
       icon: <TeamOutlined />,
