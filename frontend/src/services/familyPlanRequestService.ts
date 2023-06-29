@@ -1,4 +1,6 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
+import { FamilyPlan } from '../types/expense'
+import { Invitation } from '../types/invitation'
 
 const getSentRequests = async (userId) => {
   const { data } = await axios.get(
@@ -8,8 +10,17 @@ const getSentRequests = async (userId) => {
 }
 
 const sendRequest = async (params) => {
-  const { data } = await axios.post(`family-plan-request/send-request`, params)
-  return data
+  try {
+    const res = await axios.post<Invitation>(
+      `family-plan-request/send-request`,
+      params
+    )
+    return { data: res.data, ok: true }
+  } catch (error) {
+    const _e = error as AxiosError
+    const msg = _e.response?.data.error
+    return { data: msg, ok: false }
+  }
 }
 
 const getReceivedRequests = async (userId) => {
@@ -21,7 +32,7 @@ const getReceivedRequests = async (userId) => {
 
 const answerRequest = async (answer, userId, requestId) => {
   const params = { answer, userId }
-  const { data } = await axios.patch(
+  const { data } = await axios.patch<FamilyPlan | null>(
     `family-plan-request/request-response/${requestId}`,
     params
   )

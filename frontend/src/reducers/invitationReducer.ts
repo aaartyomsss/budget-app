@@ -34,11 +34,8 @@ export const setSentRequests = (userId) => {
   }
 }
 
-export const sendRequest = (params) => {
-  return async (dispatch) => {
-    const data = await familyPlanRequestService.sendRequest(params)
-    dispatch({ type: SEND_REQUEST, data })
-  }
+export const sendRequest = (data: Invitation) => {
+  return { type: SEND_REQUEST, data }
 }
 
 export const setReceivedRequests = (userId) => {

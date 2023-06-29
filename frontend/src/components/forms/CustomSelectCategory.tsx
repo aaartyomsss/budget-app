@@ -2,7 +2,9 @@ import { Button, Divider, Input, Select } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { capitalizeString } from '../../functions/helperFunctions'
+import { initialFamilyPlans } from '../../reducers/familyPlanReducer'
 import { initialPersonalPlan } from '../../reducers/personalReducer'
+import familyPlanService from '../../services/familyPlanService'
 import { Store } from '../../store'
 
 // Following component will allow user to pick already entered previously category,
@@ -25,7 +27,6 @@ const CustomSelectCategory = ({
     if (!familyPlanId)
       return state.personalExpenses.map((exp) => capitalizeString(exp.type))
 
-
     const plan = state.familyPlanReducer.find((p) => p.id === familyPlanId)
 
     return plan?.expenses.map((ex) => capitalizeString(ex.type)) || []
@@ -36,6 +37,8 @@ const CustomSelectCategory = ({
   useEffect(() => {
     const getExpenses = async () => {
       dispatch(initialPersonalPlan())
+      const res = await familyPlanService.getUserPlans()
+      dispatch(initialFamilyPlans(res.data))
     }
     getExpenses()
   }, [])

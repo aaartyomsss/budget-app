@@ -79,9 +79,18 @@ disconnecting from DB in the beforeEach block first.
 45. Overview functionality fixes (tech and styling) - 0.5h
 46. Adjust mobile styling for expenses overview - 0.25h
 47. Extend overview functionality - 1.5h
+48. Family plan UI changes and fixes - 2.25h
 
-48. AWS deployment - 0.2h
+    included:
 
-CURRENT: 115.2h
+    a. Add user column to the plan
+    b. Fix bug that allows inviting user to the same plan
+    c. General UI fixes
+    d. Decline button does nothing
+    e. Categories do not work on page refresh
+
+49. Azure deployment - 1.2h
+
+CURRENT: 118.45h
 
 GOAL: 122.5h
