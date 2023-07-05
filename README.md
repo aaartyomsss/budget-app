@@ -89,8 +89,8 @@ disconnecting from DB in the beforeEach block first.
     d. Decline button does nothing
     e. Categories do not work on page refresh
 
-49. Azure deployment - 1.2h
+49. Deployment - 5.25h
 
-CURRENT: 118.45h
+CURRENT: 122.5h
 
 GOAL: 122.5h
