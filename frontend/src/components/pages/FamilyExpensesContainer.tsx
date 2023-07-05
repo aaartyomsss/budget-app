@@ -2,7 +2,7 @@ import { Button } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import familyPlanService from '../../services/familyPlanService'
-import { Expense, FamilyPlan } from '../../types/expense'
+import { FamilyPlan, FamilyPlanExpense } from '../../types/expense'
 import SpendingForm from '../shared/SpendingForm'
 import ExpensesList from './ExpensesList'
 
@@ -20,7 +20,7 @@ const FamilyExpensesContainer = () => {
     getAndSetPlan()
   }, [])
 
-  const onAddFamilyExpenses = (e: Expense) => {
+  const onAddFamilyExpenses = (e: FamilyPlanExpense) => {
     setFamilyPlan((plan) => {
       if (plan)
         return {
@@ -30,7 +30,7 @@ const FamilyExpensesContainer = () => {
     })
   }
 
-  const onModifyFamilyExpense = (e: Expense) => {
+  const onModifyFamilyExpense = (e: FamilyPlanExpense) => {
     setFamilyPlan((plan) => {
       if (plan) {
         return {
@@ -66,7 +66,6 @@ const FamilyExpensesContainer = () => {
         familyPlanId={familyPlan?.id}
         onAddFamilyExpenses={onAddFamilyExpenses}
         onModifyFamilyExpense={onModifyFamilyExpense}
-
       />
     </>
   )

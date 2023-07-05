@@ -89,6 +89,8 @@ disconnecting from DB in the beforeEach block first.
     d. Decline button does nothing
     e. Categories do not work on page refresh
 
-CURRENT: 117.25h
+49. Deployment - 5.25h
+
+CURRENT: 122.5h
 
 GOAL: 122.5h

@@ -11,15 +11,15 @@ import personalService from '../../services/personalService'
 import { Store } from '../../store'
 import '../../styles.css'
 import type { SetState } from '../../types/common'
-import { CreateExpense, Expense } from '../../types/expense'
+import { CreateExpense, FamilyPlanExpense } from '../../types/expense'
 import CustomSelectCategory from '../forms/CustomSelectCategory'
 
 type Props = {
   isModalOpen: boolean
   setIsModalOpen: SetState<boolean>
   familyPlanId?: string
-  onAddFamilyExpenses?: (e: Expense) => void
-  onModifyFamilyExpense?: (e: Expense) => void
+  onAddFamilyExpenses?: (e: FamilyPlanExpense) => void
+  onModifyFamilyExpense?: (e: FamilyPlanExpense) => void
 }
 
 const SpendingForm = (props: Props) => {
