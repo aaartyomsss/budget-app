@@ -36,10 +36,12 @@ const App = () => {
     const fetch = async () => {
       const userJSON = window.localStorage.getItem('loggedInUser')
       const parsedUser = JSON.parse(userJSON!)
-      dispatch(setSentRequests(parsedUser.id))
-      dispatch(setReceivedRequests(parsedUser.id))
-      dispatch(initialPersonalPlan())
-      dispatch(login(parsedUser))
+      if (parsedUser && parsedUser.id) {
+        dispatch(setSentRequests(parsedUser.id))
+        dispatch(setReceivedRequests(parsedUser.id))
+        dispatch(initialPersonalPlan())
+        dispatch(login(parsedUser))
+      }
     }
     fetch()
   }, []) // eslint-disable-line

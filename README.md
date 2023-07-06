@@ -89,8 +89,10 @@ disconnecting from DB in the beforeEach block first.
     d. Decline button does nothing
     e. Categories do not work on page refresh
 
-49. Deployment - 5.25h
+49. Deployment - 6.5h
 
-CURRENT: 122.5h
+50. Refactor google login to the library which is not depricated - 1.5h
+
+CURRENT: 125.25h
 
 GOAL: 122.5h
