@@ -89,8 +89,10 @@ disconnecting from DB in the beforeEach block first.
     d. Decline button does nothing
     e. Categories do not work on page refresh
 
-49. Deployment - 5.25h
+49. Deployment - 6.0h
 
-CURRENT: 122.5h
+    TODO: remove mongo container on the production. Pull changes, rebuild and run
+
+CURRENT: 123.25h
 
 GOAL: 122.5h

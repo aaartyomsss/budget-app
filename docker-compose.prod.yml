@@ -45,6 +45,15 @@ services:
       - FRONTEND_BASE_URL=${FRONTEND_BASE_URL}
       - REDIS_HOST=${REDIS_HOST:-prod-redis}
       - MONGO_HOST=prod-mongodb
+      - MONGO_USERNAME=${MONGO_USERNAME:-api_user}
+      - MONGO_PASSWORD=${MONGO_PASSWORD:-api1234}
+      - MONGO_DB=${MONGO_DB:-api_dev_db}
+      - SESSION_SECRET=${SESSION_SECRET}
+      - SECRET=${SECRET}
+      - EMAIL_TOKEN=${EMAIL_TOKEN}
+      - SALT_ROUNDS=${SALT_ROUNDS}
+      - GMAIL_USER=${GMAIL_USER}
+      - GMAIL_PASSWORD=${GMAIL_PASSWORD}
     networks:
       - budget-app
     depends_on:
@@ -62,10 +71,8 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-root_dev}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD:-root_password_dev}
       - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE:-database_dev}
-      - MONGO_USERNAME=${MONGO_USERNAME:-user_dev}
-      - MONGO_PASSWORD=${MONGO_PASSWORD:-password_dev}
     volumes:
-      - ./mongo/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - ./mongo_data_prod:/data/db
     networks:
       - budget-app
@@ -98,5 +105,7 @@ networks:
 volumes:
   esdata:
   frontend:
-  backend:
+  prod-backend:
   frontend-build:
+  prod-mongo:
+  prod-nginx:
