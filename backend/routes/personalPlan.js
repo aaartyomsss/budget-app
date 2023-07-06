@@ -29,7 +29,6 @@ personalPlan.post('/', async (req, res) => {
   const decoded = jwt.verify(req.token, config.SECRET)
   // Helper function return either google or a regular user to avoid code repetition
   const user = await User.findById(decoded.id)
-
   try {
     const newExpense = new Expense({
       title: body.title,

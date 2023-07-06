@@ -19,6 +19,8 @@ const MONGO_DB = process.env.MONGO_DB
 const FRONTEND_BASE_URL = process.env.FRONTEND_BASE_URL
 const REDIS_HOST = process.env.REDIS_HOST
 
+const REMOTE_BASE_URL = process.env.REMOTE_BASE_URL
+
 const MONGO_HOST = process.env.MONGO_HOST
 const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:27017/${MONGO_DB}`
 const MONGO_TEST_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/api_test_db`
@@ -42,4 +44,5 @@ module.exports = {
   FRONTEND_BASE_URL,
   REDIS_HOST,
   MONGODB_URI,
+  REMOTE_BASE_URL,
 }

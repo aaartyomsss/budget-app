@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken')
 const config = require('../utils/config')
 require('dotenv/config')
 const nodemailer = require('nodemailer')
-const confiramtionUrl = `${config.FRONTEND_BASE_URL}api/users/confirmation`
+
+const confiramtionUrl = `${config.REMOTE_BASE_URL}api/users/confirmation`
 
 userRouter.get('/', async (req, res) => {
   const users = await User.find({})
@@ -162,11 +163,9 @@ userRouter.get('/search/:query', async (req, res) => {
       const token = req.token
       const decodedUser = jwt.verify(token, process.env.SECRET)
       if (decodedUser) {
-        console.log('!!!!!!!!!!!!!!!!!!!! ', foundUsers)
         const filteredOutSelf = foundUsers.filter(
           (u) => u.id !== decodedUser.id
         )
-        console.log('!!!!!!!!!!!!!!!!!!!! ', filteredOutSelf)
         return res.json({ foundUsers: filteredOutSelf })
       }
       return res.json({ foundUsers })
