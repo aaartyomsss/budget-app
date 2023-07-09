@@ -93,6 +93,8 @@ disconnecting from DB in the beforeEach block first.
 
 50. Refactor google login to the library which is not depricated - 1.5h
 
-CURRENT: 125.25h
+51. Additional fixes to the deployment - 1h
+
+CURRENT: 126.25h
 
 GOAL: 122.5h
