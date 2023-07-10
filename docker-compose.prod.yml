@@ -23,7 +23,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - ELASTICSEARCH_HOST=elasticsearch:9200
+      - ELASTICSEARCH_HOST=prod-elasticsearch:9200
       - FRONTEND_BASE_URL=${FRONTEND_BASE_URL}
       - REDIS_HOST=${REDIS_HOST:-prod-redis}
       - MONGO_HOST=prod-mongodb
@@ -75,8 +75,6 @@ services:
       - bootstrap.memory_lock=true
       - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
       - discovery.type=single-node
-    logging:
-      driver: none
     ports:
       - 9300:9300
       - 9200:9200

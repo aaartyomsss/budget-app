@@ -89,8 +89,6 @@ services:
       - bootstrap.memory_lock=true
       - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
       - discovery.type=single-node
-    logging:
-      driver: none
     ports:
       - 9300:9300
       - 9200:9200
