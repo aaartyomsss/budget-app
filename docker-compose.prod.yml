@@ -6,7 +6,7 @@ services:
       - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
       - ./frontend/dist:/usr/share/nginx/html
     ports:
-      - 8080:80
+      - 80:80
     container_name: prod-budget-reverse-proxy
     networks:
       - budget-app
