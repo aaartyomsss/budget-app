@@ -23,6 +23,7 @@ googleRouter.post('/', async (req, res) => {
     user = new User({
       googleId: body.googleId,
       email: body.email,
+      username: body.email,
       name: body.name,
       image: body.imageUrl,
       confirmed: true,
@@ -38,6 +39,7 @@ googleRouter.post('/', async (req, res) => {
         googleId: user.googleId,
         email: user.email,
         name: user.name,
+        username: user.username,
         id: user._id,
       })
     } catch (e) {

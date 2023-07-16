@@ -1,10 +1,26 @@
 # BudgIt App
 
-This project was created as a part of University of Helsinki Full-stakc WebDev course. The work was going smoothly up until September 2021.
+This project was created as a part of University of Helsinki Full-stack WebDev course. The work was going smoothly up until September 2021 and then has abrubtly ended.
 
 Now, over a year has passed an it is time to get back to it.
 
-Time spent bullets. Well, I was at times not to specific with the categories, so let me write down everything that was done before sep/ 2021
+## Quick remarks after the submission for 7 credits.
+
+After submission there will still be work on the project as I would like to continue developing it for personal use. So please for grading refer to main branch. There are still 2 key issues in my opinion that are present in this project:
+
+    a. Minor security vulnerabilities. While main points are resolved from what I have gathered, there is still a lot of
+    'openly' accessible endpoints, which should not happen and auth related issues.
+    b. Low test coverage on the backend and non-existed testing on the frontend.
+
+Once those issues are resolved, new features for the app will be developed.
+
+That is all,
+Thank you in advance for reviewing my project.
+Will be happy to get a feedback.
+
+## Time spent
+
+Well, when starting out I was at times not too specific with the categories, but either ways let me write down everything that was done before September 2021
 
 1. Initializing backend - 0.5h
 2. Login/ Signup backend - 1h
@@ -17,7 +33,7 @@ Time spent bullets. Well, I was at times not to specific with the categories, so
 9. _Most vague category - includes practically all frontend work_ Frontend personal plan - 27.5h
 10. Change password UI + Backend - 1h
 11. Code refactoring and bug fixing - 10h
-12. Deckerizing app - 6h (yes, at the time it was hard)
+12. Dockerizing app - 6h (yes, at the time it was a difficult task for me)
 13. Redis - 2h
 14. Merge of 2 user models into a single one - 1h
 15. Dockerizing and configuring ES. Elasticsearch query to find users by username - 2.5h
@@ -47,8 +63,8 @@ Intially, whilst being a lazy programmer - I was all for the JS. After working f
 33. Dockerizing mongo - 3.5h
 34. Backend unit tests initialization - 2.5h
 
-^^^ The intiializaiton of testing has taken such a long time due to having issue with mongosh script. After a long time of debugging had to set it to js file.
-Downside is that I simply cannot pass .env variables to it, which is quite bad from data exposure POV. So technically, will have to either comment sh script out or
+^^^ The intiializaiton of testing has taken such a long time due to having issue with mongo.sh script. After a long time of debugging had to set it to js file.
+Downside is that I simply cannot pass .env variables to it, which is quite bad from data exposure POV. So technically, will have to either comment js script out or
 push it without the sensitive variables.
 
 35. NGINX production setup and dev env fixes + mongoDB fixes - 7h
@@ -67,12 +83,18 @@ disconnecting from DB in the beforeEach block first.
     included:
 
     a. Addition of endpoints and backend tests for familyPlanRouter
+
     b. Refactoring of spending form functionality
+
     c. Add expense in frontend
+
     d. Adapt CustomSelectCategory to family plans
+
     e. Deletion of the expense in the plan
+
     f. Patching of the expense
-    g. General small fixes`
+
+    g. General small fixes
 
 43. Modify family expense and mamual testing - 0.5h
 44. Improve login and signup forms mobile UI - 0.5h
@@ -84,17 +106,27 @@ disconnecting from DB in the beforeEach block first.
     included:
 
     a. Add user column to the plan
+
     b. Fix bug that allows inviting user to the same plan
+
     c. General UI fixes
+
     d. Decline button does nothing
+
     e. Categories do not work on page refresh
 
 49. Deployment - 6.5h
+
+    NB! The main problem was that initially the choice for deployment was Azure, but once everything was already set up - I found out that free tier supports only
+    3 or 4 services running at once, whilst I had 6... So I had to change the the hosting to some random provider (kamatera, mainly as it was cheap). It is a simple
+    docker-compose up type deployment. At last pointing the domain name to the ip also has taken some time.
 
 50. Refactor google login to the library which is not depricated - 1.5h
 
 51. Additional fixes to the deployment - 1h
 
-CURRENT: 126.25h
+52. Fixes after manual testing by users - 0.25h
+
+CURRENT: 126.5h + Some other fixes through the deployment
 
 GOAL: 122.5h

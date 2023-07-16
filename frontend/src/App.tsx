@@ -2,7 +2,7 @@ import 'antd/dist/antd.css'
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
 import FamilyExpensesContainer from './components/pages/FamilyExpensesContainer'
 import FamilyPlanHome from './components/pages/FamilyPlanHome/FamilyPlanHome'
 import Homepage from './components/pages/Homepage'
@@ -29,6 +29,7 @@ axios.defaults.headers.common['Authorization'] = user
 
 const App = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const user = useSelector((state: Store) => state.user)
 
   useEffect(() => {
@@ -41,6 +42,8 @@ const App = () => {
         dispatch(setReceivedRequests(parsedUser.id))
         dispatch(initialPersonalPlan())
         dispatch(login(parsedUser))
+      } else {
+        history.push('/')
       }
     }
     fetch()
