@@ -80,7 +80,7 @@ const Homepage = () => {
           </Col>
           <Col span={12}>
             <Button type='primary' block={true}>
-              <Link to='/sign-up'>Sing Up</Link>
+              <Link to='/sign-up'>Sign Up</Link>
             </Button>
           </Col>
         </Row>
@@ -91,7 +91,7 @@ const Homepage = () => {
         </Title>
       </Divider>
       <div className='google-btn'>
-        <Button onClick={() => login()}>Sing in with google</Button>
+        <Button onClick={() => login()}>Sign in with google</Button>
       </div>
     </div>
   )

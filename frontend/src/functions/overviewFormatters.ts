@@ -58,7 +58,7 @@ export const filterPerMonth = (data: Expense[], year) => {
     },
   ]
   filtered.forEach((expense) => {
-    const month = DateTime.fromISO(expense.date as string).month
+    const month = DateTime.fromISO(expense.date as string).month - 1
     result[month].value += expense.amountSpent
   })
   return result
